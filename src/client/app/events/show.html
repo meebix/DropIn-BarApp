@@ -1,0 +1,10 @@
+<h1>{{vm.eventData.name}}</h1>
+<hr>
+<a ui-sref="events-edit({id: vm.eventId})" class="btn btn-primary">Edit</a>
+<button type="button" class="btn btn-danger" ng-click="vm.deleteEvent()">Delete</button>
+<div class="margin-top-20">
+  <p>Sent To: {{vm.eventData.loyaltyLevelId.name}}</p>
+  <p>Description: {{vm.eventData.description}}</p>
+  <p>Date: {{vm.eventData.date.iso | date: 'MM/dd/yyyy'}}</p>
+  <p>Last Updated: {{vm.eventData.updatedAt | date: 'MM/dd/yyyy'}}</p>
+</div>

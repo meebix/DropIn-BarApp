@@ -1,0 +1,53 @@
+@import (reference) "../../../bower_components/bootstrap/less/variables.less";
+
+// Navbar
+//
+
+// Subnav
+.subnav-bg {
+  min-height: 80px;
+  font-size: 12px;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.analytic-links {
+  position: relative;
+  top: 17px;
+
+  a {
+    color: @link-color-alt;
+
+    &:hover {
+      color: @link-hover-color-alt;
+      text-decoration: none;
+    }
+  }
+}
+
+.active {
+  color: @brand-green !important;
+}
+
+// =============================
+// Bootstrap overrides
+// =============================
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-brand {
+  padding-top: 16px;
+  padding-bottom: 8px;
+}
+
+// Links
+.navbar-default .navbar-nav > li > a.alt {
+  color: @link-color;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  color: @link-color;
+}
+
+// =============================

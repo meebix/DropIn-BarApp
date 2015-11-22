@@ -1,0 +1,9 @@
+<h1>Create Reward</h1>
+<hr>
+<form name="createReward" ng-submit="vm.createReward(vm.rewardData)">
+  <div class="form-group">
+    <label for="rewardName">Name</label>
+    <input type="text" class="form-control" placeholder="15% off your total bill" ng-model="vm.rewardData.name">
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>

@@ -1,0 +1,21 @@
+<h1>All Events</h1>
+<hr>
+<a ui-sref="events-new" class="btn btn-primary">Create Event</a>
+<div class="table-responsive margin-top-20">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date Of</th>
+        <th>Sent To</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="event in vm.allEvents | orderBy:'-date'">
+        <td><a ui-sref="events-show({id: event.objectId})" class="link-alt-underline">{{event.name}}</a></td>
+        <td>{{event.date.iso | date: 'MM/dd/yyyy'}}</td>
+        <td>{{event.loyaltyLevelId.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

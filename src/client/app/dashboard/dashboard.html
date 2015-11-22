@@ -1,0 +1,34 @@
+<h3>What would you like to do?</h3>
+<hr>
+<div class="row text-center">
+  <div class="col-xs-6 col-md-3">
+    <a ui-sref="analytics-user" class="thumbnail dashboard-box">
+      <i class="fa fa-bar-chart fa-5x"></i>
+      <p class="h4 text-uppercase margin-top-">Analytics</p>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3">
+    <a ui-sref="events" class="thumbnail dashboard-box">
+      <i class="fa fa-users fa-5x"></i>
+      <p class="h4 text-uppercase margin-top-">Events</p>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3" ng-if="isAuthorized(userRoles.admin)">
+    <a ui-sref="rewards-new" class="thumbnail dashboard-box">
+      <i class="fa fa-plus fa-5x"></i>
+      <p class="h4 text-uppercase margin-top-">Reward</p>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3" ng-if="isAuthorized(userRoles.admin)">
+    <a ui-sref="rewards-new" class="thumbnail dashboard-box">
+      <i class="fa fa-plus fa-5x"></i>
+      <p class="h4 text-uppercase margin-top-">User</p>
+    </a>
+  </div>
+  <div class="col-xs-6 col-md-3" ng-if="isAuthorized(userRoles.admin)">
+    <a ui-sref="profile-edit({id: vm.barId})" class="thumbnail dashboard-box">
+      <i class="fa fa-building fa-5x"></i>
+      <p class="h4 text-uppercase margin-top-">Profile</p>
+    </a>
+  </div>
+</div>

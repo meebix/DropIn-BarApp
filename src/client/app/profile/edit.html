@@ -1,0 +1,17 @@
+<h1>Edit Bar Profile</h1>
+<hr>
+<form name="profileForm" ng-submit="vm.updateProfileData(vm.profileData)">
+  <div class="form-group">
+    <label for="profileEmail">Email Address</label>
+    <input type="text" class="form-control" placeholder="bar@mybar.com" ng-model="vm.profileData.barEmailAddress">
+  </div>
+  <div class="form-group">
+    <label for="profilePhone">Phone Number</label>
+    <input type="text" class="form-control" placeholder="201-555-5555" ng-model="vm.profileData.phoneNumber">
+  </div>
+  <div class="form-group">
+    <label for="profileAbout">About The Bar</label>
+        <textarea class="form-control" placeholder="Tell our users what makes your bar special" rows="3" ng-model="vm.profileData.missionStatement"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>

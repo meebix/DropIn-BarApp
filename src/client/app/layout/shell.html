@@ -1,0 +1,10 @@
+<div class="content-wrapper">
+  <div ng-include="'app/layout/header.html'"></div>
+  <div ng-include="'app/layout/subnav.html'" ng-if="vm.isAnalyticPage()"></div>
+  <div class="content">
+    <div class="container-fluid">
+      <div ui-view></div>
+    </div>
+  </div>
+</div>
+<div ng-include="'app/layout/footer.html'"></div>
