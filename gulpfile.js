@@ -336,6 +336,7 @@ gulp.task('serve-dev', ['inject'], function() {
  */
 gulp.task('serve-build', ['build'], function() {
   // serve(false /*isDev*/);
+  done();
 });
 
 /**
