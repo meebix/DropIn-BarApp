@@ -1,7 +1,6 @@
 {
   "directory": "bower_components",
 	"scripts": {
-            "preinstall": "npm install gulp",
 		"postinstall": "gulp wiredep"
 	}
 }
