@@ -5,6 +5,7 @@
   "scripts": {
     "init": "npm install",
     "install": "bower install",
+    "gulp": "npm install gulp",
     "start": "node src/server/app.js",
     "test": "gulp test"
   },
