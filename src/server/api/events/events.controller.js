@@ -43,7 +43,8 @@ function createEvent(req, res) {
   // TODO: Need to move the creation of join table insertions to service
   var newEvent = new Events();
   var loyaltyLevelId = req.body.loyaltyLevelId;
-  var formattedDate = new Date(req.body.date);
+  var transformDateForParse = new Date(req.body.date).setUTCHours(0,0,0,0);
+  var formattedDate = new Date(transformDateForParse);
 
   loyaltyQuery.equalTo('objectId', loyaltyLevelId);
   loyaltyQuery.first().then(function(loyaltyLevelObj) {
@@ -78,7 +79,11 @@ function createEvent(req, res) {
         // Find all users who have a role of 'User' and for each user
         // save a new UsersEvents to the join table
         usersQuery.equalTo('roleId', roleObj);
-        usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
+        // TODO: Fixed hardcoded value
+        // If statement checks to see if the loyalty level is 'All', if yes, skip filter and return all users
+        if (loyaltyLevelObj.id !== 'cpMUn6twQc') {
+          usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
+        }
         return usersQuery.find().then(function(results) {
           _.each(results, function(userObj) {
             var newUsersEvents = new UsersEvents();
@@ -88,7 +93,8 @@ function createEvent(req, res) {
               userId: userObj,
               barId: currentUserBarObj(),
               date: formattedDate,
-              userHasViewed: false
+              userHasViewed: false,
+              markedForDeletion: false
             };
 
             return newUsersEvents.save(usersEventsObj).then(function() {
@@ -154,13 +160,29 @@ function deleteEvent(req, res) {
   var eventsQuery = new Parse.Query(Events);
 
   eventsQuery.equalTo('objectId', req.params.id);
-  eventsQuery.first().then(function(result) {
-    result.set('markedForDeletion', true);
-    result.save();
+  eventsQuery.first().then(function(eventObj) {
+    eventObj.set('markedForDeletion', true);
+    eventObj.save();
 
-    res.status(200).json({data: result});
+    res.status(200).json({data: eventObj});
+    return eventObj;
   }, function(error) {
     console.log(error);
     res.status(400).end();
+  })
+  .then(function(eventObj) {
+    var usersEventsQuery = new Parse.Query(UsersEvents);
+
+    usersEventsQuery.equalTo('eventId', eventObj);
+    usersEventsQuery.find().then(function(results) {
+      _.each(results, function(obj) {
+        obj.set('markedForDeletion', true);
+        obj.save();
+      });
+    }, function(error) {
+      // Error retrieving: UsersEvents Object
+      console.log(error);
+      res.status(400).end();
+    });
   });
 }
