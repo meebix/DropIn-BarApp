@@ -12,12 +12,7 @@ var four0four = require('../utils/404')();
 var environment = process.env.NODE_ENV;
 
 // Parse Keys
-Parse.initialize(
-  'h2s5h30qG8Wtps1xkVYXrkJAxbGzLs4Um3RMknyY',
-  'pJWkBO9JxnOMdHSRJnqL6koV0YhqpHirEOlT71rA'
-  // 'zcMH71cH4lo5I963hq9Dr9cVigVSj6KmlVP5z6ad',
-  // '6Gcx2CB80rPMmqGKy2UgYjGSe1inkU7UaJWj5fWw'
-);
+Parse.initialize(process.env.PARSE_ID, process.env.PARSE_SECRET);
 
 module.exports = function(app, express) {
   // Middleware

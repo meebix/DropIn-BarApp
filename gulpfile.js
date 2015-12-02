@@ -335,8 +335,7 @@ gulp.task('serve-dev', ['inject'], function() {
  * --nosync
  */
 gulp.task('serve-build', ['build'], function() {
-  // serve(false /*isDev*/);
-  done();
+  serve(false /*isDev*/);
 });
 
 /**
