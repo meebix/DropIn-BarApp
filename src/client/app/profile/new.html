@@ -1,6 +1,6 @@
-<h1>Edit Bar Profile</h1>
+<h1>Create Bar</h1>
 <hr>
-<form name="updateProfileForm" ng-submit="vm.updateProfile(vm.profileData)">
+<form name="createProfileForm" ng-submit="vm.createProfile(vm.profileData)">
   <div class="form-group">
     <label for="profileName">Bar Name</label>
     <input type="text" class="form-control" placeholder="Bar One" ng-model="vm.profileData.name">
@@ -62,4 +62,5 @@
     <label for="profileSundayPromotion">Sunday's Promotion</label>
     <input type="text" class="form-control" ng-model="vm.profileData.sundayPromotion">
   </div>
+  <button type="submit" class="btn btn-primary">Create</button>
 </form>

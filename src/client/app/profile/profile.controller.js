@@ -5,30 +5,59 @@
     .module('app.profile')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$q', 'logger', '$stateParams', 'profileService'];
+  ProfileController.$inject = ['$q', 'logger', '$state', '$stateParams', 'profileService'];
   /* @ngInject */
-  function ProfileController($q, logger, $stateParams, profileService) {
+  function ProfileController($q, logger, $state, $stateParams, profileService) {
     var vm = this;
     vm.title = 'Dashboard';
     vm.barId = $stateParams.id;
-    vm.getProfileData = getProfileData;
-    vm.updateProfileData = updateProfileData;
+    vm.allProfiles = allProfiles;
+    vm.createProfile = createProfile;
+    vm.showProfile = showProfile;
+    vm.updateProfile = updateProfile;
+    vm.deleteProfile = deleteProfile;
     vm.init = init;
 
-    function getProfileData() {
-      profileService.getProfileData(vm.barId).then(function(profileData) {
-        vm.profileData = profileData;
+    function allProfiles() {
+      profileService.allProfiles().then(function(results) {
+        vm.allProfiles = results.data;
+      }, function(error) {
+        // Error
       });
     }
 
-    function updateProfileData(profileData) {
-      profileData.barId = vm.barId;
+    function createProfile(profileData) {
+      profileService.createProfile(profileData).then(function() {
+        $state.go('profiles');
+      }, function(error) {
+        // Error
+      });
+    }
 
-      profileService.updateProfileData(profileData);
+    function showProfile() {
+      profileService.showProfile(vm.barId).then(function(results) {
+        vm.profileData = results.data;
+      });
+    }
+
+    function updateProfile(profileData) {
+      profileService.updateProfile(vm.barId, profileData).then(function() {
+        $state.go('profiles');
+      });
+    }
+
+    function deleteProfile() {
+      profileService.deleteProfile(vm.barId).then(function() {
+        $state.go('profiles');
+      });
     }
 
     function init() {
-      vm.getProfileData();
+      vm.allProfiles();
+
+      if ($stateParams.id) {
+        vm.showProfile();
+      }
     }
 
     vm.init();

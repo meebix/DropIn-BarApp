@@ -9,16 +9,19 @@
   /* @ngInject */
   function profileService($http, $q, logger, $cookieStore) {
     var service = {
-      getProfileData: getProfileData,
-      updateProfileData: updateProfileData
+      allProfiles: allProfiles,
+      createProfile: createProfile,
+      showProfile: showProfile,
+      updateProfile: updateProfile,
+      deleteProfile: deleteProfile
     };
 
     return service;
 
-    function getProfileData(barId) {
+    function allProfiles() {
       return $http({
         method: 'GET',
-        url: '/api/v1/profile/' + barId,
+        url: '/api/v1/profiles',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -27,14 +30,51 @@
       });
     }
 
-    function updateProfileData(barObj) {
+    function createProfile(profileObj) {
       return $http({
         method: 'POST',
-        url: '/api/v1/profile/' + barObj.barId,
+        url: '/api/v1/profiles',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: profileObj
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
+    function showProfile(barId) {
+      return $http({
+        method: 'GET',
+        url: '/api/v1/profiles/' + barId,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
+    function updateProfile(barId, barObj) {
+      return $http({
+        method: 'POST',
+        url: '/api/v1/profiles/' + barId,
         headers: {
           'Content-Type': 'application/json'
         },
         data: barObj
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
+    function deleteProfile(barId) {
+      return $http({
+        method: 'DELETE',
+        url: '/api/v1/profiles/' + barId,
+        headers: {
+          'Content-Type': 'application/json'
+        },
       }).then(function(response) {
         return response.data;
       });

@@ -1,0 +1,19 @@
+<h1>All Bar Profiles</h1>
+<hr>
+<a ui-sref="profile-new" class="btn btn-primary">Create Bar</a>
+<div class="table-responsive margin-top-20">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="profile in vm.allProfiles | orderBy:'name'">
+        <td><a ui-sref="profile-show({id: profile.objectId})" class="link-alt-underline">{{profile.name}}</a></td>
+        <td>{{profile.city}}, {{profile.state}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

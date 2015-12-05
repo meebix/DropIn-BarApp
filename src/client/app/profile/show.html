@@ -1,0 +1,22 @@
+<h1>{{vm.profileData.name}}</h1>
+<hr>
+<a ui-sref="profile-edit({id: vm.barId})" class="btn btn-primary">Edit</a>
+<button type="button" class="btn btn-danger" ng-click="vm.deleteProfile()">Delete</button>
+<div class="margin-top-20">
+  <p>Name: {{vm.profileData.name}}</p>
+  <p>Address: {{vm.profileData.address}}</p>
+  <p>City: {{vm.profileData.city}}</p>
+  <p>State: {{vm.profileData.state}}</p>
+  <p>Zip Code: {{vm.profileData.zip}}</p>
+  <p>Phone Number: {{vm.profileData.phone}}</p>
+  <p>Email Address: {{vm.profileData.email}}</p>
+  <p>Description: {{vm.profileData.description}}</p>
+  <hr>
+  <p>Monday's Promotion: {{vm.profileData.mondayPromotion}}</p>
+  <p>Tuesday's Promotion: {{vm.profileData.tuesdayPromotion}}</p>
+  <p>Wednesday's Promotion: {{vm.profileData.wednesdayPromotion}}</p>
+  <p>Thursday's Promotion: {{vm.profileData.thursdayPromotion}}</p>
+  <p>Friday's Promotion: {{vm.profileData.fridayPromotion}}</p>
+  <p>Saturday's Promotion: {{vm.profileData.saturdayPromotion}}</p>
+  <p>Sunday's Promotion: {{vm.profileData.sundayPromotion}}</p>
+</div>

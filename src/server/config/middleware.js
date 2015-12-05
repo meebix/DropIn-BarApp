@@ -37,7 +37,7 @@ module.exports = function(app, express) {
 
   app.use('/api/v1/analytics', require('../api/analytics/analytics.routes'));
   app.use('/api/v1/events', require('../api/events/events.routes'));
-  app.use('/api/v1/profile', require('../api/profile/profile.routes'));
+  app.use('/api/v1/profiles', require('../api/profile/profile.routes'));
   app.use('/api/v1/rewards', require('../api/rewards/rewards.routes'));
   app.use('/api/v1/users', require('../api/users/users.routes'));
   app.use('/api/v1/helpers', require('../api/helpers/helpers.routes'));
