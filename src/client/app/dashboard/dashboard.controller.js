@@ -10,17 +10,17 @@
   function DashboardController($q, logger, userService, accessService) {
     var vm = this;
     vm.title = 'Dashboard';
-    vm.barData = barData;
+    // vm.barData = barData;
     vm.init = init;
 
-    function barData() {
-      var bar = userService.getUserDataFromCookie();
+    // function barData() {
+    //   var bar = userService.getUserDataFromCookie();
 
-      vm.barId = bar.associatedBar;
-    }
+    //   vm.barId = bar.associatedBar;
+    // }
 
     function init() {
-      vm.barData();
+      // vm.barData();
     }
 
     vm.init();
