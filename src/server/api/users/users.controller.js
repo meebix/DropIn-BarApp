@@ -76,7 +76,8 @@ function createUser(req, res) {
 
 function deleteUser(req, res) {
   var usersQuery = new Parse.Query(Parse.User);
-  console.log(req.params);
+
+  Parse.Cloud.useMasterKey();
   usersQuery.equalTo('objectId', req.params.id);
   usersQuery.first().then(function(userObj) {
     // Delete the user
