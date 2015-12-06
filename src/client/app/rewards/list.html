@@ -1,0 +1,18 @@
+<h1>All Bar Rewards</h1>
+<hr>
+<div class="table-responsive margin-top-20">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Reward</th>
+        <th>Bar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="reward in vm.allRewards | orderBy:'name'">
+        <td><a ui-sref="reward-edit({id: reward.objectId})" class="link-alt-underline">{{reward.reward}}</a></td>
+        <td>{{reward.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

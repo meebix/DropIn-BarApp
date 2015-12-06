@@ -12,7 +12,8 @@
     'app.analytics',
     'app.rewards',
     'app.events',
-    'app.profile'
+    'app.profile',
+    'app.users'
   ])
   .run(appRun);
 

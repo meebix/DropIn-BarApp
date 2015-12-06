@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app.rewards')
+    .module('app.users')
     .run(appRun);
 
   appRun.$inject = ['routerHelper', 'ROLES'];
@@ -14,26 +14,26 @@
   function getStates(ROLES) {
     return [
       {
-        state: 'rewards',
+        state: 'users',
         config: {
-          url: '/rewards',
-          templateUrl: 'app/rewards/list.html',
-          controller: 'RewardsController',
+          url: '/users',
+          templateUrl: 'app/users/list.html',
+          controller: 'UserController',
           controllerAs: 'vm',
-          title: 'Rewards',
+          title: 'Users',
           data: {
             authorizedRoles: [ROLES.admin]
           }
         }
       },
       {
-        state: 'reward-edit',
+        state: 'user-new',
         config: {
-          url: '/rewards/:id/edit',
-          templateUrl: 'app/rewards/edit.html',
-          controller: 'RewardsController',
+          url: '/users/new',
+          templateUrl: 'app/users/new.html',
+          controller: 'UserController',
           controllerAs: 'vm',
-          title: 'Rewards',
+          title: 'User',
           data: {
             authorizedRoles: [ROLES.admin]
           }

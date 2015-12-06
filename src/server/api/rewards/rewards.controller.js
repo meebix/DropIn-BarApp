@@ -3,54 +3,61 @@
 
 // Requires
 var Parse = require('parse/node').Parse;
-var currentUserId = require('../auth/auth.controller').currentUserId;
+var _ = require('underscore');
+var currentUserObj = require('../auth/auth.controller').currentUserObj;
+var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
 
-var userQuery = new Parse.Query(Parse.User);
-var newUser = new Parse.User();
+var Bar = Parse.Object.extend('Bar');
 
 // Export
 module.exports = {
-  allUsers: allUsers,
-  createUser: createUser,
-  updateUser: updateUser,
-  showUser: showUser,
-  editUser: editUser,
-  deleteUser: deleteUser
+  allRewards: allRewards,
+  showReward: showReward,
+  updateReward: updateReward
 };
 
 // Route Logic
-function allUsers(req, res) {
+function allRewards(req, res) {
+  var barQuery = new Parse.Query(Bar);
 
+  barQuery.notEqualTo('isActive', false);
+  barQuery.find().then(function(bars) {
+    res.status(200).json({data: bars});
+  }, function(error) {
+    res.status(400).end();
+  });
 }
 
-function createUser(req, res) {
-  var user = {
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email
-  };
+function showReward(req, res) {
+  var barQuery = new Parse.Query(Bar);
 
-  newUser.save(user).then(function() {
-    res.status(200).end();
+  barQuery.equalTo('objectId', req.params.id);
+  barQuery.first().then(function(barObj) {
+    res.status(200).json({data: barObj});
   }, function(error) {
     console.log(error);
     res.status(400).end();
   });
 }
 
-function updateUser(req, res) {
+function updateReward(req, res) {
+  var barQuery = new Parse.Query(Bar);
 
-}
+  barQuery.equalTo('objectId', req.params.id);
+  barQuery.first().then(function(foundBar) {
+    var barObj = {
+      reward: req.body.reward
+    };
 
-function showUser(req, res) {
-
-}
-
-function editUser(req, res) {
-
-}
-
-function deleteUser(req, res) {
-
+    return foundBar.save(barObj).then(function(savedBarObj) {
+      res.status(200).json({data: savedBarObj});
+    }, function(error) {
+      console.log(error);
+      res.status(400).end();
+    });
+  }, function(error) {
+    console.log(error);
+    res.status(400).end();
+  });
 }

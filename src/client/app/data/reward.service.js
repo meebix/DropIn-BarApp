@@ -9,16 +9,17 @@
   /* @ngInject */
   function rewardService($http, $q, logger, $cookieStore) {
     var service = {
-      getProfileData: getProfileData,
-      updateProfileData: updateProfileData
+      allRewards: allRewards,
+      showReward: showReward,
+      updateReward: updateReward
     };
 
     return service;
 
-    function getProfileData(barId) {
+    function allRewards() {
       return $http({
         method: 'GET',
-        url: '/api/v1/profile/' + barId,
+        url: '/api/v1/rewards',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -27,10 +28,22 @@
       });
     }
 
-    function updateProfileData(barObj) {
+    function showReward(barId) {
+      return $http({
+        method: 'GET',
+        url: '/api/v1/rewards/' + barId,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
+    function updateReward(barId, barObj) {
       return $http({
         method: 'POST',
-        url: '/api/v1/profile/' + barObj.barId,
+        url: '/api/v1/rewards/' + barId,
         headers: {
           'Content-Type': 'application/json'
         },
