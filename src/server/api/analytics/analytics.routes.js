@@ -4,16 +4,18 @@
 // Requires
 var router = require('express').Router();
 var four0four = require('../../utils/404')();
-var analyticsUserController = require('./analytics-user.controller');
+var analyticsDropInController = require('./analytics-dropin.controller');
+var analyticsEventsController = require('./analytics-event.controller');
+var analyticsRewardsController = require('./analytics-reward.controller');
 var analyticsTrafficController = require('./analytics-traffic.controller');
-var analyticsRewardController = require('./analytics-reward.controller');
-var analyticsEventController = require('./analytics-event.controller');
+var analyticsUserController = require('./analytics-user.controller');
 
 // Routes
-router.get('/analytics-user', analyticsUserController.getUserAnalytics);
-router.get('/analytics-traffic', analyticsTrafficController.getTrafficAnalytics);
-router.get('/analytics-reward', analyticsRewardController.getRewardAnalytics);
-router.get('/analytics-event', analyticsEventController.getEventAnalytics);
+router.get('/dropin', analyticsDropInController.statsData);
+router.get('/events', analyticsEventsController.statsData);
+router.get('/rewards', analyticsRewardsController.statsData);
+router.get('/traffic', analyticsTrafficController.statsData);
+router.get('/users', analyticsUserController.statsData);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;

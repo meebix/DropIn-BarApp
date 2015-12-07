@@ -4,7 +4,6 @@
   angular.module('app', [
     'app.core',
     'app.data',
-    'app.widgets',
     'app.layout',
     // Pages
     'app.auth',

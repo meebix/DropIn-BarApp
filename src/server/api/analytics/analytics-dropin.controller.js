@@ -4,10 +4,9 @@
 // Requires
 var Parse = require('parse/node').Parse;
 var _ = require('underscore');
-var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
 
-var UserStats = Parse.Object.extend('Stats_Users');
+var DropInStats = Parse.Object.extend('Stats_DropIn');
 
 // Export
 module.exports = {
@@ -16,12 +15,10 @@ module.exports = {
 
 // Route Logic
 function statsData(req, res) {
-  var userStats = new Parse.Query(UserStats);
+  var dropinStats = new Parse.Query(DropInStats);
 
-  userStats.equalTo('barId', currentUserBarObj());
-  userStats.include('barId');
-  userStats.descending('calcDate');
-  userStats.first().then(function(results) {
+  dropinStats.descending('calcDate');
+  dropinStats.first().then(function(results) {
     res.status(200).json({data: results});
   }, function(error) {
     res.status(400).end();

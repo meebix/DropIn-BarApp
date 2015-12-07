@@ -15,6 +15,7 @@
 
   <!-- build:css styles/lib.css -->
   <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css" />
   <link rel="stylesheet" href="/bower_components/jquery-ui/themes/smoothness/jquery-ui.css" />
   <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
   <!-- endbower -->
@@ -35,6 +36,8 @@
   <script src="/bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/angular/angular.js"></script>
   <script src="/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/bower_components/Chart.js/Chart.js"></script>
+  <script src="/bower_components/angular-chart.js/dist/angular-chart.js"></script>
   <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
   <script src="/bower_components/jquery-ui/jquery-ui.js"></script>
@@ -66,7 +69,6 @@
   <script src="/src/client/app/profile/profile.module.js"></script>
   <script src="/src/client/app/rewards/rewards.module.js"></script>
   <script src="/src/client/app/users/users.module.js"></script>
-  <script src="/src/client/app/widgets/widgets.module.js"></script>
   <script src="/src/client/app/analytics/event/event-analytics.controller.js"></script>
   <script src="/src/client/app/analytics/event/event-analytics.route.js"></script>
   <script src="/src/client/app/analytics/reward/reward-analytics.controller.js"></script>
@@ -99,6 +101,7 @@
   <script src="/src/client/app/dashboard/dashboard.controller.js"></script>
   <script src="/src/client/app/dashboard/dashboard.route.js"></script>
   <script src="/src/client/app/data/access.service.js"></script>
+  <script src="/src/client/app/data/analytic.service.js"></script>
   <script src="/src/client/app/data/auth.service.js"></script>
   <script src="/src/client/app/data/event.service.js"></script>
   <script src="/src/client/app/data/helper.service.js"></script>
@@ -115,8 +118,6 @@
   <script src="/src/client/app/rewards/rewards.route.js"></script>
   <script src="/src/client/app/users/users.controller.js"></script>
   <script src="/src/client/app/users/users.route.js"></script>
-  <script src="/src/client/app/widgets/ht-img-person.directive.js"></script>
-  <script src="/src/client/app/widgets/ht-widget-header.directive.js"></script>
   <!-- endinject -->
 
   <!-- inject:templates:js -->

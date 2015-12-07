@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('app.users', [
-    'app.core',
-    'app.widgets'
+    'app.core'
     ]);
 })();
