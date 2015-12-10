@@ -11,7 +11,7 @@
     var vm = this;
     vm.title = 'Traffic Analytics';
     vm.statsData = statsData;
-    vm.barChart = barChart;
+    vm.chartTraffic = chartTraffic;
     vm.init = init;
 
     function statsData() {
@@ -27,19 +27,24 @@
           vm.dropinStats = results.data;
 
           // Stats
-          vm.dropinVisitsByCredit = vm.dropinStats.totalTrafficByCredit;
+          vm.totalTrafficByCredit = vm.dropinStats.totalTrafficByCredit;
         });
       }).then(function() {
-        vm.barChart();
+        vm.chartTraffic();
       });
     }
 
-    // Bar chart data
-    function barChart() {
-      vm.labels = [vm.calcDate];
-      vm.series = [vm.barName, 'Drop In'];
+    // Traffic breakdown chart data
+    function chartTraffic() {
+      vm.labelsTraffic = ['Traffic'];
+      vm.seriesTraffic = ['Drop In', 'Bar'];
+      vm.coloursTraffic = ['#00CC2D', '#3611BE'];
+      vm.chartOptionsTraffic = {
+        multiTooltipTemplate: '<%= value %>',
+        tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+      };
 
-      vm.data = [[vm.visitsByCredit], [vm.dropinVisitsByCredit]];
+      vm.dataTraffic = [[vm.totalTrafficByCredit], [vm.visitsByCredit]];
     }
 
     function init() {

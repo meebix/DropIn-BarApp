@@ -5,14 +5,21 @@
     .module('app.layout')
     .controller('LayoutController', LayoutController);
 
-  LayoutController.$inject = ['$scope', '$location', '$state', 'authService', 'accessService', 'ROLES'];
+  LayoutController.$inject = ['$scope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
   /* @ngInject */
-  function LayoutController($scope, $location, $state, authService, accessService, ROLES) {
+  function LayoutController($scope, $location, $state, $cookieStore, authService, accessService, ROLES) {
     var vm = this;
     vm.isAuthPage = isAuthPage;
     vm.isActive = isActive;
     vm.isAnalyticPage = isAnalyticPage;
     vm.logout = logout;
+    vm.copyrightYear = new Date();
+
+    // TODO: Why are we using $scope here instead of vm??
+    // Cannot set global vm
+    // Can we at least move userRole and isAuthorized to vm?
+    // This may be the global scope
+    // None of this works on refresh, needs to be in state service
 
     // Scopes
     $scope.currentUser = null;
