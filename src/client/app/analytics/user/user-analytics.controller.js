@@ -54,13 +54,13 @@
       vm.labelsGender = ['Males', 'Females'];
       vm.coloursGender = ['#4670C4', '#C76475'];
       vm.chartOptionsGender = {
-        tooltipTemplate: '<%= value %>',
+        // tooltipTemplate: '<%= value %>',
         // onAnimationComplete: function() {
         //   this.showTooltip(this.segments, true);
         // },
         // tooltipEvents: [],
-        tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
-        // showTooltips: true
+        // tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        showTooltips: false,
         legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><div class="chart-value" style="color: <%=segments[i].fillColor%>;"><%=segments[i].value%></div><%if(segments[i].label){%><div class="chart-label"><%=segments[i].label%></div><%}%></li><%}%></ul>'
       };
 
@@ -73,8 +73,9 @@
       vm.seriesLoyaltyLevel = ['Guest', 'Regular', 'VIP'];
       vm.coloursLoyaltyLevel = ['#ABDD93', '#7AB85C', '#519331'];
       vm.chartOptionsLoyaltyLevel = {
-        tooltipTemplate: '<%= value %>',
-        tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        // tooltipTemplate: '<%= value %>',
+        // tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        showTooltips: false,
         legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><div class="chart-value" style="color: <%=segments[i].fillColor%>;"><%=segments[i].value%></div><%if(segments[i].label){%><div class="chart-label"><%=segments[i].label%></div><%}%></li><%}%></ul>'
       };
 
@@ -87,8 +88,9 @@
       vm.seriesAge = ['21-24', '25-29', '30-34', '35 plus'];
       vm.coloursAge = ['#998E8E', '#897A7A', '#7B6868', '#6C5656'];
       vm.chartOptionsAge = {
-        tooltipTemplate: '<%= value %>',
-        tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        // tooltipTemplate: '<%= value %>',
+        // tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        showTooltips: false,
         legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><div class="chart-value" style="color: <%=segments[i].fillColor%>;"><%=segments[i].value%></div><%if(segments[i].label){%><div class="chart-label"><%=segments[i].label%></div><%}%></li><%}%></ul>'
       };
 
@@ -101,8 +103,9 @@
       vm.seriesActiveUsers = ['Drop In', vm.barName];
       vm.coloursActiveUsers = ['#27556C', '#AA7539'];
       vm.chartOptionsActiveUsers = {
-        multiTooltipTemplate: '<%= value %>',
-        multiTooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        // multiTooltipTemplate: '<%= value %>',
+        // multiTooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        showTooltips: false,
         legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
       };
 
