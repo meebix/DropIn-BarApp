@@ -4,6 +4,7 @@
 // Requires
 var Parse = require('parse/node').Parse;
 var _ = require('underscore');
+var moment = require('moment');
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
 
@@ -17,12 +18,25 @@ module.exports = {
 // Route Logic
 function statsData(req, res) {
   var trafficStats = new Parse.Query(TrafficStats);
+  var oneWeekAgoDate = new Date(moment(new Date()).subtract(7, 'days')._d);
 
   trafficStats.equalTo('barId', currentUserBarObj());
   trafficStats.include('barId');
   trafficStats.descending('calcDate');
-  trafficStats.first().then(function(results) {
-    res.status(200).json({data: results});
+  trafficStats.greaterThanOrEqualTo('calcDate', oneWeekAgoDate);
+  trafficStats.find().then(function(results) {
+    var values = [];
+    var calcDates = [];
+    var barName = [results[0].attributes.barId.attributes.name];
+
+    _.each(results, function(result) {
+      values.push(result.attributes.visitsByCredit);
+      calcDates.push(moment.utc(result.attributes.calcDate).format('MM-DD'));
+    });
+
+    var stats = [values, calcDates, barName];
+
+    res.status(200).json({data: stats});
   }, function(error) {
     res.status(400).end();
   });

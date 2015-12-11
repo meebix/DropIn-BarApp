@@ -1,9 +1,11 @@
 // Charts
 //
 
+// Block-style labels
 .chart-legend li, .bar-legend li,
 .line-legend li, .pie-legend li,
 .radar-legend li, .polararea-legend li, .doughnut-legend li {
+  margin-top: 15px;
   padding: 2px 20px;
 
   .chart-value {
@@ -13,4 +15,9 @@
   .chart-label {
     font-size: 14px;
   }
+}
+
+// Inline labels
+.bar-legend li.chart-label-inline {
+  padding: 2px 8px 2px 28px;
 }

@@ -9,7 +9,8 @@
   /* @ngInject */
   function analyticService($http, $q, logger) {
     var service = {
-      dropinStats: dropinStats,
+      singleDropinStats: singleDropinStats,
+      multipleDropinStats: multipleDropinStats,
       eventStats: eventStats,
       rewardStats: rewardStats,
       trafficStats: trafficStats,
@@ -18,10 +19,22 @@
 
     return service;
 
-    function dropinStats() {
+    function singleDropinStats() {
       return $http({
         method: 'GET',
-        url: '/api/v1/analytics/dropin',
+        url: '/api/v1/analytics/single-dropin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
+    function multipleDropinStats() {
+      return $http({
+        method: 'GET',
+        url: '/api/v1/analytics/multiple-dropin',
         headers: {
           'Content-Type': 'application/json'
         },

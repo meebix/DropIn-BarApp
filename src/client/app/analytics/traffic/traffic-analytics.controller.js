@@ -17,17 +17,18 @@
     function statsData() {
       analyticService.trafficStats().then(function(results) {
         vm.trafficStats = results.data;
-        vm.calcDate = $filter('date')(vm.trafficStats.calcDate.iso, 'MM/dd/yyyy');
-        vm.barName = vm.trafficStats.barId.name;
 
         // Stats
-        vm.visitsByCredit = vm.trafficStats.visitsByCredit;
+        vm.barTrafficValues = vm.trafficStats[0];
+        vm.calcDates = vm.trafficStats[1];
+        vm.barName = vm.trafficStats[2];
       }).then(function() {
-        return analyticService.dropinStats().then(function(results) {
-          vm.dropinStats = results.data;
+        return analyticService.multipleDropinStats().then(function(results) {
+          vm.multipleDropinStats = results.data;
+          vm.dropinTrafficValues = vm.multipleDropinStats[0];
 
           // Stats
-          vm.totalTrafficByCredit = vm.dropinStats.totalTrafficByCredit;
+          vm.totalTrafficByCredit = vm.multipleDropinStats.totalTrafficByCredit;
         });
       }).then(function() {
         vm.chartTraffic();
@@ -36,15 +37,15 @@
 
     // Traffic breakdown chart data
     function chartTraffic() {
-      vm.labelsTraffic = ['Traffic'];
-      vm.seriesTraffic = ['Drop In', 'Bar'];
+      vm.labelsTraffic = [vm.calcDates[0], vm.calcDates[1], vm.calcDates[2], vm.calcDates[3], vm.calcDates[4], vm.calcDates[5]];
+      vm.seriesTraffic = ['Drop In', vm.barName];
       vm.coloursTraffic = ['#00CC2D', '#3611BE'];
       vm.chartOptionsTraffic = {
-        multiTooltipTemplate: '<%= value %>',
-        tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        showTooltips: false,
+        legendTemplate : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li class="chart-label-inline"><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
       };
 
-      vm.dataTraffic = [[vm.totalTrafficByCredit], [vm.visitsByCredit]];
+      vm.dataTraffic = [vm.dropinTrafficValues, vm.barTrafficValues];
     }
 
     function init() {

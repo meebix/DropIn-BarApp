@@ -11,7 +11,8 @@ var analyticsTrafficController = require('./analytics-traffic.controller');
 var analyticsUserController = require('./analytics-user.controller');
 
 // Routes
-router.get('/dropin', analyticsDropInController.statsData);
+router.get('/single-dropin', analyticsDropInController.singleStatsData);
+router.get('/multiple-dropin', analyticsDropInController.multipleStatsData);
 router.get('/events', analyticsEventsController.statsData);
 router.get('/rewards', analyticsRewardsController.statsData);
 router.get('/traffic', analyticsTrafficController.statsData);
