@@ -36,13 +36,15 @@ function multipleStatsData(req, res) {
   dropinStats.find().then(function(results) {
     var calcDates = [];
     var trafficValues = [];
+    var rewardsValues = [];
 
     _.each(results, function(result) {
       trafficValues.push(result.attributes.totalTrafficByCredit);
+      rewardsValues.push(result.attributes.totalRewardsRedeemed);
       calcDates.push(moment.utc(result.attributes.calcDate).format('MM-DD'));
     });
 
-    var stats = [trafficValues, calcDates];
+    var stats = [trafficValues, rewardsValues, calcDates];
 
     res.status(200).json({data: stats});
   }, function(error) {

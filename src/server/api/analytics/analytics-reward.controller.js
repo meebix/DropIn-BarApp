@@ -4,6 +4,7 @@
 // Requires
 var Parse = require('parse/node').Parse;
 var _ = require('underscore');
+var moment = require('moment');
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
 
@@ -17,12 +18,25 @@ module.exports = {
 // Route Logic
 function statsData(req, res) {
   var rewardStats = new Parse.Query(RewardStats);
+  var oneWeekAgoDate = new Date(moment(new Date()).subtract(7, 'days')._d);
 
   rewardStats.equalTo('barId', currentUserBarObj());
   rewardStats.include('barId');
   rewardStats.descending('calcDate');
-  rewardStats.first().then(function(results) {
-    res.status(200).json({data: results});
+  rewardStats.greaterThanOrEqualTo('calcDate', oneWeekAgoDate);
+  rewardStats.find().then(function(results) {
+    var values = [];
+    var calcDates = [];
+    var barName = [results[0].attributes.barId.attributes.name];
+
+    _.each(results, function(result) {
+      values.push(result.attributes.rewardsRedeemed);
+      calcDates.push(moment.utc(result.attributes.calcDate).format('MM-DD'));
+    });
+
+    var stats = [values, calcDates, barName];
+
+    res.status(200).json({data: stats});
   }, function(error) {
     res.status(400).end();
   });

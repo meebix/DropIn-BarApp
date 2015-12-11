@@ -17,17 +17,17 @@
     function statsData() {
       analyticService.rewardStats().then(function(results) {
         vm.rewardStats = results.data;
-        vm.calcDate = $filter('date')(vm.rewardStats.calcDate.iso, 'MM/dd/yyyy');
-        vm.barName = vm.rewardStats.barId.name;
 
         // Stats
-        vm.rewardsRedeemed = vm.rewardStats.rewardsRedeemed;
+        vm.barRewardsRedeemed = vm.rewardStats[0];
+        vm.calcDates = vm.rewardStats[1];
+        vm.barName = vm.rewardStats[2];
       }).then(function() {
-        return analyticService.dropinStats().then(function(results) {
-          vm.dropinStats = results.data;
+        return analyticService.multipleDropinStats().then(function(results) {
+          vm.multipleDropinStats = results.data;
 
           // Stats
-          vm.totalRewardsRedeemed = vm.dropinStats.totalRewardsRedeemed;
+          vm.dropinRewardsRedeemed = vm.multipleDropinStats[1];
         });
       }).then(function() {
         vm.chartRewards();
@@ -36,15 +36,16 @@
 
     // Traffic breakdown chart data
     function chartRewards() {
-      vm.labelsRewards = ['Traffic'];
-      vm.seriesRewards = ['Drop In', 'Bar'];
-      vm.coloursRewards = ['#00CC2D', '#3611BE'];
+      vm.labelsRewards = [vm.calcDates[0], vm.calcDates[1], vm.calcDates[2], vm.calcDates[3], vm.calcDates[4], vm.calcDates[5]];
+      vm.seriesRewards = ['Drop In', vm.barName];
+      vm.coloursRewards = ['#00CC2D', '#9C344C'];
       vm.chartOptionsRewards = {
         multiTooltipTemplate: '<%= value %>',
-        tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        showTooltips: true,
+        legendTemplate : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li class="chart-label-inline"><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
       };
 
-      vm.dataRewards = [[vm.totalRewardsRedeemed], [vm.rewardsRedeemed]];
+      vm.dataRewards = [vm.barRewardsRedeemed, vm.dropinRewardsRedeemed];
     }
 
     function init() {

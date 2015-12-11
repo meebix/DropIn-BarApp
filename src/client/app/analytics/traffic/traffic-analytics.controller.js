@@ -25,10 +25,9 @@
       }).then(function() {
         return analyticService.multipleDropinStats().then(function(results) {
           vm.multipleDropinStats = results.data;
-          vm.dropinTrafficValues = vm.multipleDropinStats[0];
 
           // Stats
-          vm.totalTrafficByCredit = vm.multipleDropinStats.totalTrafficByCredit;
+          vm.dropinTrafficValues = vm.multipleDropinStats[0];
         });
       }).then(function() {
         vm.chartTraffic();
@@ -41,7 +40,8 @@
       vm.seriesTraffic = ['Drop In', vm.barName];
       vm.coloursTraffic = ['#00CC2D', '#3611BE'];
       vm.chartOptionsTraffic = {
-        showTooltips: false,
+        multiTooltipTemplate: '<%= value %>',
+        showTooltips: true,
         legendTemplate : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li class="chart-label-inline"><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
       };
 
