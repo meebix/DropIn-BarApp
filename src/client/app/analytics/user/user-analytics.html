@@ -1,49 +1,49 @@
-<div class="col-md-6">
+<div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Drop In Gender</h3>
+      <h3 class="panel-title">Drop In Gender Totals</h3>
     </div>
     <div class="panel-body">
       <canvas id="pie" class="chart chart-pie"
         chart-data="vm.dataGender" chart-labels="vm.labelsGender" chart-colours="vm.coloursGender"
-        chart-legend="true" chart-series="vm.seriesGender" chart-options="vm.chartOptionsGender">
+        chart-legend="true" chart-options="vm.chartOptionsGender">
       </canvas>
     </div>
   </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Drop In Loyalty Level</h3>
+      <h3 class="panel-title">Drop In Loyalty Level Totals</h3>
     </div>
     <div class="panel-body">
       <canvas id="doughnut" class="chart chart-doughnut"
         chart-data="vm.dataLoyaltyLevel" chart-labels="vm.labelsLoyaltyLevel" chart-colours="vm.coloursLoyaltyLevel"
-        chart-legend="true" chart-series="vm.seriesLoyaltyLevel" chart-options="vm.chartOptionsLoyaltyLevel">
+        chart-legend="true" chart-options="vm.chartOptionsLoyaltyLevel">
       </canvas>
     </div>
   </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Drop In Age</h3>
+      <h3 class="panel-title">Drop In Age Totals</h3>
     </div>
     <div class="panel-body">
       <canvas id="pie" class="chart chart-pie"
         chart-data="vm.dataAge" chart-labels="vm.labelsAge" chart-colours="vm.coloursAge"
-        chart-legend="true" chart-series="vm.seriesAge" chart-options="vm.chartOptionsAge">
+        chart-legend="true" chart-options="vm.chartOptionsAge">
       </canvas>
     </div>
   </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-12">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Active Users</h3>
+      <h3 class="panel-title">{{vm.barName}} Active Users</h3>
     </div>
     <div class="panel-body">
       <canvas id="bar" class="chart chart-bar"

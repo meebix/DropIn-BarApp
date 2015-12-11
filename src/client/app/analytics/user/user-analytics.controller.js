@@ -20,6 +20,8 @@
     function statsData() {
       analyticService.userStats().then(function(results) {
         vm.userStats = results.data;
+        vm.calcDate = $filter('date')(vm.userStats.calcDate.iso, 'MM/dd/yyyy');
+        vm.barName = vm.userStats.barId.name;
 
         // Stats
         vm.activeUsersByCredit = vm.userStats.activeUsersByCredit;
@@ -50,8 +52,7 @@
     // Gender breakdown chart data
     function chartGender() {
       vm.labelsGender = ['Males', 'Females'];
-      vm.seriesGender = ['Males', 'Females'];
-      vm.coloursGender = ['#4670C4', '#FFC049'];
+      vm.coloursGender = ['#4670C4', '#C76475'];
       vm.chartOptionsGender = {
         tooltipTemplate: '<%= value %>',
         // onAnimationComplete: function() {
@@ -60,6 +61,7 @@
         // tooltipEvents: [],
         tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
         // showTooltips: true
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><div class="chart-value" style="color: <%=segments[i].fillColor%>;"><%=segments[i].value%></div><%if(segments[i].label){%><div class="chart-label"><%=segments[i].label%></div><%}%></li><%}%></ul>'
       };
 
       vm.dataGender = [vm.totalMales, vm.totalFemales];
@@ -69,10 +71,11 @@
     function chartLoyaltyLevel() {
       vm.labelsLoyaltyLevel = ['Guest', 'Regular', 'VIP'];
       vm.seriesLoyaltyLevel = ['Guest', 'Regular', 'VIP'];
-      vm.coloursLoyaltyLevel = ['#16A085', '#BDC3C7', '#CCAC00'];
+      vm.coloursLoyaltyLevel = ['#ABDD93', '#7AB85C', '#519331'];
       vm.chartOptionsLoyaltyLevel = {
         tooltipTemplate: '<%= value %>',
         tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><div class="chart-value" style="color: <%=segments[i].fillColor%>;"><%=segments[i].value%></div><%if(segments[i].label){%><div class="chart-label"><%=segments[i].label%></div><%}%></li><%}%></ul>'
       };
 
       vm.dataLoyaltyLevel = [vm.totalGuests, vm.totalRegulars, vm.totalVips];
@@ -82,10 +85,11 @@
     function chartAge() {
       vm.labelsAge = ['21-24', '25-29', '30-34', '35 plus'];
       vm.seriesAge = ['21-24', '25-29', '30-34', '35 plus'];
-      vm.coloursAge = ['#00CC2D', '#3611BE', '#FFD100', '#FF1800'];
+      vm.coloursAge = ['#998E8E', '#897A7A', '#7B6868', '#6C5656'];
       vm.chartOptionsAge = {
         tooltipTemplate: '<%= value %>',
         tooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<segments.length; i++){%><li><div class="chart-value" style="color: <%=segments[i].fillColor%>;"><%=segments[i].value%></div><%if(segments[i].label){%><div class="chart-label"><%=segments[i].label%></div><%}%></li><%}%></ul>'
       };
 
       vm.dataAge = [vm.age2124, vm.age2529, vm.age3034, vm.age35Plus];
@@ -93,12 +97,13 @@
 
     // Active users by credit breakdown chart data
     function chartActiveUsersByCredit() {
-      vm.labelsActiveUsers = ['Users'];
-      vm.seriesActiveUsers = ['Drop In', 'Bar'];
-      vm.coloursActiveUsers = ['#00CC2D', '#3611BE'];
+      vm.labelsActiveUsers = ['Over Past 30 Days'];
+      vm.seriesActiveUsers = ['Drop In', vm.barName];
+      vm.coloursActiveUsers = ['#27556C', '#AA7539'];
       vm.chartOptionsActiveUsers = {
         multiTooltipTemplate: '<%= value %>',
         multiTooltipFillColor: 'rgba(0, 0, 0, 0.75)',
+        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
       };
 
       vm.dataActiveUsers = [[vm.totalActiveUsersByCredit], [vm.activeUsersByCredit]];
