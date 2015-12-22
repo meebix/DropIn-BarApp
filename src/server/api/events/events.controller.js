@@ -78,8 +78,9 @@ function createEvent(req, res) {
         // Find all users who have a role of 'User' and for each user
         // save a new UsersEvents to the join table
         usersQuery.equalTo('roleId', roleObj);
+        console.log(loyaltyLevelObj.id);
         // TODO: Fixed hardcoded value
-        // If statement checks to see if the loyalty level is 'All', if yes, skip filter and return all users
+        // If statement checks to see if the loyalty level is 'All', if yes, skips filter and return all users
         if (loyaltyLevelObj.id !== 'cpMUn6twQc') {
           usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
         }
