@@ -19,14 +19,16 @@
   "dependencies": {
     "angular": "^1.4.5",
     "angular-animate": "^1.4.5",
+    "angular-bootstrap": "0.14.3",
     "angular-chart.js": "^0.8.7",
     "angular-cookies": "^1.4.6",
+    "angular-moment": "~0.10.3",
     "angular-sanitize": "^1.4.5",
-    "angular-ui-date": "^0.0.8",
+    "angular-ui-bootstrap-datetimepicker": "0.14.0",
     "angular-ui-router": "^0.2.15",
     "extras.angular.plus": "^0.9.2",
     "jquery": "^2.1.4",
-    "moment": "^2.10.3",
+    "moment": "^2.10.6",
     "toastr": "^2.1.1"
   },
   "resolutions": {

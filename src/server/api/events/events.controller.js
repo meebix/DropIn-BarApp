@@ -43,15 +43,14 @@ function createEvent(req, res) {
   // TODO: Need to move the creation of join table insertions to service
   var newEvent = new Events();
   var loyaltyLevelId = req.body.loyaltyLevelId;
-  var transformDateForParse = new Date(req.body.date).setUTCHours(0,0,0,0);
-  var formattedDate = new Date(transformDateForParse);
 
   loyaltyQuery.equalTo('objectId', loyaltyLevelId);
   loyaltyQuery.first().then(function(loyaltyLevelObj) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
-      date: formattedDate,
+      eventStart: transformDateForParse(req.body.eventStart),
+      eventEnd: transformDateForParse(req.body.eventEnd),
       loyaltyLevelId: loyaltyLevelObj,
       barId: currentUserBarObj(),
       markedForDeletion: false
@@ -92,7 +91,8 @@ function createEvent(req, res) {
               eventId: savedEventObj,
               userId: userObj,
               barId: currentUserBarObj(),
-              date: formattedDate,
+              eventStart: transformDateForParse(req.body.eventStart),
+              eventEnd: transformDateForParse(req.body.eventEnd),
               userHasViewed: false,
               markedForDeletion: false
             };
@@ -117,6 +117,15 @@ function createEvent(req, res) {
     console.log(error);
     res.status(400).end();
   });
+
+  // Utility to transform date for Parse
+  // This just creates a date object for Parse to read
+  // Parse seems to be converting date to UTC before storing it automatically
+  function transformDateForParse(date) {
+    var newDate = new Date(date);
+
+    return newDate;
+  }
 }
 
 function updateEvent(req, res) {

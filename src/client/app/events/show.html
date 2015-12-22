@@ -5,6 +5,6 @@
 <div class="margin-top-20">
   <p>Sent To: {{vm.eventData.loyaltyLevelId.name}}</p>
   <p>Description: {{vm.eventData.description}}</p>
-  <p>Date: {{vm.eventData.date.iso | date: 'MM/dd/yyyy'}}</p>
+  <p>Date: {{vm.eventData.eventStart.iso | date: 'MM/dd/yyyy'}}</p>
   <p>Last Updated: {{vm.eventData.updatedAt | date: 'MM/dd/yyyy'}}</p>
 </div>

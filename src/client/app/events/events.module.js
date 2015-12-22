@@ -3,6 +3,7 @@
 
   angular.module('app.events', [
     'app.core',
-    'ui.date'
+    'ui.bootstrap',
+    'ui.bootstrap.datetimepicker'
     ]);
 })();

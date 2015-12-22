@@ -45,7 +45,7 @@
         legendTemplate : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li class="chart-label-inline"><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
       };
 
-      vm.dataRewards = [vm.barRewardsRedeemed, vm.dropinRewardsRedeemed];
+      vm.dataRewards = [vm.dropinRewardsRedeemed, vm.barRewardsRedeemed];
     }
 
     function init() {

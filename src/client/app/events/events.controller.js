@@ -5,9 +5,9 @@
     .module('app.events')
     .controller('EventsController', EventsController);
 
-  EventsController.$inject = ['$q', 'logger', '$state', '$stateParams', 'eventService', 'helperService'];
+  EventsController.$inject = ['$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
   /* @ngInject */
-  function EventsController($q, logger, $state, $stateParams, eventService, helperService) {
+  function EventsController($q, logger, $state, $stateParams, moment, eventService, helperService) {
     var vm = this;
     vm.title = 'Events';
     vm.eventId = $stateParams.id;
@@ -28,6 +28,10 @@
     }
 
     function createEvent(eventData) {
+      // Convert dates to ISO string (local time)
+      eventData.eventStart = moment(eventData.eventStart).format();
+      eventData.eventEnd = moment(eventData.eventEnd).format();
+
       eventService.createEvent(eventData).then(function() {
         $state.go('events');
       }, function(error) {
