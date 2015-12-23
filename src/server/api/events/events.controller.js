@@ -86,6 +86,7 @@ function createEvent(req, res) {
           usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
         }
         return usersQuery.find().then(function(results) {
+          console.log(results.length);
           _.each(results, function(userObj) {
             var newUsersEvents = new UsersEvents();
 
