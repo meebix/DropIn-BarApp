@@ -82,6 +82,7 @@ function createEvent(req, res) {
         // TODO: Fixed hardcoded value
         // If statement checks to see if the loyalty level is 'All', if yes, skips filter and return all users
         if (loyaltyLevelObj.id !== 'cpMUn6twQc') {
+          console.log('hit block');
           usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
         }
         return usersQuery.find().then(function(results) {
