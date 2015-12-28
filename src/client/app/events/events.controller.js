@@ -77,6 +77,9 @@
       });
     }
 
+    // Datetime Picker
+    vm.minDate = new Date();
+
     function init() {
       vm.allEvents();
       vm.getLoyaltyLevels();
