@@ -43,10 +43,10 @@
       });
     }
 
-    function eventStats() {
+    function eventStats(eventId) {
       return $http({
         method: 'GET',
-        url: '/api/v1/analytics/events',
+        url: '/api/v1/analytics/events/' + eventId,
         headers: {
           'Content-Type': 'application/json'
         },

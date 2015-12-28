@@ -13,7 +13,7 @@ var analyticsUserController = require('./analytics-user.controller');
 // Routes
 router.get('/single-dropin', analyticsDropInController.singleStatsData);
 router.get('/multiple-dropin', analyticsDropInController.multipleStatsData);
-router.get('/events', analyticsEventsController.statsData);
+router.get('/events/:id', analyticsEventsController.statsData);
 router.get('/rewards', analyticsRewardsController.statsData);
 router.get('/traffic', analyticsTrafficController.statsData);
 router.get('/users', analyticsUserController.statsData);

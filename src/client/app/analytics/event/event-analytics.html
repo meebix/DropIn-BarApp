@@ -1,1 +1,42 @@
-<p>Event Analytics</p>
+<div class="col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{vm.eventName}}</h3>
+    </div>
+    <div class="panel-body">
+      <canvas id="bar" class="chart chart-bar"
+        chart-data="vm.dataEvent" chart-labels="vm.labelsEvent" chart-colours="vm.coloursEvent"
+        chart-legend="true" chart-series="vm.seriesEvent" chart-options="vm.chartOptionsEvent">
+      </canvas>
+    </div>
+  </div>
+</div>
+
+<div class="margin-top-20">
+  <p>Name: {{vm.eventData.name}}</p>
+  <p>Sent To: {{vm.eventData.loyaltyLevelId.name}}</p>
+  <p>Description: {{vm.eventData.description}}</p>
+  <p>Start of Event: {{vm.eventData.eventStart.iso | date: 'MM/dd/yyyy'}}</p>
+  <p>End of Event: {{vm.eventData.eventEnd.iso | date: 'MM/dd/yyyy'}}</p>
+</div>
+
+<div class="table-responsive margin-top-20">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Sent To</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="event in vm.allEvents | orderBy:'-date'">
+        <td><a href="" ng-click="vm.populateEvent(event.objectId)" class="link-alt-underline">{{event.name}}</td>
+        <td>{{event.eventStart.iso | date: 'MM/dd/yyyy hh:mm a'}}</td>
+        <td>{{event.eventEnd.iso | date: 'MM/dd/yyyy hh:mm a'}}</td>
+        <td>{{event.loyaltyLevelId.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
