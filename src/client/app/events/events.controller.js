@@ -5,9 +5,9 @@
     .module('app.events')
     .controller('EventsController', EventsController);
 
-  EventsController.$inject = ['$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
+  EventsController.$inject = ['$scope', '$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
   /* @ngInject */
-  function EventsController($q, logger, $state, $stateParams, moment, eventService, helperService) {
+  function EventsController($scope, $q, logger, $state, $stateParams, moment, eventService, helperService) {
     var vm = this;
     vm.title = 'Events';
     vm.eventId = $stateParams.id;
@@ -18,6 +18,12 @@
     vm.deleteEvent = deleteEvent;
     vm.getLoyaltyLevels = getLoyaltyLevels;
     vm.init = init;
+
+    // Get photo object from form
+    $scope.eventPhoto = function(photo) {
+      vm.photo = photo.files[0];
+      $scope.$apply();
+    };
 
     function allEvents() {
       eventService.allEvents().then(function(results) {
@@ -31,8 +37,8 @@
       // Convert dates to ISO string (local time)
       eventData.eventStart = moment(eventData.eventStart).format();
       eventData.eventEnd = moment(eventData.eventEnd).format();
-
-      eventService.createEvent(eventData).then(function() {
+      console.log(vm.photo);
+      eventService.createEvent(eventData, vm.photo).then(function() {
         $state.go('events');
       }, function(error) {
         // Error

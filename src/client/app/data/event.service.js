@@ -30,14 +30,20 @@
       });
     }
 
-    function createEvent(eventObj) {
+    function createEvent(eventObj, photo) {
+      // Needed to encode photo file and rest of JSON form data
+      var formData = new FormData();
+      formData.append('eventData', JSON.stringify(eventObj));
+      formData.append('photo', photo);
+
       return $http({
         method: 'POST',
         url: '/api/v1/events',
+        data: formData,
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': undefined
         },
-        data: eventObj
+        transformRequest: angular.identity,
       }).then(function(response) {
         return response.data;
       });

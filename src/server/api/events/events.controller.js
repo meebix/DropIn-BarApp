@@ -3,6 +3,7 @@
 
 // Requires
 var Parse = require('parse/node').Parse;
+var fs = require('fs');
 var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
@@ -12,6 +13,7 @@ var Events = Parse.Object.extend('Events');
 var Role = Parse.Object.extend('Role');
 var LoyaltyLevels = Parse.Object.extend('Loyalty_Levels');
 var UsersEvents = Parse.Object.extend('Users_Events');
+var EventStats = Parse.Object.extend('Stats_Events');
 var roleQuery = new Parse.Query(Role);
 var loyaltyQuery = new Parse.Query(LoyaltyLevels);
 var usersQuery = new Parse.Query(Parse.User);
@@ -40,15 +42,26 @@ function allEvents(req, res) {
 }
 
 function createEvent(req, res) {
-  // TODO: Need to move the creation of join table insertions to service
+  // eventData being appended in stringified format from Angular
+  // TODO: Do I really need a try catch here?
+  req.body = JSON.parse(req.body.eventData);
+  console.log(req.file);
   var newEvent = new Events();
   var loyaltyLevelId = req.body.loyaltyLevelId;
 
+  // Prepare photo for upload to Parse
+  // TODO: Do I need to make sure file saves to Parse first??
+  var photoPath = fs.readFileSync(req.file.path);
+  var photoData = Array.prototype.slice.call(new Buffer(photoPath), 0);
+  var photoFile = new Parse.File(req.file.originalname, photoData);
+
+  // Query to Parse
   loyaltyQuery.equalTo('objectId', loyaltyLevelId);
   loyaltyQuery.first().then(function(loyaltyLevelObj) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
+      photo: photoFile,
       eventStart: transformDateForParse(req.body.eventStart),
       eventEnd: transformDateForParse(req.body.eventEnd),
       loyaltyLevelId: loyaltyLevelObj,
@@ -78,15 +91,13 @@ function createEvent(req, res) {
         // Find all users who have a role of 'User' and for each user
         // save a new UsersEvents to the join table
         usersQuery.equalTo('roleId', roleObj);
-        console.log(loyaltyLevelObj.id);
+
         // TODO: Fixed hardcoded value
         // If statement checks to see if the loyalty level is 'All', if yes, skips filter and return all users
         if (loyaltyLevelObj.id !== 'cpMUn6twQc') {
-          console.log('hit block');
           usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
         }
         return usersQuery.find().then(function(results) {
-          console.log(results.length);
           _.each(results, function(userObj) {
             var newUsersEvents = new UsersEvents();
 
