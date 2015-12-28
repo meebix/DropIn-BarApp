@@ -25,8 +25,6 @@
       // result contains json authorized: false if not authenticated, blank otherwise
       if (result) {
         $state.go('login');
-      } else {
-        $state.go('dashboard');
       }
     });
 
