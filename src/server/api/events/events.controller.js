@@ -33,6 +33,7 @@ function allEvents(req, res) {
 
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);
+  eventsQuery.greaterThan('eventStart', new Date());
   eventsQuery.include('loyaltyLevelId');
   eventsQuery.find().then(function(events) {
     res.status(200).json({data: events});
