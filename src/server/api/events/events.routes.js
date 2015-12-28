@@ -19,7 +19,7 @@ var upload = multer({
 router.get('/', eventsController.allEvents);
 router.post('/', upload.single('photo'), eventsController.createEvent);
 router.get('/:id', eventsController.showEvent);
-router.post('/:id', eventsController.updateEvent);
+router.post('/:id', upload.single('photo'), eventsController.updateEvent);
 router.delete('/:id', eventsController.deleteEvent);
 router.get('/*', four0four.notFoundMiddleware);
 

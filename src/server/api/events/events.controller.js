@@ -45,15 +45,9 @@ function createEvent(req, res) {
   // eventData being appended in stringified format from Angular
   // TODO: Do I really need a try catch here?
   req.body = JSON.parse(req.body.eventData);
-  console.log(req.file);
+
   var newEvent = new Events();
   var loyaltyLevelId = req.body.loyaltyLevelId;
-
-  // Prepare photo for upload to Parse
-  // TODO: Do I need to make sure file saves to Parse first??
-  var photoPath = fs.readFileSync(req.file.path);
-  var photoData = Array.prototype.slice.call(new Buffer(photoPath), 0);
-  var photoFile = new Parse.File(req.file.originalname, photoData);
 
   // Query to Parse
   loyaltyQuery.equalTo('objectId', loyaltyLevelId);
@@ -61,13 +55,17 @@ function createEvent(req, res) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
-      photo: photoFile,
       eventStart: transformDateForParse(req.body.eventStart),
       eventEnd: transformDateForParse(req.body.eventEnd),
       loyaltyLevelId: loyaltyLevelObj,
       barId: currentUserBarObj(),
       markedForDeletion: false
     };
+
+    // If a photo is present, add it to the JSON object
+    if (req.file) {
+      eventObj.photo = prepareImage(req.file);
+    }
 
     // Save the event
     return newEvent.save(eventObj).then(function(savedEventObj) {
@@ -131,28 +129,28 @@ function createEvent(req, res) {
     console.log(error);
     res.status(400).end();
   });
-
-  // Utility to transform date for Parse
-  // This just creates a date object for Parse to read
-  // Parse seems to be converting date to UTC before storing it automatically
-  function transformDateForParse(date) {
-    var newDate = new Date(date);
-
-    return newDate;
-  }
 }
 
 function updateEvent(req, res) {
-  var eventsQuery = new Parse.Query(Events);
-  var formattedDate = new Date(req.body.date);
+  // eventData being appended in stringified format from Angular
+  req.body = JSON.parse(req.body.eventData);
 
+  var eventsQuery = new Parse.Query(Events);
+
+  // Query to Parse
   eventsQuery.equalTo('objectId', req.params.id);
   eventsQuery.first().then(function(result) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
-      date: formattedDate
+      eventStart: transformDateForParse(req.body.eventStart),
+      eventEnd: transformDateForParse(req.body.eventEnd),
     };
+
+    // If a photo is present, add it to the JSON object
+    if (req.file) {
+      eventObj.photo = prepareImage(req.file);
+    }
 
     return result.save(eventObj).then(function() {
       res.status(200).json({data: result});
@@ -208,4 +206,23 @@ function deleteEvent(req, res) {
       res.status(400).end();
     });
   });
+}
+
+// Utility to transform date for Parse
+// This just creates a date object for Parse to read
+// Parse seems to be converting date to UTC before storing it automatically
+function transformDateForParse(date) {
+  var newDate = new Date(date);
+
+  return newDate;
+}
+
+// Prepare photo for upload to Parse
+// TODO: Do I need to make sure file saves to Parse first??
+function prepareImage(file) {
+  var photoPath = fs.readFileSync(file.path);
+  var photoData = Array.prototype.slice.call(new Buffer(photoPath), 0);
+  var photoFile = new Parse.File(file.originalname, photoData);
+
+  return photoFile;
 }

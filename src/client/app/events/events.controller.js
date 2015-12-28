@@ -37,7 +37,7 @@
       // Convert dates to ISO string (local time)
       eventData.eventStart = moment(eventData.eventStart).format();
       eventData.eventEnd = moment(eventData.eventEnd).format();
-      console.log(vm.photo);
+
       eventService.createEvent(eventData, vm.photo).then(function() {
         $state.go('events');
       }, function(error) {
@@ -52,11 +52,15 @@
     }
 
     function updateEvent(eventData) {
-      // Sets date from ng-model on edit template
-      // Needed iso property on edit to get date string
-      eventData.date = vm.eventData.date.iso;
+      // Build new form object for only editable fields
+      var updatedEventData = {
+        name: eventData.name,
+        description: eventData.description,
+        eventStart: moment(eventData.eventStart.iso).format(),
+        eventEnd: moment(eventData.eventEnd.iso).format()
+      };
 
-      eventService.updateEvent(vm.eventId, eventData).then(function() {
+      eventService.updateEvent(vm.eventId, updatedEventData, vm.photo).then(function() {
         $state.go('events');
       });
     }

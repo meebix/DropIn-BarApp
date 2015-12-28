@@ -1,6 +1,6 @@
 <h1>Edit Event</h1>
 <hr>
-<form name="createEventForm" ng-submit="vm.updateEvent(vm.eventData)">
+<form name="createEventForm" ng-submit="vm.updateEvent(vm.eventData)" enctype="multipart/form-data">
   <div class="form-group">
     <label for="eventName">Name</label>
     <input type="text" class="form-control" placeholder="$0.25 wings this Thurdays night" ng-model="vm.eventData.name">
@@ -10,15 +10,34 @@
     <textarea class="form-control" placeholder="Tell our users why they should attend" rows="3" ng-model="vm.eventData.description"></textarea>
   </div>
   <div class="form-group">
-    <label for="eventDate">Date of Event</label>
-    <!-- ADD QUESTION MARK HELPER -->
-    <input type="text" class="form-control" placeholder="Select date" ui-date="MM/dd/yyyy" ng-model="vm.eventData.date.iso">
+    <label for="eventPhoto">Event Photo</label>
+    <div>
+      <label>
+        <input type="file" name="photo" class="event-photo" multiple="false" accept="image/*" onchange="angular.element(this).scope().eventPhoto(this)">
+        <div class="btn btn-default">Browse</div>
+        <img ng-src="{{vm.eventData.photo.url}}" alt="Description" height="100" width="100" />
+      </label>
+    </div>
   </div>
-<!--   <div class="form-group">
-    <label for="eventSendTo">Send To</label>
-    <select class="form-control" ng-options="loyaltyLevel.objectId as loyaltyLevel.name for loyaltyLevel in vm.loyaltyLevels" ng-model="vm.eventData.loyaltyLevelId.objectId">
-      <option value="">Select Loyalty Level</option>
-    </select>
-  </div> -->
+  <div class="form-group">
+    <label for="eventDate">Start of Event</label>
+    <div>
+      <datetimepicker ng-model="vm.eventData.eventStart.iso"
+                                date-format="MM-dd-yyyy"
+                                date-options="dateOptions"
+                                date-disabled="isDisabledDate(date, mode)">
+      </datetimepicker>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="eventDate">End of Event</label>
+    <div>
+      <datetimepicker ng-model="vm.eventData.eventEnd.iso"
+                                date-format="MM-dd-yyyy"
+                                date-options="dateOptions"
+                                date-disabled="isDisabledDate(date, mode)">
+      </datetimepicker>
+    </div>
+  </div>
   <button type="submit" class="btn btn-primary">Update</button>
 </form>
