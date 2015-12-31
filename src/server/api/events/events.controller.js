@@ -91,38 +91,13 @@ function createEvent(req, res) {
         // save a new UsersEvents to the join table
         usersQuery.equalTo('roleId', roleObj);
 
+        // If statement checks to see if the loyalty level is 'All'
         // TODO: Fixed hardcoded value
-        // If statement checks to see if the loyalty level is 'All', if yes, skips filter and return all users
         if (loyaltyLevelObj.id !== 'cpMUn6twQc') {
-          usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
+          sendToSpecified(savedEventObj, loyaltyLevelObj, req, res);
+        } else {
+          sendToAll(savedEventObj, req, res);
         }
-        return usersQuery.find().then(function(results) {
-          _.each(results, function(userObj) {
-            var newUsersEvents = new UsersEvents();
-
-            var usersEventsObj = {
-              eventId: savedEventObj,
-              userId: userObj,
-              barId: currentUserBarObj(),
-              eventStart: transformDateForParse(req.body.eventStart),
-              eventEnd: transformDateForParse(req.body.eventEnd),
-              userHasViewed: false,
-              markedForDeletion: false
-            };
-
-            return newUsersEvents.save(usersEventsObj).then(function() {
-              res.status(200).end();
-            }, function(error) {
-              // Error saving: New UsersEvent Object
-              console.log(error);
-              res.status(400).end();
-            });
-          });
-        }, function(error) {
-          // Error retrieving: Users
-          console.log(error);
-          res.status(400).end();
-        });
       });
     });
   }, function(error) {
@@ -206,6 +181,73 @@ function deleteEvent(req, res) {
       console.log(error);
       res.status(400).end();
     });
+  });
+}
+
+// Send event to ALL users
+function sendToAll(savedEventObj, req, res) {
+  console.log('inside all');
+
+  return usersQuery.find().then(function(results) {
+    _.each(results, function(userObj) {
+      var newUsersEvents = new UsersEvents();
+
+      var usersEventsObj = {
+        eventId: savedEventObj,
+        userId: userObj,
+        barId: currentUserBarObj(),
+        eventStart: transformDateForParse(req.body.eventStart),
+        eventEnd: transformDateForParse(req.body.eventEnd),
+        userHasViewed: false,
+        markedForDeletion: false
+      };
+
+      return newUsersEvents.save(usersEventsObj).then(function() {
+        res.status(200).end();
+      }, function(error) {
+        // Error saving: New UsersEvent Object
+        console.log(error);
+        res.status(400).end();
+      });
+    });
+  }, function(error) {
+    // Error retrieving: Users
+    console.log(error);
+    res.status(400).end();
+  });
+}
+
+// Send event to SPECIFIED users
+function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
+  console.log('inside spec');
+
+  usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
+  return usersQuery.find().then(function(results) {
+    _.each(results, function(userObj) {
+      var newUsersEvents = new UsersEvents();
+
+      var usersEventsObj = {
+        eventId: savedEventObj,
+        userId: userObj,
+        barId: currentUserBarObj(),
+        eventStart: transformDateForParse(req.body.eventStart),
+        eventEnd: transformDateForParse(req.body.eventEnd),
+        userHasViewed: false,
+        markedForDeletion: false
+      };
+
+      return newUsersEvents.save(usersEventsObj).then(function() {
+        res.status(200).end();
+      }, function(error) {
+        // Error saving: New UsersEvent Object
+        console.log(error);
+        res.status(400).end();
+      });
+    });
+  }, function(error) {
+    // Error retrieving: Users
+    console.log(error);
+    res.status(400).end();
   });
 }
 
