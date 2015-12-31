@@ -189,13 +189,11 @@ function deleteEvent(req, res) {
 
 // Send event to ALL users
 function sendToAll(savedEventObj, req, res) {
-  console.log('inside all');
-
   return usersQuery.find().then(function(results) {
     console.log('*** USERS COUNT ***', results.length);
 
     _.each(results, function(userObj) {
-      console.log('--- INSIDE EACH ---');
+      console.log('--- INSIDE EACH ---', userObj.id);
 
       var newUsersEvents = new UsersEvents();
 
@@ -209,8 +207,9 @@ function sendToAll(savedEventObj, req, res) {
         markedForDeletion: false
       };
 
-      return newUsersEvents.save(usersEventsObj).then(function() {
-        console.log('$$$ SAVED $$$');
+      return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+        console.log('--- SAVED ---', savedObj.id);
+
         res.status(200).end();
       }, function(error) {
         // Error saving: New UsersEvent Object
@@ -227,11 +226,13 @@ function sendToAll(savedEventObj, req, res) {
 
 // Send event to SPECIFIED users
 function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
-  console.log('inside spec');
-
   usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
   return usersQuery.find().then(function(results) {
+    console.log('*** USERS COUNT ***', results.length);
+
     _.each(results, function(userObj) {
+      console.log('--- INSIDE EACH ---', userObj.id);
+
       var newUsersEvents = new UsersEvents();
 
       var usersEventsObj = {
@@ -244,7 +245,9 @@ function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
         markedForDeletion: false
       };
 
-      return newUsersEvents.save(usersEventsObj).then(function() {
+      return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+        console.log('--- SAVED ---', savedObj.id);
+
         res.status(200).end();
       }, function(error) {
         // Error saving: New UsersEvent Object
