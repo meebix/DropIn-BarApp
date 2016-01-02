@@ -30,10 +30,18 @@ module.exports = {
 // Route Logic
 function allEvents(req, res) {
   var eventsQuery = new Parse.Query(Events);
+  var dateLimitation;
+
+  if (req.query.limitByDate === 'true') {
+    dateLimitation = new Date();
+  } else {
+    // Set date in past so all events pull from DB
+    dateLimitation = new Date('01', '01', '1970');
+  }
 
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);
-  eventsQuery.greaterThan('eventStart', new Date());
+  eventsQuery.greaterThan('eventEnd', dateLimitation);
   eventsQuery.include('loyaltyLevelId');
   eventsQuery.find().then(function(events) {
     res.status(200).json({data: events});

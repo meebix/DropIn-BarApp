@@ -45,7 +45,7 @@
     }
 
     function allEvents() {
-      eventService.allEvents().then(function(results) {
+      eventService.allEvents({ limitByDate: false }).then(function(results) {
         vm.allEvents = results.data;
       }, function(error) {
         // Error

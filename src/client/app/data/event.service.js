@@ -18,13 +18,18 @@
 
     return service;
 
-    function allEvents() {
+    function allEvents(options) {
+      console.log(options);
+
       return $http({
         method: 'GET',
         url: '/api/v1/events',
         headers: {
           'Content-Type': 'application/json'
         },
+        params: {
+          limitByDate: options.limitByDate
+        }
       }).then(function(response) {
         return response.data;
       });
