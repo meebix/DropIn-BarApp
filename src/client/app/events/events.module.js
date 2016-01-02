@@ -4,6 +4,7 @@
   angular.module('app.events', [
     'app.core',
     'ui.bootstrap',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'angular-img-cropper'
     ]);
 })();

@@ -13,11 +13,17 @@
     <label for="eventPhoto">Event Photo</label>
     <div>
       <label>
-        <input type="file" name="photo" class="event-photo" multiple="false" accept="image/*" onchange="angular.element(this).scope().eventPhoto(this)">
-        <div class="btn btn-default">Browse</div> {{vm.photo.name}}
+        <input type="file" name="photo" class="event-photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
+        <div class="btn btn-default">Browse</div>
       </label>
+      <div>
+        <canvas width="500" height="300" id="canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="400" crop-height="200" min-width="100" min-height="50" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+      </div>
+      <div ng-show="vm.cropper.croppedImage!=null"><img ng-src="{{vm.cropper.croppedImage}}" /></div>
     </div>
   </div>
+  {{vm.bounds}}
+  {{vm.cropper}}
   <div class="form-group">
     <label for="eventDate">Start of Event</label>
     <div>

@@ -19,12 +19,18 @@
     vm.getLoyaltyLevels = getLoyaltyLevels;
     vm.init = init;
 
-    // Get photo object from form
-    $scope.eventPhoto = function(photo) {
-      vm.photo = photo.files[0];
-      $scope.$apply();
-    };
+    // Image cropper options
+    vm.cropper = {};
+    vm.cropper.sourceImage = null;
+    vm.cropper.croppedImage = null;
 
+    vm.bounds = {};
+    vm.bounds.left = 0;
+    vm.bounds.right = 0;
+    vm.bounds.top = 0;
+    vm.bounds.bottom = 0;
+
+    // REST calls
     function allEvents() {
       eventService.allEvents({ limitByDate: true }).then(function(results) {
         vm.allEvents = results.data;
@@ -37,8 +43,9 @@
       // Convert dates to ISO string (local time)
       eventData.eventStart = moment(eventData.eventStart).format();
       eventData.eventEnd = moment(eventData.eventEnd).format();
+      eventData.photo = vm.cropper.croppedImage;
 
-      eventService.createEvent(eventData, vm.photo).then(function() {
+      eventService.createEvent(eventData).then(function() {
         $state.go('events');
       }, function(error) {
         // Error

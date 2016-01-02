@@ -19,8 +19,6 @@
     return service;
 
     function allEvents(options) {
-      console.log(options);
-
       return $http({
         method: 'GET',
         url: '/api/v1/events',
@@ -35,20 +33,14 @@
       });
     }
 
-    function createEvent(eventObj, photo) {
-      // Needed to encode photo file and rest of JSON form data
-      var formData = new FormData();
-      formData.append('eventData', JSON.stringify(eventObj));
-      formData.append('photo', photo);
-
+    function createEvent(eventObj) {
       return $http({
         method: 'POST',
         url: '/api/v1/events',
-        data: formData,
+        data: eventObj,
         headers: {
-          'Content-Type': undefined
-        },
-        transformRequest: angular.identity,
+          'Content-Type': 'application/json'
+        }
       }).then(function(response) {
         return response.data;
       });
@@ -66,20 +58,14 @@
       });
     }
 
-    function updateEvent(eventId, eventObj, photo) {
-      // Needed to encode photo file and rest of JSON form data
-      var formData = new FormData();
-      formData.append('eventData', JSON.stringify(eventObj));
-      formData.append('photo', photo);
-
+    function updateEvent(eventId, eventObj) {
       return $http({
         method: 'POST',
         url: '/api/v1/events/' + eventId,
-        data: formData,
+        data: eventObj,
         headers: {
-          'Content-Type': undefined
-        },
-        transformRequest: angular.identity,
+          'Content-Type': 'application/json'
+        }
       }).then(function(response) {
         return response.data;
       });

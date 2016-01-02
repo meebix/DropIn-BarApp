@@ -15,7 +15,6 @@
     "express": "^4.9.3",
     "moment": "2.10.6",
     "morgan": "^1.1.1",
-    "multer": "1.1.0",
     "parse": "^1.6.1",
     "serve-favicon": "^2.0.1",
     "underscore": "^1.8.3"

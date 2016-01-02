@@ -3,7 +3,7 @@
 
 // Requires
 var Parse = require('parse/node').Parse;
-var fs = require('fs');
+var crypto = require('crypto');
 var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
@@ -51,10 +51,6 @@ function allEvents(req, res) {
 }
 
 function createEvent(req, res) {
-  // eventData being appended in stringified format from Angular
-  // TODO: Do I really need a try catch here?
-  req.body = JSON.parse(req.body.eventData);
-
   var newEvent = new Events();
   var loyaltyLevelId = req.body.loyaltyLevelId;
 
@@ -64,17 +60,13 @@ function createEvent(req, res) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
+      photo: prepareImageForParse(req.body.photo),
       eventStart: transformDateForParse(req.body.eventStart),
       eventEnd: transformDateForParse(req.body.eventEnd),
       loyaltyLevelId: loyaltyLevelObj,
       barId: currentUserBarObj(),
       markedForDeletion: false
     };
-
-    // If a photo is present, add it to the JSON object
-    if (req.file) {
-      eventObj.photo = prepareImage(req.file);
-    }
 
     // Save the event
     return newEvent.save(eventObj).then(function(savedEventObj) {
@@ -116,9 +108,6 @@ function createEvent(req, res) {
 }
 
 function updateEvent(req, res) {
-  // eventData being appended in stringified format from Angular
-  req.body = JSON.parse(req.body.eventData);
-
   var eventsQuery = new Parse.Query(Events);
 
   // Query to Parse
@@ -131,16 +120,32 @@ function updateEvent(req, res) {
       eventEnd: transformDateForParse(req.body.eventEnd),
     };
 
-    // If a photo is present, add it to the JSON object
-    if (req.file) {
-      eventObj.photo = prepareImage(req.file);
-    }
-
     return result.save(eventObj).then(function() {
       res.status(200).json({data: result});
     }, function(error) {
       console.log(error);
       res.status(400).end();
+    })
+    .then(function() {
+      var eventsQuery = new Parse.Query(Events);
+      var usersEventsQuery = new Parse.Query(UsersEvents);
+
+      eventsQuery.equalTo('objectId', req.params.id);
+      eventsQuery.first().then(function(eventObj) {
+        return eventObj;
+      })
+      .then(function(eventObj) {
+        usersEventsQuery.equalTo('eventId', eventObj);
+        usersEventsQuery.find().then(function(results) {
+          _.each(results, function(obj) {
+            obj.set('eventStart', transformDateForParse(req.body.eventStart));
+            obj.set('eventEnd', transformDateForParse(req.body.eventEnd));
+            obj.save();
+          });
+
+          res.status(200).end();
+        });
+      });
     });
   }, function(error) {
     console.log(error);
@@ -279,12 +284,12 @@ function transformDateForParse(date) {
   return newDate;
 }
 
-// Prepare photo for upload to Parse
-// TODO: Do I need to make sure file saves to Parse first??
-function prepareImage(file) {
-  var photoPath = fs.readFileSync(file.path);
-  var photoData = Array.prototype.slice.call(new Buffer(photoPath), 0);
-  var photoFile = new Parse.File(file.originalname, photoData);
+// Write image to disk
+function prepareImageForParse(image) {
+  var base64Image = image.replace(/^data:image\/png;base64,/, '');
+  var checkSum = crypto.randomBytes(15).toString('hex');
+
+  var photoFile = new Parse.File(checkSum + '.png', {base64: base64Image});
 
   return photoFile;
 }

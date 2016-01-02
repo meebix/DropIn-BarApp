@@ -17,8 +17,8 @@ Parse.initialize(process.env.PARSE_ID, process.env.PARSE_SECRET, process.env.PAR
 module.exports = function(app, express) {
   // Middleware
   app.use(favicon(__dirname + '/../favicon.ico'));
-  app.use(bodyParser.urlencoded({extended: true}));
-  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({extended: true, limit: '5mb'}));
+  app.use(bodyParser.json({limit: '5mb'}));
   app.use(logger('dev'));
 
   // Cookies & sessions
@@ -44,7 +44,7 @@ module.exports = function(app, express) {
 
 
   // Env builds
-  switch (environment){
+  switch (environment) {
     case 'build':
       console.log('** BUILD **');
       app.use(express.static('./build/'));
