@@ -116,6 +116,7 @@ function updateEvent(req, res) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
+      photo: prepareImageForParse(req.body.photo),
       eventStart: transformDateForParse(req.body.eventStart),
       eventEnd: transformDateForParse(req.body.eventEnd),
     };
@@ -144,6 +145,9 @@ function updateEvent(req, res) {
           });
 
           res.status(200).end();
+        }, function(error) {
+          // Error saving to Users Events table
+          console.log(error);
         });
       });
     });
@@ -205,6 +209,8 @@ function sendToAll(savedEventObj, req, res) {
   return usersQuery.find().then(function(results) {
     console.log('*** USERS COUNT ***', results.length);
 
+    if (results.length === 0) res.status(200).end();
+
     _.each(results, function(userObj) {
       console.log('--- INSIDE EACH ---', userObj.id);
 
@@ -242,6 +248,8 @@ function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
   usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
   return usersQuery.find().then(function(results) {
     console.log('*** USERS COUNT ***', results.length);
+
+    if (results.length === 0) res.status(200).end();
 
     _.each(results, function(userObj) {
       console.log('--- INSIDE EACH ---', userObj.id);
@@ -286,6 +294,10 @@ function transformDateForParse(date) {
 
 // Write image to disk
 function prepareImageForParse(image) {
+  if (image === null) {
+    return;
+  }
+
   var base64Image = image.replace(/^data:image\/png;base64,/, '');
   var checkSum = crypto.randomBytes(15).toString('hex');
 

@@ -1,6 +1,6 @@
 <h1>Edit Event</h1>
 <hr>
-<form name="createEventForm" ng-submit="vm.updateEvent(vm.eventData)" enctype="multipart/form-data">
+<form name="updateEventForm" ng-submit="vm.updateEvent(vm.eventData)" enctype="multipart/form-data">
   <div class="form-group">
     <label for="eventName">Name</label>
     <input type="text" class="form-control" placeholder="$0.25 wings this Thurdays night" ng-model="vm.eventData.name">
@@ -13,11 +13,15 @@
     <label for="eventPhoto">Event Photo</label>
     <div>
       <label>
-        <input type="file" name="photo" class="event-photo" multiple="false" accept="image/*" onchange="angular.element(this).scope().eventPhoto(this)">
+        <input type="file" class="event-photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
         <div class="btn btn-default">Browse</div>
-        <img ng-src="{{vm.eventData.photo.url}}" alt="Description" height="100" width="100" />
       </label>
+      <div>
+        <canvas width="500" height="300" id="canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="400" crop-height="200" min-width="100" min-height="50" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+      </div>
+      <div ng-show="vm.cropper.croppedImage!=null"><img ng-src="{{vm.cropper.croppedImage}}" /></div>
     </div>
+    <img ng-src="{{vm.eventData.photo.url}}" alt="Description" height="100" width="100" />
   </div>
   <div class="form-group">
     <label for="eventDate">Start of Event</label>

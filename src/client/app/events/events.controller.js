@@ -5,9 +5,9 @@
     .module('app.events')
     .controller('EventsController', EventsController);
 
-  EventsController.$inject = ['$scope', '$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
+  EventsController.$inject = ['$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
   /* @ngInject */
-  function EventsController($scope, $q, logger, $state, $stateParams, moment, eventService, helperService) {
+  function EventsController($q, logger, $state, $stateParams, moment, eventService, helperService) {
     var vm = this;
     vm.title = 'Events';
     vm.eventId = $stateParams.id;
@@ -63,11 +63,12 @@
       var updatedEventData = {
         name: eventData.name,
         description: eventData.description,
+        photo: vm.cropper.croppedImage,
         eventStart: moment(eventData.eventStart.iso).format(),
         eventEnd: moment(eventData.eventEnd.iso).format()
       };
 
-      eventService.updateEvent(vm.eventId, updatedEventData, vm.photo).then(function() {
+      eventService.updateEvent(vm.eventId, updatedEventData).then(function() {
         $state.go('events');
       });
     }
@@ -85,6 +86,12 @@
     }
 
     // Datetime Picker
+      // Defaults
+    vm.eventData = {};
+    vm.eventData.eventStart = moment(new Date()).minute(0).format();
+    vm.eventData.eventEnd = moment(new Date()).add(3, 'hours').minute(0).format();
+
+      // Options
     vm.minDate = new Date();
 
     function init() {
