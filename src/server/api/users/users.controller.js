@@ -24,15 +24,32 @@ module.exports = {
 function allUsers(req, res) {
   var usersQuery = new Parse.Query(Parse.User);
   var roleQuery = new Parse.Query(Role);
+  var page = req.query.page;
+  var displayLimit = 15;
+  var count;
 
   roleQuery.equalTo('objectId', 'qwekFNkzFc');
   roleQuery.first().then(function(roleObj) {
     usersQuery.equalTo('roleId', roleObj);
-    usersQuery.include('barId');
-    return usersQuery.find().then(function(results) {
-      res.status(200).json({data: results});
-    }, function(error) {
-    res.status(400).end();
+    usersQuery.count().then(function(result) {
+      count = result;
+    })
+    .then(function() {
+      usersQuery.equalTo('roleId', roleObj);
+      usersQuery.include('barId');
+      usersQuery.limit(displayLimit);
+      usersQuery.skip(page * displayLimit);
+      return usersQuery.find().then(function(results) {
+        var jsonData = {};
+        jsonData.data = results;
+        jsonData.page = page;
+        jsonData.displayLimit = displayLimit;
+        jsonData.count = count;
+
+        res.status(200).json(jsonData);
+      }, function(error) {
+        res.status(400).end();
+      });
     });
   }, function(error) {
     res.status(400).end();

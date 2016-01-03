@@ -15,11 +15,16 @@
     vm.createUser = createUser;
     vm.deleteUser = deleteUser;
     vm.getBars = getBars;
+    vm.currentPage = 0;
     vm.init = init;
 
     function allUsers() {
-      userService.allUsers().then(function(results) {
+      userService.allUsers(vm.currentPage).then(function(results) {
         vm.allUsers = results.data;
+
+        vm.displayLimit = results.displayLimit;
+        vm.count = results.count;
+        vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
       }, function(error) {
         // Error
       });
@@ -34,7 +39,6 @@
     }
 
     function deleteUser(userId) {
-      console.log(userId);
       userService.deleteUser(userId).then(function() {
         $state.reload();
       });
@@ -45,6 +49,25 @@
         vm.bars = results.data;
       });
     }
+
+    // Pagination
+    vm.nextPage = function() {
+      vm.currentPage++;
+      allUsers();
+    };
+
+    vm.previousPage = function() {
+      vm.currentPage--;
+      allUsers();
+    };
+
+    vm.hideNextPage = function() {
+      return vm.currentPage === vm.maxPage || vm.displayLimit === 0;
+    };
+
+    vm.hidePreviousPage = function() {
+      return vm.currentPage > vm.maxPage || vm.currentPage === 0;
+    };
 
     function init() {
       vm.allUsers();

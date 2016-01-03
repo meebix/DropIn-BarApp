@@ -17,13 +17,16 @@
 
     return service;
 
-    function allUsers() {
+    function allUsers(page) {
       return $http({
         method: 'GET',
         url: '/api/v1/users',
         headers: {
           'Content-Type': 'application/json'
         },
+        params: {
+          page: page
+        }
       }).then(function(response) {
         return response.data;
       });
