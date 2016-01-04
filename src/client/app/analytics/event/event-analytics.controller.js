@@ -14,6 +14,7 @@
     vm.populateEvent = populateEvent;
     vm.statsData = statsData;
     vm.chartEvent = chartEvent;
+    vm.currentPage = 0;
     vm.init = init;
 
     function statsData(eventId) {
@@ -45,8 +46,13 @@
     }
 
     function allEvents() {
-      eventService.allEvents({ limitByDate: false }).then(function(results) {
+      eventService.allEvents({ limitByDate: false, page: vm.currentPage }).then(function(results) {
         vm.allEvents = results.data;
+
+        // Pagination
+        vm.displayLimit = results.displayLimit;
+        vm.count = results.count;
+        vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
       }, function(error) {
         // Error
       });
@@ -60,6 +66,25 @@
       // Populate chart
       statsData(eventId);
     }
+
+    // Pagination
+    vm.nextPage = function() {
+      vm.currentPage++;
+      allEvents();
+    };
+
+    vm.previousPage = function() {
+      vm.currentPage--;
+      allEvents();
+    };
+
+    vm.hideNextPage = function() {
+      return vm.currentPage === vm.maxPage || vm.displayLimit === 0;
+    };
+
+    vm.hidePreviousPage = function() {
+      return vm.currentPage > vm.maxPage || vm.currentPage === 0;
+    };
 
     function init() {
       vm.allEvents();

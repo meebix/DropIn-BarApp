@@ -17,6 +17,7 @@
     vm.updateEvent = updateEvent;
     vm.deleteEvent = deleteEvent;
     vm.getLoyaltyLevels = getLoyaltyLevels;
+    vm.currentPage = 0;
     vm.init = init;
 
     // Image cropper options
@@ -32,8 +33,12 @@
 
     // REST calls
     function allEvents() {
-      eventService.allEvents({ limitByDate: true }).then(function(results) {
+      eventService.allEvents({ limitByDate: true, page: vm.currentPage }).then(function(results) {
         vm.allEvents = results.data;
+
+        vm.displayLimit = results.displayLimit;
+        vm.count = results.count;
+        vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
       }, function(error) {
         // Error
       });
@@ -93,6 +98,25 @@
 
       // Options
     vm.minDate = new Date();
+
+    // Pagination
+    vm.nextPage = function() {
+      vm.currentPage++;
+      allEvents();
+    };
+
+    vm.previousPage = function() {
+      vm.currentPage--;
+      allEvents();
+    };
+
+    vm.hideNextPage = function() {
+      return vm.currentPage === vm.maxPage || vm.displayLimit === 0;
+    };
+
+    vm.hidePreviousPage = function() {
+      return vm.currentPage > vm.maxPage || vm.currentPage === 0;
+    };
 
     function init() {
       vm.allEvents();

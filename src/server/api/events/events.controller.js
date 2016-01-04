@@ -30,6 +30,9 @@ module.exports = {
 // Route Logic
 function allEvents(req, res) {
   var eventsQuery = new Parse.Query(Events);
+  var page = req.query.page;
+  var displayLimit = 15;
+  var count;
   var dateLimitation;
 
   if (req.query.limitByDate === 'true') {
@@ -43,10 +46,23 @@ function allEvents(req, res) {
   eventsQuery.notEqualTo('markedForDeletion', true);
   eventsQuery.greaterThan('eventEnd', dateLimitation);
   eventsQuery.include('loyaltyLevelId');
-  eventsQuery.find().then(function(events) {
-    res.status(200).json({data: events});
-  }, function(error) {
-    res.status(400).end();
+  eventsQuery.limit(displayLimit);
+  eventsQuery.skip(page * displayLimit);
+  eventsQuery.count().then(function(result) {
+    count = result;
+  })
+  .then(function() {
+    return eventsQuery.find().then(function(events) {
+      var jsonData = {};
+      jsonData.data = events;
+      jsonData.page = page;
+      jsonData.displayLimit = displayLimit;
+      jsonData.count = count;
+
+      res.status(200).json(jsonData);
+    }, function(error) {
+      res.status(400).end();
+    });
   });
 }
 
