@@ -3,6 +3,7 @@
 
 // Requires
 var Parse = require('parse/node').Parse;
+var crypto = require('crypto');
 var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
@@ -64,9 +65,11 @@ function createUser(req, res) {
 
   roleQuery.equalTo('objectId', 'qwekFNkzFc');
   roleQuery.first().then(function(roleObj) {
+    console.log(generatePassword());
+
     var userObj = {
       username: req.body.username,
-      password: 'RANDOM', // generate random password, have them reset it
+      password: generatePassword(), // generate random password, have them reset it
       email: req.body.email,
       roleId: roleObj
     };
@@ -107,4 +110,11 @@ function deleteUser(req, res) {
       res.status(400).end();
     });
   });
+}
+
+// Utilities
+function generatePassword() {
+  var sha1 = crypto.randomBytes(10).toString('hex');
+
+  return sha1;
 }

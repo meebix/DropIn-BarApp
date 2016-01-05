@@ -62,7 +62,7 @@
     };
 
     vm.hideNextPage = function() {
-      return vm.currentPage === vm.maxPage || vm.displayLimit === 0;
+      return vm.currentPage === vm.maxPage || vm.displayLimit === 0 || vm.maxPage < 0;
     };
 
     vm.hidePreviousPage = function() {
