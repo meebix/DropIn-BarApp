@@ -299,7 +299,9 @@ function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
   });
 }
 
-// Utility to transform date for Parse
+// Utilities
+// ======
+
 // This just creates a date object for Parse to read
 // Parse seems to be converting date to UTC before storing it automatically
 function transformDateForParse(date) {
@@ -308,7 +310,7 @@ function transformDateForParse(date) {
   return newDate;
 }
 
-// Write image to disk
+// Prepare image for Parse
 function prepareImageForParse(image) {
   if (image === null) {
     return;

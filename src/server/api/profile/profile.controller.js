@@ -3,6 +3,7 @@
 
 // Requires
 var Parse = require('parse/node').Parse;
+var crypto = require('crypto');
 var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
@@ -10,6 +11,7 @@ var four0four = require('../../utils/404')();
 
 var Bar = Parse.Object.extend('Bar');
 var Role = Parse.Object.extend('Role');
+var AppParams = Parse.Object.extend('App_Params');
 var roleQuery = new Parse.Query(Role);
 
 // Export
@@ -25,7 +27,6 @@ module.exports = {
 function allProfiles(req, res) {
   var barQuery = new Parse.Query(Bar);
 
-  barQuery.notEqualTo('isActive', false);
   barQuery.find().then(function(bars) {
     res.status(200).json({data: bars});
   }, function(error) {
@@ -37,15 +38,20 @@ function createProfile(req, res) {
   var newBar = new Bar();
 
   var barObj = {
-    // TODO: Add photo upload
     name: req.body.name,
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
+    zip: req.body.zip,
     phone: req.body.phone,
     email: req.body.email,
     description: req.body.description,
-    zip: req.body.zip,
+    thumbnail: prepareImageForParse(req.body.thumbnail),
+    photo: prepareImageForParse(req.body.photo),
+    beaconMajor: req.body.beaconMajor,
+    beaconMinor: req.body.beaconMinor,
+    latitude: req.body.latitude,
+    longitude: req.body.longitude,
     mondayPromotion: req.body.mondayPromotion,
     tuesdayPromotion: req.body.tuesdayPromotion,
     wednesdayPromotion: req.body.wednesdayPromotion,
@@ -53,17 +59,37 @@ function createProfile(req, res) {
     fridayPromotion: req.body.fridayPromotion,
     saturdayPromotion: req.body.saturdayPromotion,
     sundayPromotion: req.body.sundayPromotion,
-    isActive: true
+    reward: req.body.reward,
+    isActive: req.body.isActive
   };
 
   // Save the bar
   newBar.save(barObj).then(function(savedBarObj) {
-    // success
-    res.status(200).json({data: savedBarObj});
+    return savedBarObj;
   }, function(error) {
     // Error saving: New Bar Object
     console.log(error);
     res.status(400).end();
+  })
+  .then(function(savedBarObj) {
+    var paramsQuery = new Parse.Query(AppParams);
+
+    if (req.body.isActive === true) {
+      paramsQuery.equalTo('paramName', 'totalBarsOnboarded');
+      paramsQuery.first().then(function(obj) {
+        var currentCount = obj.get('number1');
+        var addOne = currentCount + 1;
+
+        obj.set('number1', addOne);
+        obj.save();
+
+        res.status(200).json({data: savedBarObj});
+      }, function(error) {
+        console.log(error);
+      });
+    } else {
+      res.status(200).json({data: savedBarObj});
+    }
   });
 }
 
@@ -73,15 +99,20 @@ function updateProfile(req, res) {
   barQuery.equalTo('objectId', req.params.id);
   barQuery.first().then(function(foundBar) {
     var barObj = {
-      // TODO: Add photo upload
       name: req.body.name,
       address: req.body.address,
       city: req.body.city,
       state: req.body.state,
+      zip: req.body.zip,
       phone: req.body.phone,
       email: req.body.email,
       description: req.body.description,
-      zip: req.body.zip,
+      thumbnail: prepareImageForParse(req.body.thumbnail),
+      photo: prepareImageForParse(req.body.photo),
+      beaconMajor: req.body.beaconMajor,
+      beaconMinor: req.body.beaconMinor,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
       mondayPromotion: req.body.mondayPromotion,
       tuesdayPromotion: req.body.tuesdayPromotion,
       wednesdayPromotion: req.body.wednesdayPromotion,
@@ -89,14 +120,35 @@ function updateProfile(req, res) {
       fridayPromotion: req.body.fridayPromotion,
       saturdayPromotion: req.body.saturdayPromotion,
       sundayPromotion: req.body.sundayPromotion,
-      isActive: true
+      isActive: req.body.isActive
     };
 
     return foundBar.save(barObj).then(function(savedBarObj) {
-      res.status(200).json({data: savedBarObj});
+      return savedBarObj;
     }, function(error) {
       console.log(error);
       res.status(400).end();
+    })
+    .then(function(savedBarObj) {
+      var paramsQuery = new Parse.Query(AppParams);
+
+      paramsQuery.equalTo('paramName', 'totalBarsOnboarded');
+      paramsQuery.first().then(function(obj) {
+        var currentCount = obj.get('number1');
+        var addOne = currentCount + 1;
+        var subtractOne = currentCount - 1;
+
+        if (req.body.isActive === true) {
+          obj.set('number1', addOne);
+        } else {
+          obj.set('number1', subtractOne);
+        }
+
+        obj.save();
+        res.status(200).json({data: savedBarObj});
+      }, function(error) {
+        console.log(error);
+      });
     });
   }, function(error) {
     console.log(error);
@@ -129,4 +181,21 @@ function deleteProfile(req, res) {
     console.log(error);
     res.status(400).end();
   });
+}
+
+// Utilities
+// ======
+
+// Prepare image for Parse
+function prepareImageForParse(image) {
+  if (image === null) {
+    return;
+  }
+
+  var base64Image = image.replace(/^data:image\/png;base64,/, '');
+  var checkSum = crypto.randomBytes(15).toString('hex');
+
+  var photoFile = new Parse.File(checkSum + '.png', {base64: base64Image});
+
+  return photoFile;
 }

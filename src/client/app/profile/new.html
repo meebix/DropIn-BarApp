@@ -35,32 +35,81 @@
   </div>
   <hr>
   <div class="form-group">
+    <label for="thumbnailPhoto">Thumbnail Photo</label>
+    <div>
+      <label>
+        <input type="file" name="thumbnail" class="photo" multiple="false" image="vm.thumbnailPhoto" accept="image/*" img-cropper-fileread>
+        <div class="btn btn-default">Browse</div>
+        <img ng-src="{{vm.thumbnailPhoto}}" height="100" width="100">
+      </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="detailPhoto">Detail Photo</label>
+    <div>
+      <label>
+        <input type="file" name="photo" class="photo" multiple="false" image="vm.detailPhoto" accept="image/*" img-cropper-fileread>
+        <div class="btn btn-default">Browse</div>
+        <img ng-src="{{vm.detailPhoto}}" height="100" width="100">
+      </label>
+    </div>
+  </div>
+  <hr>
+  <div class="form-group">
+    <label for="beaconMajor">Beacon Major</label>
+        <input type="number" class="form-control" ng-model="vm.profileData.beaconMajor">
+  </div>
+  <div class="form-group">
+    <label for="beaconMinor">Beacon Minor</label>
+        <input type="number" class="form-control" ng-model="vm.profileData.beaconMinor">
+  </div>
+  <hr>
+  <div class="form-group">
+    <label for="mapLatitude">Map Latitude</label>
+        <input type="text" class="form-control" ng-model="vm.profileData.latitude">
+  </div>
+  <div class="form-group">
+    <label for="mapLongitude">Map Longitude</label>
+        <input type="text" class="form-control" ng-model="vm.profileData.longitude">
+  </div>
+  <hr>
+  <div class="form-group">
     <label for="profileMondayPromotion">Monday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.mondayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.mondayPromotion"></textarea>
   </div>
   <div class="form-group">
     <label for="profileTuesdayPromotion">Tuesday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.tuesdayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.tuesdayPromotion"></textarea>
   </div>
   <div class="form-group">
     <label for="profileWednesdayPromotion">Wednesday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.wednesdayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.wednesdayPromotion"></textarea>
   </div>
   <div class="form-group">
     <label for="profileThursdayPromotion">Thursday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.thursdayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.thursdayPromotion"></textarea>
   </div>
   <div class="form-group">
     <label for="profileFridayPromotion">Friday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.fridayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.fridayPromotion"></textarea>
   </div>
   <div class="form-group">
     <label for="profileSaturdayPromotion">Saturday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.saturdayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.saturdayPromotion"></textarea>
   </div>
   <div class="form-group">
     <label for="profileSundayPromotion">Sunday's Promotion</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.sundayPromotion">
+    <textarea class="form-control" rows="3" ng-model="vm.profileData.sundayPromotion"></textarea>
+  </div>
+  <hr>
+  <div class="form-group">
+    <label for="reward">Reward</label>
+    <input type="text" class="form-control" ng-model="vm.profileData.reward">
+  </div>
+  <div class="form-group">
+    <label for="isActive">Active?</label>
+    <select class="form-control" ng-options="option.value as option.name for option in vm.activeOptions" ng-model="vm.profileData.isActive" ng-init="vm.profileData.isActive=false">
+    </select>
   </div>
   <button type="submit" class="btn btn-primary">Create</button>
 </form>

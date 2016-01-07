@@ -18,6 +18,10 @@
     vm.deleteProfile = deleteProfile;
     vm.init = init;
 
+    // Images
+    vm.thumbnailPhoto = null;
+    vm.detailPhoto = null;
+
     function allProfiles() {
       profileService.allProfiles().then(function(results) {
         vm.allProfiles = results.data;
@@ -27,6 +31,11 @@
     }
 
     function createProfile(profileData) {
+      profileData.latitude = Number(profileData.latitude);
+      profileData.longitude = Number(profileData.longitude);
+      profileData.thumbnail = vm.thumbnailPhoto;
+      profileData.photo = vm.detailPhoto;
+
       profileService.createProfile(profileData).then(function() {
         $state.go('profiles');
       }, function(error) {
@@ -37,11 +46,39 @@
     function showProfile() {
       profileService.showProfile(vm.barId).then(function(results) {
         vm.profileData = results.data;
+
+        vm.profileData.isActive = results.data.isActive;
       });
     }
 
     function updateProfile(profileData) {
-      profileService.updateProfile(vm.barId, profileData).then(function() {
+      // Build new form object for only editable fields
+      var updatedProfileData = {
+        name: profileData.name,
+        address: profileData.address,
+        city: profileData.city,
+        state: profileData.state,
+        zip: profileData.zip,
+        phone: profileData.phone,
+        email: profileData.email,
+        description: profileData.description,
+        thumbnail: vm.thumbnailPhoto,
+        photo: vm.detailPhoto,
+        beaconMajor: profileData.beaconMajor,
+        beaconMinor: profileData.beaconMinor,
+        latitude: Number(profileData.latitude),
+        longitude: Number(profileData.longitude),
+        mondayPromotion: profileData.mondayPromotion,
+        tuesdayPromotion: profileData.tuesdayPromotion,
+        wednesdayPromotion: profileData.wednesdayPromotion,
+        thursdayPromotion: profileData.thursdayPromotion,
+        fridayPromotion: profileData.fridayPromotion,
+        saturdayPromotion: profileData.saturdayPromotion,
+        sundayPromotion: profileData.sundayPromotion,
+        isActive: profileData.isActive
+      };
+
+      profileService.updateProfile(vm.barId, updatedProfileData).then(function() {
         $state.go('profiles');
       });
     }
@@ -51,6 +88,12 @@
         $state.go('profiles');
       });
     }
+
+    // Select options for isActive
+    vm.activeOptions = [
+      { name: 'True', value: true },
+      { name: 'False', value: false }
+    ];
 
     function init() {
       vm.allProfiles();
