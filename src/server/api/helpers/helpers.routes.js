@@ -4,11 +4,12 @@
 // Requires
 var router = require('express').Router();
 var four0four = require('../../utils/404')();
-var authController = require('./helpers.controller');
+var helpersController = require('./helpers.controller');
 
 // Routes
-router.get('/bars', authController.getBars);
-router.get('/loyalty-levels', authController.getLoyaltyLevels);
+router.get('/bars', helpersController.getBars);
+router.get('/users-bar', helpersController.getCurrentUsersBar);
+router.get('/loyalty-levels', helpersController.getLoyaltyLevels);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;

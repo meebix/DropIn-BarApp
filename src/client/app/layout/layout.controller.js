@@ -5,15 +5,17 @@
     .module('app.layout')
     .controller('LayoutController', LayoutController);
 
-  LayoutController.$inject = ['$scope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
+  LayoutController.$inject = ['$scope', '$location', '$state', '$cookieStore', 'helperService', 'authService', 'accessService', 'ROLES'];
   /* @ngInject */
-  function LayoutController($scope, $location, $state, $cookieStore, authService, accessService, ROLES) {
+  function LayoutController($scope, $location, $state, $cookieStore, helperService, authService, accessService, ROLES) {
     var vm = this;
     vm.isAuthPage = isAuthPage;
     vm.isActive = isActive;
     vm.isAnalyticPage = isAnalyticPage;
+    vm.barName = barName;
     vm.logout = logout;
     vm.copyrightYear = new Date();
+    vm.init = init;
 
     // TODO: Why are we using $scope here instead of vm??
     // Cannot set global vm
@@ -63,6 +65,12 @@
       }
     }
 
+    function barName() {
+      helperService.getCurrentUsersBar().then(function(result) {
+        $scope.barName = result.data.name;
+      });
+    }
+
     function logout() {
       authService.logout().then(function() {
         $state.go('login');
@@ -70,5 +78,11 @@
         // error broadcast
       });
     }
+
+    function init() {
+      vm.barName();
+    }
+
+    vm.init();
   }
 })();

@@ -10,6 +10,7 @@
   function helperService($http, $q, logger) {
     var service = {
       getBars: getBars,
+      getCurrentUsersBar: getCurrentUsersBar,
       getLoyaltyLevels: getLoyaltyLevels
     };
 
@@ -19,6 +20,18 @@
       return $http({
         method: 'GET',
         url: '/api/v1/helpers/bars',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }).then(function(response) {
+        return response.data;
+      });
+    }
+
+    function getCurrentUsersBar() {
+      return $http({
+        method: 'GET',
+        url: '/api/v1/helpers/users-bar',
         headers: {
           'Content-Type': 'application/json'
         },
