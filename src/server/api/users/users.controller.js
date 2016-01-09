@@ -29,7 +29,7 @@ function allUsers(req, res) {
   var displayLimit = 15;
   var count;
 
-  roleQuery.equalTo('objectId', 'qwekFNkzFc');
+  roleQuery.equalTo('name', 'Bar');
   roleQuery.first().then(function(roleObj) {
     usersQuery.equalTo('roleId', roleObj);
     usersQuery.count().then(function(result) {

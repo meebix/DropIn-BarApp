@@ -15,7 +15,6 @@ var LoyaltyLevels = Parse.Object.extend('Loyalty_Levels');
 var UsersEvents = Parse.Object.extend('Users_Events');
 var EventStats = Parse.Object.extend('Stats_Events');
 var roleQuery = new Parse.Query(Role);
-var loyaltyQuery = new Parse.Query(LoyaltyLevels);
 var usersQuery = new Parse.Query(Parse.User);
 
 // Export
@@ -68,6 +67,7 @@ function allEvents(req, res) {
 
 function createEvent(req, res) {
   var newEvent = new Events();
+  var loyaltyQuery = new Parse.Query(LoyaltyLevels);
   var loyaltyLevelId = req.body.loyaltyLevelId;
 
   // Query to Parse
@@ -94,7 +94,7 @@ function createEvent(req, res) {
     })
     .then(function(savedEventObj) {
       // Get the role object for 'User'
-      roleQuery.equalTo('objectId', 'ArWsSwq2Ky'); // TODO: Unhardcode this piece, 'User' role id
+      roleQuery.equalTo('name', 'User');
       return roleQuery.first().then(function(roleObj) {
         return roleObj;
       }, function(error) {
@@ -103,17 +103,22 @@ function createEvent(req, res) {
         res.status(400).end();
       })
       .then(function(roleObj) {
-        // Find all users who have a role of 'User' and for each user
-        // save a new UsersEvents to the join table
-        usersQuery.equalTo('roleId', roleObj);
+        var loyaltyQuery = new Parse.Query(LoyaltyLevels);
 
-        // If statement checks to see if the loyalty level is 'All'
-        // TODO: Fixed hardcoded value
-        if (loyaltyLevelObj.id !== 'cpMUn6twQc') {
-          sendToSpecified(savedEventObj, loyaltyLevelObj, req, res);
-        } else {
-          sendToAll(savedEventObj, req, res);
-        }
+        loyaltyQuery.equalTo('name', 'All');
+        return loyaltyQuery.first().then(function(allObj) {
+          // Find all users who have a role of 'User' and for each user
+          // save a new UsersEvents to the join table
+          usersQuery.equalTo('roleId', roleObj);
+
+          // If statement checks to see if the loyalty level is 'All'
+          // TODO: Fixed hardcoded value
+          if (loyaltyLevelObj.id !== allObj.id) {
+            sendToSpecified(savedEventObj, loyaltyLevelObj, req, res);
+          } else {
+            sendToAll(savedEventObj, req, res);
+          }
+        });
       });
     });
   }, function(error) {
