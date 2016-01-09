@@ -5,19 +5,18 @@
     .module('app.auth')
     .controller('AuthController', AuthController);
 
-  AuthController.$inject = ['$rootScope', '$q', 'toastr', 'logger', '$state', 'authService', 'helperService'];
+  AuthController.$inject = ['$q', 'toastr', 'logger', '$state', '$cookieStore', 'authService', 'helperService'];
   /* @ngInject */
-  function AuthController($rootScope, $q, toastr, logger, $state, authService, helperService) {
+  function AuthController($q, toastr, logger, $state, $cookieStore, authService, helperService) {
     var vm = this;
     vm.title = 'Login';
     vm.login = login;
     vm.resetPassword = resetPassword;
-    vm.setBarName = setBarName;
+    vm.setBarNameAndTransition = setBarNameAndTransition;
 
     function login(credentials) {
       authService.login(credentials).then(function(user) {
-        vm.setBarName();
-        $state.go('dashboard');
+        vm.setBarNameAndTransition();
       }, function(error) {
         toastr.error('Invalid email address or password');
       });
@@ -31,9 +30,11 @@
       });
     }
 
-    function setBarName() {
+    function setBarNameAndTransition() {
       helperService.getCurrentUsersBar().then(function(result) {
-        $rootScope.barName = result.data ? result.data.name : '';
+        // TODO: Maybe move to localStorage instead of a cookie
+        $cookieStore.put('bar-name', result.data ? result.data.name : '');
+        $state.go('dashboard');
       });
     }
   }

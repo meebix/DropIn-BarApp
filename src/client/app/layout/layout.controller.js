@@ -5,9 +5,9 @@
     .module('app.layout')
     .controller('LayoutController', LayoutController);
 
-  LayoutController.$inject = ['$scope', '$rootScope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
+  LayoutController.$inject = ['$scope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
   /* @ngInject */
-  function LayoutController($scope, $rootScope, $location, $state, $cookieStore, authService, accessService, ROLES) {
+  function LayoutController($scope, $location, $state, $cookieStore, authService, accessService, ROLES) {
     var vm = this;
     vm.isAuthPage = isAuthPage;
     vm.isActive = isActive;
@@ -60,7 +60,7 @@
 
     function logout() {
       authService.logout().then(function() {
-        $rootScope.barName = '';
+        $cookieStore.remove('bar-name');
         $state.go('login');
       }, function() {
         // error broadcast

@@ -304,9 +304,6 @@ function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
   });
 }
 
-// Utilities
-// ======
-
 // This just creates a date object for Parse to read
 // Parse seems to be converting date to UTC before storing it automatically
 function transformDateForParse(date) {

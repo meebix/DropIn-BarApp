@@ -16,10 +16,10 @@
   ])
   .run(appRun);
 
-  appRun.$inject = ['$state', '$rootScope', 'toastr', 'authService', 'accessService'];
+  appRun.$inject = ['$state', '$rootScope', '$cookieStore', 'toastr', 'authService', 'accessService'];
   /* @ngInject */
 
-  function appRun($state, $rootScope, toastr, authService, accessService) {
+  function appRun($state, $rootScope, $cookieStore, toastr, authService, accessService) {
     // Check for authentication and authorization when app loads
     authService.isAuthenticated().then(function(result) {
       // result contains json authorized: false if not authenticated, blank otherwise
@@ -36,6 +36,11 @@
         event.preventDefault();
         toastr.error('You do not have access to this page');
       }
+    });
+
+    // Get the bar name from a cookie after each route change
+    $rootScope.$on('$stateChangeSuccess', function(event) {
+      $rootScope.barName = $cookieStore.get('bar-name');
     });
   }
 })();
