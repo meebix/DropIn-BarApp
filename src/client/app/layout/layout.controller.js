@@ -5,17 +5,15 @@
     .module('app.layout')
     .controller('LayoutController', LayoutController);
 
-  LayoutController.$inject = ['$scope', '$location', '$state', '$cookieStore', 'helperService', 'authService', 'accessService', 'ROLES'];
+  LayoutController.$inject = ['$scope', '$rootScope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
   /* @ngInject */
-  function LayoutController($scope, $location, $state, $cookieStore, helperService, authService, accessService, ROLES) {
+  function LayoutController($scope, $rootScope, $location, $state, $cookieStore, authService, accessService, ROLES) {
     var vm = this;
     vm.isAuthPage = isAuthPage;
     vm.isActive = isActive;
     vm.isAnalyticPage = isAnalyticPage;
-    vm.barName = barName;
     vm.logout = logout;
     vm.copyrightYear = new Date();
-    vm.init = init;
 
     // TODO: Why are we using $scope here instead of vm??
     // Cannot set global vm
@@ -24,12 +22,7 @@
     // None of this works on refresh, needs to be in state service
 
     // Scopes
-    $scope.currentUser = null;
     $scope.userRoles = ROLES;
-
-    $scope.setCurrentUser = function (user) {
-      $scope.currentUser = user;
-    };
 
     $scope.isAuthorized = function(role) {
       return accessService.isAuthorized(role);
@@ -65,24 +58,13 @@
       }
     }
 
-    function barName() {
-      helperService.getCurrentUsersBar().then(function(result) {
-        $scope.barName = result.data.name;
-      });
-    }
-
     function logout() {
       authService.logout().then(function() {
+        $rootScope.barName = '';
         $state.go('login');
       }, function() {
         // error broadcast
       });
     }
-
-    function init() {
-      vm.barName();
-    }
-
-    vm.init();
   }
 })();

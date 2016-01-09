@@ -5,17 +5,18 @@
     .module('app.auth')
     .controller('AuthController', AuthController);
 
-  AuthController.$inject = ['$scope', '$q', 'toastr', 'logger', '$state', 'authService'];
+  AuthController.$inject = ['$rootScope', '$q', 'toastr', 'logger', '$state', 'authService', 'helperService'];
   /* @ngInject */
-  function AuthController($scope, $q, toastr, logger, $state, authService) {
+  function AuthController($rootScope, $q, toastr, logger, $state, authService, helperService) {
     var vm = this;
     vm.title = 'Login';
     vm.login = login;
     vm.resetPassword = resetPassword;
+    vm.setBarName = setBarName;
 
     function login(credentials) {
       authService.login(credentials).then(function(user) {
-        $scope.setCurrentUser(user);
+        vm.setBarName();
         $state.go('dashboard');
       }, function(error) {
         toastr.error('Invalid email address or password');
@@ -27,6 +28,12 @@
         // success
       }, function() {
         toastr.error('Please try again');
+      });
+    }
+
+    function setBarName() {
+      helperService.getCurrentUsersBar().then(function(result) {
+        $rootScope.barName = result.data ? result.data.name : '';
       });
     }
   }
