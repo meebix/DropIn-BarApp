@@ -17,9 +17,13 @@
         state: 'analytics-user',
         config: {
           url: '/analytics/user',
-          templateUrl: 'app/analytics/user/user-analytics.html',
-          controller: 'UserAnalyticsController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/analytics/user/user-analytics.html',
+              controller: 'UserAnalyticsController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'User Analytics',
           data: {
             authorizedRoles: [ROLES.admin, ROLES.bar]

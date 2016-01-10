@@ -5,24 +5,11 @@
     .module('app.dashboard')
     .controller('DashboardController', DashboardController);
 
-  DashboardController.$inject = ['$q', 'logger', 'userService', 'accessService'];
+  DashboardController.$inject = ['$q', 'logger'];
   /* @ngInject */
-  function DashboardController($q, logger, userService, accessService) {
+  function DashboardController($q, logger) {
+    console.log('called');
     var vm = this;
     vm.title = 'Dashboard';
-    // vm.barData = barData;
-    vm.init = init;
-
-    // function barData() {
-    //   var bar = userService.getUserDataFromCookie();
-
-    //   vm.barId = bar.associatedBar;
-    // }
-
-    function init() {
-      // vm.barData();
-    }
-
-    vm.init();
   }
 })();

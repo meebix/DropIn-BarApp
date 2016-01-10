@@ -17,9 +17,13 @@
         state: 'rewards',
         config: {
           url: '/rewards',
-          templateUrl: 'app/rewards/list.html',
-          controller: 'RewardsController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/rewards/list.html',
+              controller: 'RewardsController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Rewards',
           data: {
             authorizedRoles: [ROLES.admin]
@@ -30,9 +34,13 @@
         state: 'reward-edit',
         config: {
           url: '/rewards/:id/edit',
-          templateUrl: 'app/rewards/edit.html',
-          controller: 'RewardsController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/rewards/edit.html',
+              controller: 'RewardsController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Rewards',
           data: {
             authorizedRoles: [ROLES.admin]

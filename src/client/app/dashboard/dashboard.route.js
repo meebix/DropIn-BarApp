@@ -17,9 +17,13 @@
         state: 'dashboard',
         config: {
           url: '/',
-          templateUrl: 'app/dashboard/dashboard.html',
-          controller: 'DashboardController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/dashboard/dashboard.html',
+              controller: 'DashboardController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Dashboard',
           data: {
             authorizedRoles: [ROLES.all, ROLES.admin, ROLES.bar]

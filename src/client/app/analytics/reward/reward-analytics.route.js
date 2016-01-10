@@ -17,9 +17,13 @@
         state: 'analytics-reward',
         config: {
           url: '/analytics/reward',
-          templateUrl: 'app/analytics/reward/reward-analytics.html',
-          controller: 'RewardAnalyticsController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/analytics/reward/reward-analytics.html',
+              controller: 'RewardAnalyticsController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Reward Analytics',
           data: {
             authorizedRoles: [ROLES.admin, ROLES.bar]

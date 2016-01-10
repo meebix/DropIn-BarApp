@@ -17,9 +17,13 @@
         state: 'analytics-event',
         config: {
           url: '/analytics/event',
-          templateUrl: 'app/analytics/event/event-analytics.html',
-          controller: 'EventAnalyticsController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/analytics/event/event-analytics.html',
+              controller: 'EventAnalyticsController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Event Analytics',
           data: {
             authorizedRoles: [ROLES.admin, ROLES.bar]

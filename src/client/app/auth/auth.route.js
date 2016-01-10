@@ -17,9 +17,13 @@
         state: 'login',
         config: {
           url: '/login',
-          templateUrl: 'app/auth/login.html',
-          controller: 'AuthController',
-          controllerAs: 'vm',
+          views: {
+            'auth': {
+              templateUrl: 'app/auth/login.html',
+              controller: 'AuthController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Login',
           data: {
             authorizedRoles: [ROLES.all, ROLES.admin, ROLES.bar]
@@ -30,9 +34,13 @@
         state: 'resetPassword',
         config: {
           url: '/reset-password',
-          templateUrl: 'app/auth/reset-password.html',
-          controller: 'AuthController',
-          controllerAs: 'vm',
+          views: {
+            'auth': {
+              templateUrl: 'app/auth/reset-password.html',
+              controller: 'AuthController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Reset Password',
           data: {
             authorizedRoles: [ROLES.all, ROLES.admin, ROLES.bar]

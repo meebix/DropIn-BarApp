@@ -17,9 +17,13 @@
         state: 'users',
         config: {
           url: '/users',
-          templateUrl: 'app/users/list.html',
-          controller: 'UserController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/users/list.html',
+              controller: 'UserController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Users',
           data: {
             authorizedRoles: [ROLES.admin]
@@ -30,9 +34,13 @@
         state: 'user-new',
         config: {
           url: '/users/new',
-          templateUrl: 'app/users/new.html',
-          controller: 'UserController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/users/new.html',
+              controller: 'UserController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'User',
           data: {
             authorizedRoles: [ROLES.admin]

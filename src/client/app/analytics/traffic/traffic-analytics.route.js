@@ -17,9 +17,13 @@
         state: 'analytics-traffic',
         config: {
           url: '/analytics/traffic',
-          templateUrl: 'app/analytics/traffic/traffic-analytics.html',
-          controller: 'TrafficAnalyticsController',
-          controllerAs: 'vm',
+          views: {
+            'main': {
+              templateUrl: 'app/analytics/traffic/traffic-analytics.html',
+              controller: 'TrafficAnalyticsController',
+              controllerAs: 'vm'
+            }
+          },
           title: 'Traffic Analytics',
           data: {
             authorizedRoles: [ROLES.admin, ROLES.bar]
