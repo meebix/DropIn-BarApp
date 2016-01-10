@@ -8,7 +8,6 @@
   UserController.$inject = ['$q', 'logger', '$state', '$stateParams', 'userService', 'helperService'];
   /* @ngInject */
   function UserController($q, logger, $state, $stateParams, userService, helperService) {
-    console.log('test');
     var vm = this;
     vm.title = 'Dashboard';
     vm.userId = $stateParams.id;

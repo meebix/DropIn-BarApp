@@ -8,7 +8,6 @@
   DashboardController.$inject = ['$q', 'logger'];
   /* @ngInject */
   function DashboardController($q, logger) {
-    console.log('called');
     var vm = this;
     vm.title = 'Dashboard';
   }
