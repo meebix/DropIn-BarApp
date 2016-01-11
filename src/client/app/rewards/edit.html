@@ -1,9 +1,14 @@
+<a ui-sref="rewards" class="alt-link"><i class="fa fa-long-arrow-left"></i> Rewards</a>
 <h1>Edit Reward</h1>
 <hr>
 <form name="createEventForm" ng-submit="vm.updateReward(vm.rewardData)">
-  <div class="form-group">
-    <label for="rewardName">Name</label>
-    <input type="text" class="form-control" ng-model="vm.rewardData.reward">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="rewardName">Name</label>
+        <input type="text" class="form-control" ng-model="vm.rewardData.reward">
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Update</button>
+  <button type="submit" class="btn btn-primary margin-top-20">Update</button>
 </form>
