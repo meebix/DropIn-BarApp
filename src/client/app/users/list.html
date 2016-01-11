@@ -1,25 +1,24 @@
-<h1>All Bar Users</h1>
+<h1>Bar Users</h1>
 <hr>
 <a ui-sref="user-new" class="btn btn-primary">Create Bar User</a>
+<span us-spinner ng-hide="dataLoaded"></span>
 <div class="table-responsive margin-top-20">
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Username</th>
         <th>Email</th>
         <th>Bar</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="user in vm.allUsers | orderBy:'username'">
-        <td>{{user.username}}</td>
-        <td>{{user.email}}</td>
+      <tr ng-repeat="user in vm.allUsers | orderBy: 'username'">
+        <td>{{user.username | lowercase}}</td>
+        <td>{{user.email | lowercase}}</td>
         <td>{{user.barId.name}}</td>
-        <td><a href="" class="link-alt-underline" ng-click="vm.deleteUser(user.objectId)">Delete</a></td>
       </tr>
     </tbody>
   </table>
 </div>
-<button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-hide="vm.hidePreviousPage()">Previous</button>
-<button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-hide="vm.hideNextPage()">Next</button>
+<button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-show="vm.showPreviousPage()">Previous</button>
+<button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>

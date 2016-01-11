@@ -5,9 +5,9 @@
     .module('app.data')
     .factory('profileService', profileService);
 
-  profileService.$inject = ['$http', '$q', 'logger', '$cookieStore'];
+  profileService.$inject = ['$http', '$rootScope', '$q', 'logger', '$cookieStore'];
   /* @ngInject */
-  function profileService($http, $q, logger, $cookieStore) {
+  function profileService($http, $rootScope, $q, logger, $cookieStore) {
     var service = {
       allProfiles: allProfiles,
       createProfile: createProfile,
@@ -19,6 +19,8 @@
     return service;
 
     function allProfiles() {
+      $rootScope.dataLoaded = false;
+
       return $http({
         method: 'GET',
         url: '/api/v1/profiles',
@@ -26,6 +28,7 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
         return response.data;
       });
     }

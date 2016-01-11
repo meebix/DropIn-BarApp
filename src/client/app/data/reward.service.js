@@ -5,9 +5,9 @@
     .module('app.data')
     .factory('rewardService', rewardService);
 
-  rewardService.$inject = ['$http', '$q', 'logger', '$cookieStore'];
+  rewardService.$inject = ['$http', '$rootScope', '$q', 'logger', '$cookieStore'];
   /* @ngInject */
-  function rewardService($http, $q, logger, $cookieStore) {
+  function rewardService($http, $rootScope, $q, logger, $cookieStore) {
     var service = {
       allRewards: allRewards,
       showReward: showReward,
@@ -17,6 +17,8 @@
     return service;
 
     function allRewards() {
+      $rootScope.dataLoaded = false;
+
       return $http({
         method: 'GET',
         url: '/api/v1/rewards',
@@ -24,6 +26,7 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
         return response.data;
       });
     }

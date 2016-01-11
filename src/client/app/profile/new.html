@@ -1,115 +1,285 @@
 <h1>Create Bar</h1>
 <hr>
 <form name="createProfileForm" ng-submit="vm.createProfile(vm.profileData)">
-  <div class="form-group">
-    <label for="profileName">Bar Name</label>
-    <input type="text" class="form-control" placeholder="Bar One" ng-model="vm.profileData.name">
-  </div>
-  <div class="form-group">
-    <label for="profileAddress">Address</label>
-    <input type="text" class="form-control" placeholder="1200 Washington Ave" ng-model="vm.profileData.address">
-  </div>
-  <div class="form-group">
-    <label for="profileCity">City</label>
-    <input type="text" class="form-control" placeholder="Hoboken" ng-model="vm.profileData.city">
-  </div>
-  <div class="form-group">
-    <label for="profileState">State</label>
-    <input type="text" class="form-control" placeholder="NJ" ng-model="vm.profileData.state">
-  </div>
-  <div class="form-group">
-    <label for="profileZip">Zip Code</label>
-    <input type="text" class="form-control" placeholder="07040" ng-model="vm.profileData.zip">
-  </div>
-  <div class="form-group">
-    <label for="profilePhone">Phone Number</label>
-    <input type="text" class="form-control" placeholder="(201) 555-5555" ng-model="vm.profileData.phone">
-  </div>
-  <div class="form-group">
-    <label for="profileEmail">Email Address</label>
-    <input type="text" class="form-control" placeholder="bar@mybar.com" ng-model="vm.profileData.email">
-  </div>
-  <div class="form-group">
-    <label for="profileDescription">Bar Description</label>
-        <textarea class="form-control" placeholder="Describe the bar" rows="3" ng-model="vm.profileData.description"></textarea>
-  </div>
-  <hr>
-  <div class="form-group">
-    <label for="thumbnailPhoto">Thumbnail Photo</label>
-    <div>
-      <label>
-        <input type="file" name="thumbnail" class="photo" multiple="false" image="vm.thumbnailPhoto" accept="image/*" img-cropper-fileread>
-        <div class="btn btn-default">Browse</div>
-        <img ng-src="{{vm.thumbnailPhoto}}" height="100" width="100">
-      </label>
+  <h3 class="margin-bottom-20 text-muted">Core Information</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileName">Bar Name</label>
+        <input type="text" class="form-control" placeholder="The Last Call" ng-model="vm.profileData.name" ng-focus="vm.showHelperName = true" ng-blur="vm.showHelperName = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperName">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Please enter the <strong>official legal name</strong> of the bar</div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="form-group">
-    <label for="detailPhoto">Detail Photo</label>
-    <div>
-      <label>
-        <input type="file" name="photo" class="photo" multiple="false" image="vm.detailPhoto" accept="image/*" img-cropper-fileread>
-        <div class="btn btn-default">Browse</div>
-        <img ng-src="{{vm.detailPhoto}}" height="100" width="100">
-      </label>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileAddress">Address</label>
+        <input type="text" class="form-control" placeholder="1200 Washington Ave" ng-model="vm.profileData.address" ng-focus="vm.showHelperAddress = true" ng-blur="vm.showHelperAddress = false">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileCity">City</label>
+        <input type="text" class="form-control" placeholder="Hoboken" ng-model="vm.profileData.city" ng-focus="vm.showHelperCity = true" ng-blur="vm.showHelperCity = false">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileState">State</label>
+        <input type="text" class="form-control" placeholder="NJ" ng-model="vm.profileData.state" ng-focus="vm.showHelperState = true" ng-blur="vm.showHelperState = false">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileZip">Zip Code</label>
+        <input type="text" class="form-control" placeholder="07030" ng-model="vm.profileData.zip" ng-focus="vm.showHelperZip = true" ng-blur="vm.showHelperZip = false">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profilePhone">Phone Number</label>
+        <input type="text" class="form-control" placeholder="(201) 444-4444" ng-model="vm.profileData.phone" ng-focus="vm.showHelperPhone = true" ng-blur="vm.showHelperPhone = false">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileEmail">Email Address</label>
+        <input type="text" class="form-control" placeholder="info@bar.com" ng-model="vm.profileData.email" ng-focus="vm.showHelperEmail = true" ng-blur="vm.showHelperEmail = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperEmail">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Please enter the main <strong>information email address</strong> for the bar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileDescription">Bar Description</label>
+            <textarea class="form-control" placeholder="Enter a description of the bar found on their website or social page" rows="3" ng-model="vm.profileData.description"></textarea>
+      </div>
     </div>
   </div>
   <hr>
-  <div class="form-group">
-    <label for="beaconMajor">Beacon Major</label>
-        <input type="number" class="form-control" ng-model="vm.profileData.beaconMajor">
+  <h3 class="margin-bottom-20 text-muted">Images</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="thumbnailPhoto">Thumbnail Photo</label>
+        <div>
+          <label>
+            <input type="file" name="thumbnail" class="photo" multiple="false" image="vm.thumbnailPhoto" accept="image/*" img-cropper-fileread>
+            <div class="btn btn-default">Browse</div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <p>150 x 150</p>
+      <img ng-src="{{vm.thumbnailPhoto}}" width="150" height="150">
+    </div>
   </div>
-  <div class="form-group">
-    <label for="beaconMinor">Beacon Minor</label>
-        <input type="number" class="form-control" ng-model="vm.profileData.beaconMinor">
-  </div>
-  <hr>
-  <div class="form-group">
-    <label for="mapLatitude">Map Latitude</label>
-        <input type="text" class="form-control" ng-model="vm.profileData.latitude">
-  </div>
-  <div class="form-group">
-    <label for="mapLongitude">Map Longitude</label>
-        <input type="text" class="form-control" ng-model="vm.profileData.longitude">
-  </div>
-  <hr>
-  <div class="form-group">
-    <label for="profileMondayPromotion">Monday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.mondayPromotion"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="profileTuesdayPromotion">Tuesday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.tuesdayPromotion"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="profileWednesdayPromotion">Wednesday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.wednesdayPromotion"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="profileThursdayPromotion">Thursday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.thursdayPromotion"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="profileFridayPromotion">Friday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.fridayPromotion"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="profileSaturdayPromotion">Saturday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.saturdayPromotion"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="profileSundayPromotion">Sunday's Promotion</label>
-    <textarea class="form-control" rows="3" ng-model="vm.profileData.sundayPromotion"></textarea>
+  <div class="row margin-top-20">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="detailPhoto">Detail Photo</label>
+        <div>
+          <label>
+            <input type="file" name="photo" class="photo" multiple="false" image="vm.detailPhoto" accept="image/*" img-cropper-fileread>
+            <div class="btn btn-default">Browse</div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <p>275 x 175</p>
+      <img ng-src="{{vm.detailPhoto}}" width="275" height="175">
+    </div>
   </div>
   <hr>
-  <div class="form-group">
-    <label for="reward">Reward</label>
-    <input type="text" class="form-control" ng-model="vm.profileData.reward">
+  <h3 class="margin-bottom-20 text-muted">Beacon Settings</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="beaconMajor">Beacon Major</label>
+            <input type="number" class="form-control" ng-model="vm.profileData.beaconMajor" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperBeaconMajor">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>major</strong> setting when connecting to a beacon</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="isActive">Active?</label>
-    <select class="form-control" ng-options="option.value as option.name for option in vm.activeOptions" ng-model="vm.profileData.isActive" ng-init="vm.profileData.isActive=false">
-    </select>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="beaconMinor">Beacon Minor</label>
+            <input type="number" class="form-control" ng-model="vm.profileData.beaconMinor" ng-focus="vm.showHelperBeaconMinor = true" ng-blur="vm.showHelperBeaconMinor = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperBeaconMinor">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>minor</strong> setting when connecting to a beacon</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <button type="submit" class="btn btn-primary">Create</button>
+  <hr>
+  <h3 class="margin-bottom-20 text-muted">Map Location</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="mapLatitude">Map Latitude</label>
+            <input type="text" class="form-control" ng-model="vm.profileData.latitude" ng-focus="vm.showHelperLatitude = true" ng-blur="vm.showHelperLatitude = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperLatitude">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>latitude</strong> cordinate of the bar on a map</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="mapLongitude">Map Longitude</label>
+            <input type="text" class="form-control" ng-model="vm.profileData.longitude" ng-focus="vm.showHelperLongitude = true" ng-blur="vm.showHelperLongitude = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperLongitude">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>longitude</strong> cordinate of the bar on a map</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <h3 class="margin-bottom-20 text-muted">Promotions</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileMondayPromotion">Monday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.mondayPromotion" placeholder="Enter the bar's special promotions for Monday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileTuesdayPromotion">Tuesday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.tuesdayPromotion" placeholder="Enter the bar's special promotions for Tuesday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileWednesdayPromotion">Wednesday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.wednesdayPromotion" placeholder="Enter the bar's special promotions for Wednesday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileThursdayPromotion">Thursday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.thursdayPromotion" placeholder="Enter the bar's special promotions for Thursday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileFridayPromotion">Friday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.fridayPromotion" placeholder="Enter the bar's special promotions for Friday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileSaturdayPromotion">Saturday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.saturdayPromotion" placeholder="Enter the bar's special promotions for Saturday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="profileSundayPromotion">Sunday's Promotion</label>
+        <textarea class="form-control" rows="3" ng-model="vm.profileData.sundayPromotion" placeholder="Enter the bar's special promotions for Sunday only"></textarea>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <h3 class="margin-bottom-20 text-muted">Reward</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="reward">Reward</label>
+        <input type="text" class="form-control" ng-model="vm.profileData.reward" placeholder="$2 Margaritas" ng-focus="vm.showHelperReward = true" ng-blur="vm.showHelperReward = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperReward">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Enter the <strong>reward</strong> the bar will be providing to Drop In users</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <h3 class="margin-bottom-20 text-muted">Status</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="isActive">Active</label>
+        <select class="form-control" ng-options="option.value as option.name for option in vm.activeOptions" ng-model="vm.profileData.isActive" ng-init="vm.profileData.isActive=false" ng-focus="vm.showHelperStatus = true" ng-blur="vm.showHelperStatus = false">
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperStatus">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> False = bar is not yet actively shown to users on the mobile app</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary margin-top-20">Create</button>
 </form>

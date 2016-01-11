@@ -16,6 +16,7 @@
     vm.showProfile = showProfile;
     vm.updateProfile = updateProfile;
     vm.deleteProfile = deleteProfile;
+    vm.goToShow = goToShow;
     vm.init = init;
 
     // Images
@@ -46,8 +47,6 @@
     function showProfile() {
       profileService.showProfile(vm.barId).then(function(results) {
         vm.profileData = results.data;
-
-        vm.profileData.isActive = results.data.isActive;
       });
     }
 
@@ -87,6 +86,10 @@
       profileService.deleteProfile(vm.barId).then(function() {
         $state.go('profiles');
       });
+    }
+
+    function goToShow(profileId) {
+      $state.go('profile-show', {id: profileId});
     }
 
     // Select options for isActive

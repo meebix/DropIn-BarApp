@@ -3,11 +3,11 @@
 <form name="createEventForm" ng-submit="vm.createEvent(vm.eventData)" enctype="multipart/form-data">
   <div class="form-group">
     <label for="eventName">Name</label>
-    <input type="text" class="form-control" placeholder="$0.25 wings this Thurdays night" ng-model="vm.eventData.name">
+    <input type="text" class="form-control" placeholder="$0.50 Wings Night" ng-model="vm.eventData.name">
   </div>
   <div class="form-group">
     <label for="eventDescription">Description</label>
-    <textarea class="form-control" placeholder="Tell our users why they should attend" rows="3" ng-model="vm.eventData.description"></textarea>
+    <textarea class="form-control" placeholder="Tell our users why they should go to your event" rows="3" ng-model="vm.eventData.description"></textarea>
   </div>
   <div class="form-group">
     <label for="eventPhoto">Event Photo</label>
@@ -48,3 +48,22 @@
   </div>
   <button type="submit" class="btn btn-primary">Create</button>
 </form>
+
+<!-- Image Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-show="vm.cropper.sourceImage !== null">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

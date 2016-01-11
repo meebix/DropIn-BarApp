@@ -17,6 +17,7 @@
     vm.updateEvent = updateEvent;
     vm.deleteEvent = deleteEvent;
     vm.getLoyaltyLevels = getLoyaltyLevels;
+    vm.goToShow = goToShow;
     vm.currentPage = 0;
     vm.init = init;
 
@@ -90,11 +91,15 @@
       });
     }
 
+    function goToShow(eventId) {
+      $state.go('events-show', {id: eventId});
+    }
+
     // Datetime Picker
       // Defaults
     vm.eventData = {};
-    vm.eventData.eventStart = moment(new Date()).minute(0).format();
-    vm.eventData.eventEnd = moment(new Date()).add(3, 'hours').minute(0).format();
+    vm.eventData.eventStart = moment(new Date()).add(1, 'hours').minute(0).format();
+    vm.eventData.eventEnd = moment(new Date()).add(4, 'hours').minute(0).format();
 
       // Options
     vm.minDate = new Date();
@@ -110,12 +115,12 @@
       allEvents();
     };
 
-    vm.hideNextPage = function() {
-      return vm.currentPage === vm.maxPage || vm.displayLimit === 0 || vm.maxPage < 0;
+    vm.showNextPage = function() {
+      return vm.currentPage < vm.maxPage;
     };
 
-    vm.hidePreviousPage = function() {
-      return vm.currentPage > vm.maxPage || vm.currentPage === 0;
+    vm.showPreviousPage = function() {
+      return vm.currentPage !== 0;
     };
 
     function init() {

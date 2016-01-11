@@ -1,8 +1,9 @@
-<h1>All Events</h1>
+<h1>Events</h1>
 <hr>
 <a ui-sref="events-new" class="btn btn-primary">Create Event</a>
+<span us-spinner ng-hide="dataLoaded"></span>
 <div class="table-responsive margin-top-20">
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Name</th>
@@ -12,14 +13,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="event in vm.allEvents | orderBy:'eventStart'">
-        <td><a ui-sref="events-show({id: event.objectId})" class="link-alt-underline">{{event.name}}</a></td>
-        <td>{{event.eventStart.iso | date: 'MM/dd/yyyy hh:mm a'}}</td>
-        <td>{{event.eventEnd.iso | date: 'MM/dd/yyyy hh:mm a'}}</td>
+      <tr ng-repeat="event in vm.allEvents | orderBy: 'eventEnd'" ng-click="vm.goToShow(event.objectId)">
+        <td>{{event.name | titlecase}}</td>
+        <td>{{event.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
+        <td>{{event.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
         <td>{{event.loyaltyLevelId.name}}</td>
       </tr>
     </tbody>
   </table>
 </div>
-<button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-hide="vm.hidePreviousPage()">Previous</button>
-<button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-hide="vm.hideNextPage()">Next</button>
+<button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-show="vm.showPreviousPage()">Previous</button>
+<button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>

@@ -14,6 +14,7 @@
     vm.allRewards = allRewards;
     vm.showReward = showReward;
     vm.updateReward = updateReward;
+    vm.goToShow = goToShow;
     vm.init = init;
 
     function allRewards() {
@@ -34,6 +35,10 @@
       rewardService.updateReward(vm.barId, rewardData).then(function() {
         $state.go('rewards');
       });
+    }
+
+    function goToShow(rewardId) {
+      $state.go('reward-edit', {id: rewardId});
     }
 
     function init() {

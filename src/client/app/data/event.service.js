@@ -5,9 +5,9 @@
     .module('app.data')
     .factory('eventService', eventService);
 
-  eventService.$inject = ['$http', '$q', 'logger'];
+  eventService.$inject = ['$http', '$rootScope', '$q', 'logger'];
   /* @ngInject */
-  function eventService($http, $q, logger) {
+  function eventService($http, $rootScope, $q, logger) {
     var service = {
       allEvents: allEvents,
       createEvent: createEvent,
@@ -19,6 +19,8 @@
     return service;
 
     function allEvents(options) {
+      $rootScope.dataLoaded = false;
+
       return $http({
         method: 'GET',
         url: '/api/v1/events',
@@ -30,6 +32,7 @@
           page: options.page
         }
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
         return response.data;
       });
     }

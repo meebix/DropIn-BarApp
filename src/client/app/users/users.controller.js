@@ -61,12 +61,12 @@
       allUsers();
     };
 
-    vm.hideNextPage = function() {
-      return vm.currentPage === vm.maxPage || vm.displayLimit === 0 || vm.maxPage < 0;
+    vm.showNextPage = function() {
+      return vm.currentPage < vm.maxPage;
     };
 
-    vm.hidePreviousPage = function() {
-      return vm.currentPage > vm.maxPage || vm.currentPage === 0;
+    vm.showPreviousPage = function() {
+      return vm.currentPage !== 0;
     };
 
     function init() {

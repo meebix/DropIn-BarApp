@@ -7,9 +7,20 @@ input.photo {
   display: none;
 }
 
-// Media queries
-@media screen and (min-width: @screen-md-min) {
-  .form-control {
-    width: 50%;
-  }
+.helper {
+  border: 1px dashed @brand-primary;
+  -webkit-box-shadow: 2px 2px 12px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 12px 0px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 12px 0px rgba(0,0,0,0.75);
 }
+
+.input-helper {
+  padding: 6px 12px;
+}
+
+// Media queries
+// @media screen and (min-width: @screen-md-min) {
+//   .form-control {
+//     width: 50%;
+//   }
+// }

@@ -1,7 +1,8 @@
-<h1>All Bar Rewards</h1>
+<h1>Bar Rewards</h1>
 <hr>
+<span us-spinner ng-hide="dataLoaded"></span>
 <div class="table-responsive margin-top-20">
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Reward</th>
@@ -9,8 +10,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="reward in vm.allRewards | orderBy:'name'">
-        <td><a ui-sref="reward-edit({id: reward.objectId})" class="link-alt-underline">{{reward.reward}}</a></td>
+    <tr ng-repeat="reward in vm.allRewards | orderBy: 'name'" ng-click="vm.goToShow(reward.objectId)">
+        <td>{{reward.reward | titlecase}}</td>
         <td>{{reward.name}}</td>
       </tr>
     </tbody>

@@ -5,9 +5,9 @@
     .module('app.data')
     .factory('userService', userService);
 
-  userService.$inject = ['$http', '$q', 'logger', '$cookieStore'];
+  userService.$inject = ['$http', '$rootScope', '$q', 'logger', '$cookieStore'];
   /* @ngInject */
-  function userService($http, $q, logger, $cookieStore) {
+  function userService($http, $rootScope, $q, logger, $cookieStore) {
     var service = {
       allUsers: allUsers,
       createUser: createUser,
@@ -18,6 +18,8 @@
     return service;
 
     function allUsers(page) {
+      $rootScope.dataLoaded = false;
+
       return $http({
         method: 'GET',
         url: '/api/v1/users',
@@ -28,6 +30,7 @@
           page: page
         }
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
         return response.data;
       });
     }

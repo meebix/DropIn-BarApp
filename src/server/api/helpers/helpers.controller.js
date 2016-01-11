@@ -43,6 +43,7 @@ function getCurrentUsersBar(req, res) {
 function getLoyaltyLevels(req, res) {
   var loyaltyLevelsQuery = new Parse.Query(LoyaltyLevels);
 
+  loyaltyLevelsQuery.ascending('name');
   loyaltyLevelsQuery.find().then(function(results) {
     res.status(200).json({data: results});
   }, function(error) {

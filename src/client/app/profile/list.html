@@ -1,8 +1,9 @@
-<h1>All Bar Profiles</h1>
+<h1>Bars</h1>
 <hr>
 <a ui-sref="profile-new" class="btn btn-primary">Create Bar</a>
+<span us-spinner ng-hide="dataLoaded"></span>
 <div class="table-responsive margin-top-20">
-  <table class="table table-striped">
+  <table class="table table-hover">
     <thead>
       <tr>
         <th>Name</th>
@@ -11,10 +12,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="profile in vm.allProfiles | orderBy:'name'">
-        <td><a ui-sref="profile-show({id: profile.objectId})" class="link-alt-underline">{{profile.name}}</a></td>
-        <td>{{profile.city}}, {{profile.state}}</td>
-        <td>{{profile.isActive}}</td>
+      <tr ng-repeat="profile in vm.allProfiles | orderBy: 'name'" ng-click="vm.goToShow(profile.objectId)">
+        <td>{{profile.name}}</td>
+        <td>{{profile.city | titlecase}}, {{profile.state | uppercase}}</td>
+        <td ng-init="profile.isActive ? profile.isActive = 'True' : profile.isActive = 'False'">{{profile.isActive}}</td>
       </tr>
     </tbody>
   </table>
