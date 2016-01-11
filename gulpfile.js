@@ -97,7 +97,7 @@ gulp.task('images', ['clean-images'], function() {
 });
 
 gulp.task('less-watcher', function() {
-  gulp.watch([config.less], ['styles']);
+  gulp.watch(['src/client/styles/**/*.less'], ['styles']);
 });
 
 /**
@@ -493,7 +493,7 @@ function startBrowserSync(isDev, specRunner) {
     // If build: watches the files, builds, and restarts browser-sync.
     // If dev: watches less, compiles it to css, browser-sync handles reload
   if (isDev) {
-    gulp.watch([config.less], ['styles'])
+    gulp.watch(['src/client/styles/**/*.less'], ['styles'])
         .on('change', changeEvent);
   } else {
     gulp.watch([config.less, config.js, config.html], ['browserSyncReload'])
