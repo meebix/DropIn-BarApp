@@ -6,7 +6,7 @@ build/
 
 # other
 .tmp
-src/client/images/.DS_Store
+**/.DS_Store
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

@@ -4,10 +4,28 @@
 //
 
 a.alt-link {
-  color: @brand-blue;
+  color: @gray-light;
 
   &:hover {
-    color: darken(@brand-blue, 10%);
+    color: darken(@gray-light, 10%);
     text-decoration: none;
+  }
+}
+
+// Remove blue outline on focus
+a.btn.btn-link {
+  &:extend(a.alt-link);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.datetimepicker-wrapper .dropdown-menu,
+.datetimepicker-wrapper .dropdown-menu li,
+.datetimepicker-wrapper .dropdown-menu li div,
+.datetimepicker-wrapper .dropdown-menu li div table {
+  &:focus {
+    outline: none;
   }
 }

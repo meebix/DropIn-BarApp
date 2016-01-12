@@ -6,7 +6,15 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="rewardName">Name</label>
-        <input type="text" class="form-control" ng-model="vm.rewardData.reward">
+        <input type="text" class="form-control" ng-model="vm.rewardData.reward" ng-focus="vm.showHelperReward = true" ng-blur="vm.showHelperReward = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperReward">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Enter the <strong>reward</strong> the bar will be providing to Drop In users</div>
+        </div>
       </div>
     </div>
   </div>

@@ -103,6 +103,12 @@
 
       // Options
     vm.minDate = new Date();
+    vm.hourStep = 1;
+    vm.minuteStep = 15;
+    vm.showMeridian = true;
+    vm.dateOptions = {
+      showWeeks: false
+    };
 
     // Pagination
     vm.nextPage = function() {
