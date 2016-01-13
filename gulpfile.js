@@ -191,7 +191,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
  * This is separate so we can run tests on
  * optimize before handling image or fonts
  */
-gulp.task('build', ['optimize', 'images'], function() {
+gulp.task('build', ['optimize', 'images', 'fonts'], function() {
   log('Building everything');
 
   var msg = {
@@ -263,9 +263,9 @@ gulp.task('clean', function(done) {
  * Remove all fonts from the build folder
  * @param  {Function} done - callback when complete
  */
-// gulp.task('clean-fonts', function(done) {
-//     clean(config.build + 'fonts/**/*.*', done);
-// });
+gulp.task('clean-fonts', function(done) {
+    clean(config.build + 'fonts/**/*.*', done);
+});
 
 /**
  * Remove all images from the build folder
