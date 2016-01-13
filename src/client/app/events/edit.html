@@ -1,35 +1,66 @@
-<h1>Edit Event</h1>
+<a ui-sref="events-show({id: vm.eventId})" class="alt-link"><i class="fa fa-long-arrow-left"></i> {{vm.eventData.name}}</a>
+<h1>Edit Event: {{vm.eventData.name}}</h1>
 <hr>
 <form name="updateEventForm" ng-submit="vm.updateEvent(vm.eventData)" enctype="multipart/form-data">
-  <div class="form-group">
-    <label for="eventName">Name</label>
-    <input type="text" class="form-control" placeholder="$0.25 wings this Thurdays night" ng-model="vm.eventData.name">
-  </div>
-  <div class="form-group">
-    <label for="eventDescription">Description</label>
-    <textarea class="form-control" placeholder="Tell our users why they should attend" rows="3" ng-model="vm.eventData.description"></textarea>
-  </div>
-  <div class="form-group">
-    <label for="eventPhoto">Event Photo</label>
-    <div>
-      <label>
-        <input type="file" class="photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
-        <div class="btn btn-default">Browse</div>
-      </label>
-      <div>
-        <canvas width="500" height="500" id="canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="375" min-height="275" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="eventName">Name</label>
+        <input type="text" class="form-control" placeholder="$0.50 Wings Night" ng-model="vm.eventData.name" ng-focus="vm.showHelperName = true" ng-blur="vm.showHelperName = false">
       </div>
-      <div ng-show="vm.cropper.croppedImage!=null"><img ng-src="{{vm.cropper.croppedImage}}" /></div>
     </div>
-    <img ng-src="{{vm.eventData.photo.url}}" alt="Description" height="100" width="100" />
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperName">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This will be the name of your event on the Drop In app</div>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="eventDescription">Description</label>
+        <textarea class="form-control" placeholder="Tell our users why they should go to your event" rows="3" ng-model="vm.eventData.description"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="eventPhoto">Event Photo</label>
+        <div>
+          <label>
+            <input type="file" name="photo" class="photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
+            <div class="btn btn-default">Browse</div>
+          </label>
+        </div>
+        <div class="margin-top-10" ng-hide="vm.cropper.sourceImage !== null">
+          <img ng-src="{{vm.eventData.photo.url}}" alt="Description" width="375" height="275"  />
+        </div>
+        <div class="margin-top-10" ng-show="vm.cropper.sourceImage !== null">
+          <canvas width="475" height="375" id="event-canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="375" min-height="275" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="preview-image text-center" ng-show="vm.cropper.sourceImage !== null">
+        <div><strong>Photo Preview</strong></div>
+        <div class="margin-top-10" ng-show="vm.cropper.croppedImage !== null"><img ng-src="{{vm.cropper.croppedImage}}" /></div>
+      </div>
+    </div>
+  </div>
+
   <div class="form-group">
     <label for="eventDate">Start of Event</label>
     <div>
       <datetimepicker ng-model="vm.eventData.eventStart.iso"
-                                date-format="MM-dd-yyyy"
-                                date-options="dateOptions"
-                                date-disabled="isDisabledDate(date, mode)">
+        min-date="vm.minDate" hour-step="vm.hourStep"
+        minute-step="vm.minuteStep" show-meridian="vm.showMeridian"
+        date-format="MM-dd-yyyy" date-options="vm.dateOptions"
+        name="datetimepicker"
+        show-spinners="true">
       </datetimepicker>
     </div>
   </div>
@@ -37,9 +68,11 @@
     <label for="eventDate">End of Event</label>
     <div>
       <datetimepicker ng-model="vm.eventData.eventEnd.iso"
-                                date-format="MM-dd-yyyy"
-                                date-options="dateOptions"
-                                date-disabled="isDisabledDate(date, mode)">
+        min-date="vm.minDate" hour-step="vm.hourStep"
+        minute-step="vm.minuteStep" show-meridian="vm.showMeridian"
+        date-format="MM-dd-yyyy" date-options="vm.dateOptions"
+        name="datetimepicker"
+        show-spinners="true">
       </datetimepicker>
     </div>
   </div>

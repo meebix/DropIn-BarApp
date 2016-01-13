@@ -9,6 +9,7 @@
         <th>Username</th>
         <th>Email</th>
         <th>Bar</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,7 @@
         <td>{{user.username | lowercase}}</td>
         <td>{{user.email | lowercase}}</td>
         <td>{{user.barId.name}}</td>
+        <td><a class="alt-link" ng-click="vm.deleteUser(user.objectId)">Delete</a></td>
       </tr>
     </tbody>
   </table>
