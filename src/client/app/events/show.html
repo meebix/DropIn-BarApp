@@ -1,11 +1,26 @@
-<a ui-sref="events" class="alt-link"><i class="fa fa-long-arrow-left"></i> Events</a>
+<a ui-sref="events" class="alt-link margin-right-40"><i class="fa fa-long-arrow-left"></i> Events</a>
 <h1>{{vm.eventData.name}}</h1>
 <hr>
-<a ui-sref="events-edit({id: vm.eventId})" class="btn btn-primary">Edit</a>
-<button type="button" class="btn btn-danger" ng-click="vm.deleteEvent()">Delete</button>
 <div class="margin-top-20">
-  <p>Sent To: {{vm.eventData.loyaltyLevelId.name}}</p>
-  <p>Description: {{vm.eventData.description}}</p>
-  <p>Date: {{vm.eventData.eventStart.iso | date: 'MM/dd/yyyy'}}</p>
-  <p>Last Updated: {{vm.eventData.updatedAt | date: 'MM/dd/yyyy'}}</p>
+  <h3 class="margin-bottom-20 text-muted">Description</h3>
+  <p>{{vm.eventData.description}}</p>
+  <hr>
+  <h3 class="margin-bottom-20 text-muted">Dates</h3>
+  <div class="row">
+    <div class="col-md-3">
+      <p><strong>Start</strong></p>
+      <p>{{vm.eventData.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
+    </div>
+    <div class="col-md-3">
+      <p><strong>End</strong></p>
+      <p>{{vm.eventData.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
+    </div>
+  </div>
+  <hr>
+  <h3 class="margin-bottom-20 text-muted">Photo</h3>
+  <img ng-src="{{vm.eventData.photo.url}}" alt="Description" width="375" height="275"  />
+</div>
+<div class="well margin-top-30">
+  <a ui-sref="events-edit({id: vm.eventId})" class="btn btn-default margin-right-40">Edit</a>
+  <button type="button" class="btn btn-danger" ng-click="vm.deleteEvent()">Delete</button>
 </div>
