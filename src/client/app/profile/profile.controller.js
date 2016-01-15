@@ -46,7 +46,11 @@
 
     function showProfile() {
       profileService.showProfile(vm.barId).then(function(results) {
+        var isActive = results.data.isActive ? 'Active' : 'Inactive';
+        vm.statusLabel = results.data.isActive ? 'label-success' : 'label-danger';
+
         vm.profileData = results.data;
+        vm.isActive = isActive;
       });
     }
 
