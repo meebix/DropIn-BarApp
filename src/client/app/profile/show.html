@@ -1,5 +1,14 @@
+<span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 <span us-spinner ng-hide="dataLoaded"></span>
 <a ui-sref="profiles" class="alt-link"><i class="fa fa-long-arrow-left"></i> Bars</a>
+<div class="row">
+  <div class="col-md-6">
+    <div class="btn-group btn-group-justified margin-top-20" role="group">
+      <a ui-sref="profile-edit({id: vm.barId})" class="btn btn-default" role="button">Edit</a>
+      <a class="btn btn-danger" role="button" ng-click="vm.deleteProfile()">Delete</a>
+    </div>
+  </div>
+</div>
 <h1>{{vm.profileData.name}}</h1>
 <div class="row">
   <div class="col-md-6">
@@ -93,10 +102,6 @@
       <h3 class="margin-top-30 text-muted">Status</h3>
       <hr class="thin">
       <h4><span class="label {{vm.statusLabel}}">{{vm.isActive}}</span></h4>
-    </div>
-    <div class="btn-group btn-group-justified margin-top-30" role="group">
-      <a ui-sref="profile-edit({id: vm.barId})" class="btn btn-default" role="button">Edit</a>
-      <a class="btn btn-danger" role="button" ng-click="vm.deleteProfile()">Delete</a>
     </div>
   </div>
 </div>

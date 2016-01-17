@@ -34,9 +34,6 @@
     }
 
     function createProfile(profileObj) {
-      $rootScope.dataLoaded = false;
-      $rootScope.fadeBackground = true;
-
       return $http({
         method: 'POST',
         url: '/api/v1/profiles',
@@ -45,8 +42,6 @@
         },
         data: profileObj
       }).then(function(response) {
-        $rootScope.dataLoaded = true;
-        $rootScope.fadeBackground = false;
         return response.data;
       });
     }

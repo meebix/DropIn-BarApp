@@ -38,9 +38,6 @@
     }
 
     function createEvent(eventObj) {
-      $rootScope.dataLoaded = false;
-      $rootScope.fadeBackground = true;
-
       return $http({
         method: 'POST',
         url: '/api/v1/events',
@@ -49,8 +46,6 @@
           'Content-Type': 'application/json'
         }
       }).then(function(response) {
-        $rootScope.dataLoaded = true;
-        $rootScope.fadeBackground = false;
         return response.data;
       });
     }

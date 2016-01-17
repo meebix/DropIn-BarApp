@@ -35,7 +35,9 @@
   }
 
   core.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
-      usSpinnerConfigProvider.setDefaults({color: '#555'});
+    usSpinnerConfigProvider.setDefaults({color: '#000000', position: 'relative'});
+    usSpinnerConfigProvider.setTheme('table', {top: '150px'});
+    usSpinnerConfigProvider.setTheme('page', {top: '100px'});
   }]);
 
 })();

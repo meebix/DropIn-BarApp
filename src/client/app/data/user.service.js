@@ -36,9 +36,6 @@
     }
 
     function createUser(userObj) {
-      $rootScope.dataLoaded = false;
-      $rootScope.fadeBackground = true;
-
       return $http({
         method: 'POST',
         url: '/api/v1/users',
@@ -47,8 +44,6 @@
         },
         data: userObj
       }).then(function(response) {
-        $rootScope.dataLoaded = true;
-        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
