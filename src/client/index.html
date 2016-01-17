@@ -27,7 +27,7 @@
   <!-- endinject -->
   <!-- endbuild -->
 </head>
-<body ng-controller="LayoutController as vm" ng-class="vm.isAuthPage() ? 'blue-bg' : ''">
+<body ng-controller="LayoutController as vm" ng-class="{ 'fade-bg': fadeBackground, 'blue-bg': vm.isAuthPage() }">
   <div ng-include="'app/layout/shell.html'" ng-hide="vm.isAuthPage()"></div>
   <div ng-include="'app/layout/shell-auth.html'" ng-show="vm.isAuthPage()"></div>
 
@@ -44,6 +44,8 @@
   <script src="/bower_components/moment/moment.js"></script>
   <script src="/bower_components/angular-moment/angular-moment.js"></script>
   <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="/bower_components/spin.js/spin.js"></script>
+  <script src="/bower_components/angular-spinner/angular-spinner.js"></script>
   <script src="/bower_components/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
   <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
@@ -61,6 +63,7 @@
   <script src="/src/client/app/analytics/user/user-analytics.module.js"></script>
   <script src="/src/client/app/auth/auth.module.js"></script>
   <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+  <script src="/src/client/app/blocks/filters/filters.module.js"></script>
   <script src="/src/client/app/blocks/logger/logger.module.js"></script>
   <script src="/src/client/app/blocks/router/router.module.js"></script>
   <script src="/src/client/app/core/core.module.js"></script>
