@@ -32,6 +32,9 @@
     }
 
     function showReward(barId) {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/rewards/' + barId,
@@ -39,11 +42,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function updateReward(barId, barObj) {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'POST',
         url: '/api/v1/rewards/' + barId,
@@ -52,6 +60,8 @@
         },
         data: barObj
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }

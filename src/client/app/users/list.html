@@ -1,7 +1,7 @@
+<span us-spinner ng-hide="dataLoaded"></span>
 <h1>Bar Users</h1>
 <hr>
 <a ui-sref="user-new" class="btn btn-primary">Create Bar User</a>
-<span us-spinner ng-hide="dataLoaded"></span>
 <div class="table-responsive margin-top-20">
   <table class="table table-hover">
     <thead>
@@ -17,7 +17,7 @@
         <td>{{user.username | lowercase}}</td>
         <td>{{user.email | lowercase}}</td>
         <td>{{user.barId.name}}</td>
-        <td><a class="alt-link" ng-click="vm.deleteUser(user.objectId)">Delete</a></td>
+        <td><a href="" class="alt-link" ng-click="vm.deleteUser(user.objectId)">Delete</a></td>
       </tr>
     </tbody>
   </table>

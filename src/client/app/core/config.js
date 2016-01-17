@@ -34,4 +34,8 @@
     routerHelperProvider.configure({docTitle: config.appTitle + ': '});
   }
 
+  core.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
+      usSpinnerConfigProvider.setDefaults({color: '#555'});
+  }]);
+
 })();

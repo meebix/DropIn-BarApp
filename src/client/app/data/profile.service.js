@@ -34,6 +34,9 @@
     }
 
     function createProfile(profileObj) {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'POST',
         url: '/api/v1/profiles',
@@ -42,11 +45,16 @@
         },
         data: profileObj
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function showProfile(barId) {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/profiles/' + barId,
@@ -54,11 +62,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function updateProfile(barId, barObj) {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'POST',
         url: '/api/v1/profiles/' + barId,
@@ -67,6 +80,8 @@
         },
         data: barObj
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }

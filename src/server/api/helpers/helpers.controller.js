@@ -20,6 +20,7 @@ module.exports = {
 function getBars(req, res) {
   var barQuery = new Parse.Query(Bar);
 
+  barQuery.ascending('name');
   barQuery.find().then(function(results) {
     res.status(200).json({data: results});
   }, function(error) {

@@ -1,3 +1,4 @@
+<span us-spinner ng-hide="dataLoaded"></span>
 <a ui-sref="profiles" class="alt-link"><i class="fa fa-long-arrow-left"></i> Bars</a>
 <h1>Create Bar</h1>
 <hr>
@@ -125,7 +126,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="beaconMajor">Beacon Major</label>
-            <input type="number" class="form-control" ng-model="vm.profileData.beaconMajor" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
+            <input type="number" class="form-control" ng-model="vm.profileData.beaconMajor" placeholder="12345" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
       </div>
     </div>
     <div class="col-md-6">
@@ -141,7 +142,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="beaconMinor">Beacon Minor</label>
-            <input type="number" class="form-control" ng-model="vm.profileData.beaconMinor" ng-focus="vm.showHelperBeaconMinor = true" ng-blur="vm.showHelperBeaconMinor = false">
+            <input type="number" class="form-control" ng-model="vm.profileData.beaconMinor" placeholder="6789" ng-focus="vm.showHelperBeaconMinor = true" ng-blur="vm.showHelperBeaconMinor = false">
       </div>
     </div>
     <div class="col-md-6">
@@ -159,7 +160,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="mapLatitude">Map Latitude</label>
-            <input type="text" class="form-control" ng-model="vm.profileData.latitude" ng-focus="vm.showHelperLatitude = true" ng-blur="vm.showHelperLatitude = false">
+            <input type="text" class="form-control" ng-model="vm.profileData.latitude" placeholder="46.78" ng-focus="vm.showHelperLatitude = true" ng-blur="vm.showHelperLatitude = false">
       </div>
     </div>
     <div class="col-md-6">
@@ -175,7 +176,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="mapLongitude">Map Longitude</label>
-            <input type="text" class="form-control" ng-model="vm.profileData.longitude" ng-focus="vm.showHelperLongitude = true" ng-blur="vm.showHelperLongitude = false">
+            <input type="text" class="form-control" ng-model="vm.profileData.longitude" placeholder="-113.94" ng-focus="vm.showHelperLongitude = true" ng-blur="vm.showHelperLongitude = false">
       </div>
     </div>
     <div class="col-md-6">
@@ -282,5 +283,9 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary margin-top-20">Create</button>
+  <div class="row">
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-primary btn-block margin-top-20">Create</button>
+    </div>
+  </div>
 </form>

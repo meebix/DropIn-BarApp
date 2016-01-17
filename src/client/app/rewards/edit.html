@@ -1,3 +1,4 @@
+<span us-spinner ng-hide="dataLoaded"></span>
 <a ui-sref="rewards" class="alt-link"><i class="fa fa-long-arrow-left"></i> Rewards</a>
 <h1>{{vm.rewardData.name}}</h1>
 <hr>
@@ -18,5 +19,9 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-primary margin-top-20">Update</button>
+  <div class="row">
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-primary btn-block margin-top-20">Update</button>
+    </div>
+  </div>
 </form>

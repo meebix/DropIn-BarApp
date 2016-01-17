@@ -8,6 +8,10 @@
     return function (input) {
       var smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|the|to|vs?\.?|via)$/i;
 
+      if (!input) {
+        return;
+      }
+
       input = input.toLowerCase();
       return input.replace(/[A-Za-z0-9\u00C0-\u00FF]+[^\s-]*/g, function(match, index, title) {
         if (index > 0 && index + match.length !== title.length &&
