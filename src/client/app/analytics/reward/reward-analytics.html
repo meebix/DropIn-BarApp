@@ -1,3 +1,41 @@
+<span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
+
+<!-- Rewards -->
+<div class="col-md-6">
+  <div class="data-panel">
+    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
+      <li>
+        <a popover-placement="right" uib-popover="Users who have redeemed a reward broken down by day" role="button">
+          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
+        </a>
+      </li>
+      <li class="text-center text-uppercase"><strong>Rewards</strong></li>
+      <li></li>
+    </ul>
+    <div>
+      <canvas id="line" class="chart chart-line" chart-data="vm.dataRewards" chart-colours="vm.coloursRewards"
+        chart-labels="vm.labelsRewards" chart-legend="false" chart-series="vm.seriesRewards"
+        chart-options="vm.chartOptionsRewards">
+      </canvas>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-6">
+        <div class="number-stat" style="color: #0084C1">
+          <div style="background-color: #0084C1; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
+        </div>
+        <div class="number-stat-label">Drop In</div>
+      </div>
+      <div class="col-md-6">
+        <div class="number-stat" style="color: #F05523">
+          <div style="background-color: #F05523; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
+        </div>
+        <div class="number-stat-label">{{vm.barName}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
 <div class="col-md-12">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -10,4 +48,4 @@
       </canvas>
     </div>
   </div>
-</div>
+</div> -->

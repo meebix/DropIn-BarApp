@@ -5,6 +5,7 @@
 var Parse = require('parse/node').Parse;
 var crypto = require('crypto');
 var _ = require('underscore');
+var moment = require('moment');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
@@ -32,18 +33,23 @@ function allEvents(req, res) {
   var page = req.query.page;
   var displayLimit = 15;
   var count;
-  var dateLimitation;
+  var greaterThanDate;
+  var lessThanDate;
 
+  // TODO: Move event anlytics query to own file and remove this dateLimitation nonsense
   if (req.query.limitByDate === 'true') {
-    dateLimitation = new Date();
+    greaterThanDate = new Date();
+    lessThanDate = moment(new Date()).add(100, 'years')._d;
   } else {
     // Set date in past so all events pull from DB
-    dateLimitation = new Date('01', '01', '1970');
+    greaterThanDate = new Date('01', '01', '1970');
+    lessThanDate = moment(new Date()).subtract(1, 'day')._d;
   }
 
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);
-  eventsQuery.greaterThan('eventEnd', dateLimitation);
+  eventsQuery.lessThan('eventEnd', lessThanDate);
+  eventsQuery.greaterThan('eventEnd', greaterThanDate);
   eventsQuery.include('loyaltyLevelId');
   eventsQuery.limit(displayLimit);
   eventsQuery.skip(page * displayLimit);

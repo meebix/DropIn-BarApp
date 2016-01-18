@@ -18,7 +18,7 @@ module.exports = {
 // Route Logic
 function statsData(req, res) {
   var rewardStats = new Parse.Query(RewardStats);
-  var oneWeekAgoDate = new Date(moment(new Date()).subtract(7, 'days')._d);
+  var oneWeekAgoDate = new Date(moment(new Date()).subtract(8, 'days')._d);
 
   rewardStats.equalTo('barId', currentUserBarObj());
   rewardStats.include('barId');

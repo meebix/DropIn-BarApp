@@ -34,12 +34,12 @@
 
     // Event chart data
     function chartEvent() {
-      vm.labelsEvent = '';
+      vm.labelsEvent = [''];
       vm.seriesEvent = ['Users Sent To', 'Credits Earned'];
-      vm.coloursEvent = ['#27556C', '#AA7539'];
+      vm.coloursEvent = ['#3E606F', '#7AA08B'];
       vm.chartOptionsEvent = {
         showTooltips: false,
-        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
+        // legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
       };
 
       vm.dataEvent = [[vm.usersSentTo], [vm.creditsEarned]];
@@ -61,6 +61,7 @@
     function populateEvent(eventId) {
       eventService.showEvent(eventId).then(function(results) {
         vm.eventData = results.data;
+        vm.chartReady = true;
       });
 
       // Populate chart
@@ -78,12 +79,12 @@
       allEvents();
     };
 
-    vm.hideNextPage = function() {
-      return vm.currentPage === vm.maxPage || vm.displayLimit === 0 || vm.maxPage < 0;
+    vm.showNextPage = function() {
+      return vm.currentPage < vm.maxPage;
     };
 
-    vm.hidePreviousPage = function() {
-      return vm.currentPage > vm.maxPage || vm.currentPage === 0;
+    vm.showPreviousPage = function() {
+      return vm.currentPage !== 0;
     };
 
     function init() {

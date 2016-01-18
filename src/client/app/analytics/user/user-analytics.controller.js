@@ -95,12 +95,12 @@
 
     // Active users by credit breakdown chart data
     function chartActiveUsersByCredit() {
-      vm.labelsActiveUsers = ['Over Past 30 Days'];
-      vm.seriesActiveUsers = ['Drop In', vm.barName];
-      vm.coloursActiveUsers = ['#27556C', '#AA7539'];
+      vm.labelsActiveUsers = [''];
+      vm.seriesActiveUsers = [''];
+      vm.coloursActiveUsers = ['#0084C1', '#F05523'];
       vm.chartOptionsActiveUsers = {
         showTooltips: false,
-        legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
+        // legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
       };
 
       vm.dataActiveUsers = [[vm.totalActiveUsersByCredit], [vm.activeUsersByCredit]];

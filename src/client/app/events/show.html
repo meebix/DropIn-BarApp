@@ -24,12 +24,19 @@
     <hr class="thin">
     <div class="row">
       <div class="col-md-5">
-        <p><strong>Start</strong></p>
+        <p class="margin-bottom-0"><strong>Start</strong></p>
         <p>{{vm.eventData.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
       </div>
       <div class="col-md-5">
-        <p><strong>End</strong></p>
+        <p class="margin-bottom-0"><strong>End</strong></p>
         <p>{{vm.eventData.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
+      </div>
+    </div>
+    <h3 class="text-muted">Sent To</h3>
+    <hr class="thin">
+    <div class="row">
+      <div class="col-md-9">
+        <p>{{vm.eventData.loyaltyLevelId.name}}</p>
       </div>
     </div>
     <h3 class="text-muted">Photo</h3>

@@ -19,9 +19,9 @@
         vm.rewardStats = results.data;
 
         // Stats
-        vm.barRewardsRedeemed = vm.rewardStats[0];
+        vm.barRewardsRedeemed = vm.rewardStats[0].slice(1);
         vm.calcDates = vm.rewardStats[1];
-        vm.barName = vm.rewardStats[2];
+        vm.barName = vm.rewardStats[2][0];
       }).then(function() {
         return analyticService.multipleDropinStats().then(function(results) {
           vm.multipleDropinStats = results.data;
@@ -36,13 +36,13 @@
 
     // Traffic breakdown chart data
     function chartRewards() {
-      vm.labelsRewards = [vm.calcDates[0], vm.calcDates[1], vm.calcDates[2], vm.calcDates[3], vm.calcDates[4], vm.calcDates[5]];
+      vm.labelsRewards = [vm.calcDates[1], vm.calcDates[2], vm.calcDates[3], vm.calcDates[4], vm.calcDates[5], vm.calcDates[6], vm.calcDates[7]];
       vm.seriesRewards = ['Drop In', vm.barName];
-      vm.coloursRewards = ['#00CC2D', '#9C344C'];
+      vm.coloursRewards = ['#0084C1', '#F05523'];
       vm.chartOptionsRewards = {
         multiTooltipTemplate: '<%= value %>',
         showTooltips: true,
-        legendTemplate : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li class="chart-label-inline"><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
+        // legendTemplate : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li class="chart-label-inline"><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>'
       };
 
       vm.dataRewards = [vm.dropinRewardsRedeemed, vm.barRewardsRedeemed];

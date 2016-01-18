@@ -5,9 +5,9 @@
     .module('app.data')
     .factory('analyticService', analyticService);
 
-  analyticService.$inject = ['$http', '$q', 'logger'];
+  analyticService.$inject = ['$http', '$rootScope', '$q', 'logger'];
   /* @ngInject */
-  function analyticService($http, $q, logger) {
+  function analyticService($http, $rootScope, $q, logger) {
     var service = {
       singleDropinStats: singleDropinStats,
       multipleDropinStats: multipleDropinStats,
@@ -20,6 +20,9 @@
     return service;
 
     function singleDropinStats() {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/analytics/single-dropin',
@@ -27,11 +30,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function multipleDropinStats() {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/analytics/multiple-dropin',
@@ -39,11 +47,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function eventStats(eventId) {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/analytics/events/' + eventId,
@@ -51,11 +64,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function rewardStats() {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/analytics/rewards',
@@ -63,11 +81,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function trafficStats() {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/analytics/traffic',
@@ -75,11 +98,16 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }
 
     function userStats() {
+      $rootScope.dataLoaded = false;
+      $rootScope.fadeBackground = true;
+
       return $http({
         method: 'GET',
         url: '/api/v1/analytics/users',
@@ -87,6 +115,8 @@
           'Content-Type': 'application/json'
         },
       }).then(function(response) {
+        $rootScope.dataLoaded = true;
+        $rootScope.fadeBackground = false;
         return response.data;
       });
     }

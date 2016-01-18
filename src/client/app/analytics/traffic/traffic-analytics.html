@@ -1,4 +1,41 @@
-<div class="col-md-12">
+<span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
+
+<!-- Traffic -->
+<div class="col-md-6">
+  <div class="data-panel">
+    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
+      <li>
+        <a popover-placement="right" uib-popover="Users who have earned a credit by visiting a bar for at least 30 minutes broken down by day" role="button">
+          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
+        </a>
+      </li>
+      <li class="text-center text-uppercase"><strong>Traffic</strong></li>
+      <li></li>
+    </ul>
+    <div>
+      <canvas id="line" class="chart chart-line" chart-data="vm.dataTraffic" chart-colours="vm.coloursTraffic"
+        chart-labels="vm.labelsTraffic" chart-legend="false" chart-series="vm.seriesTraffic"
+        chart-options="vm.chartOptionsTraffic">
+      </canvas>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-6">
+        <div class="number-stat" style="color: #0084C1">
+          <div style="background-color: #0084C1; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
+        </div>
+        <div class="number-stat-label">Drop In</div>
+      </div>
+      <div class="col-md-6">
+        <div class="number-stat" style="color: #F05523">
+          <div style="background-color: #F05523; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
+        </div>
+        <div class="number-stat-label">{{vm.barName}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="col-md-12">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">{{vm.barName[0]}} Traffic</h3>
@@ -11,3 +48,4 @@
     </div>
   </div>
 </div>
+ -->

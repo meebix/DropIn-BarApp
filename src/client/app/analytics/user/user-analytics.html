@@ -1,21 +1,32 @@
-<h3 class="margin-top-10 text-muted">Drop In Stats</h3>
-<hr class="thin">
+<span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
-<div class="col-md-4">
+<!-- Active Users -->
+<div class="col-md-6">
   <div class="data-panel">
     <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-      <li><i class="fa fa-info-circle fa-lg text-muted"></i></li>
-      <li class="text-center text-uppercase"><strong>Total Users</strong></li>
+      <li>
+        <a popover-placement="right" uib-popover="Users who have earned a credit by visiting a bar for at least 30 minutes within the last 30 days" role="button">
+          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
+        </a>
+      </li>
+      <li class="text-center text-uppercase"><strong>Active Users</strong></li>
       <li></li>
     </ul>
+    <div>
+      <canvas id="bar" class="chart chart-bar"
+        chart-data="vm.dataActiveUsers" chart-labels="vm.labelsActiveUsers" chart-colours="vm.coloursActiveUsers"
+        chart-legend="false" chart-options="vm.chartOptionsActiveUsers">
+      </canvas>
+      <div class="text-center text-muted" style="font-size: 12px; margin-top: -18px;">Over the past 30 days</div>
+    </div>
     <div class="row text-center">
       <div class="col-md-6">
-        <div class="number-stat" style="color: #419191">11</div>
-        <div class="number-stat-label">Males</div>
+        <div class="number-stat" style="color: #0084C1">{{vm.totalActiveUsersByCredit}}</div>
+        <div class="number-stat-label">Drop In</div>
       </div>
       <div class="col-md-6">
-        <div class="number-stat" style="color: #F26D6D">9</div>
-        <div class="number-stat-label">Females</div>
+        <div class="number-stat" style="color: #F05523">{{vm.activeUsersByCredit}}</div>
+        <div class="number-stat-label">{{vm.barName}}</div>
       </div>
     </div>
   </div>
