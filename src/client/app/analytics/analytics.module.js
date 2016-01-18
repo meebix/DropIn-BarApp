@@ -4,6 +4,7 @@
   angular.module('app.analytics', [
     'app.core',
     // Analytics
+    'app.analytics.dropin',
     'app.analytics.user',
     'app.analytics.traffic',
     'app.analytics.reward',

@@ -1,6 +1,12 @@
 <div class="subnav-bg">
   <div class="analytic-links">
     <div class="container-fluid">
+      <a ui-sref="analytics-dropin" ng-class="{ 'subnav-active': vm.isActive('/analytics/dropin') }">
+        <div class="col-sm-1 text-center text-uppercase">
+          <i class="fa fa-mobile-phone fa-2x"></i>
+          <div class="margin-top-5">Drop In</div>
+        </div>
+      </a>
       <a ui-sref="analytics-user" ng-class="{ 'subnav-active': vm.isActive('/analytics/user') }">
         <div class="col-sm-1 text-center text-uppercase">
           <i class="fa fa-user fa-2x"></i>

@@ -45,6 +45,7 @@
 
     function isAnalyticPage() {
       var whitelist = [
+        '/analytics/dropin',
         '/analytics/user',
         '/analytics/traffic',
         '/analytics/reward',
