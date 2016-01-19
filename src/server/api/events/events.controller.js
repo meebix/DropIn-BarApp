@@ -120,10 +120,49 @@ function createEvent(req, res) {
           // If statement checks to see if the loyalty level is 'All'
           // TODO: Fixed hardcoded value
           if (loyaltyLevelObj.id !== allObj.id) {
-            sendToSpecified(savedEventObj, loyaltyLevelObj, req, res);
-          } else {
-            sendToAll(savedEventObj, req, res);
+            usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
           }
+
+          var promise = Parse.Promise.as();
+          return usersQuery.find().then(function(results) {
+            console.log('*** USERS COUNT ***', results.length);
+
+            if (results.length === 0) res.status(200).end();
+
+            _.each(results, function(userObj) {
+              promise = promise.then(function() {
+                console.log('--- INSIDE EACH ---', userObj.id);
+
+                var newUsersEvents = new UsersEvents();
+
+                var usersEventsObj = {
+                  eventId: savedEventObj,
+                  userId: userObj,
+                  barId: currentUserBarObj(),
+                  eventStart: transformDateForParse(req.body.eventStart),
+                  eventEnd: transformDateForParse(req.body.eventEnd),
+                  userHasViewed: false,
+                  markedForDeletion: false
+                };
+
+                return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+                  console.log('--- SAVED ---', savedObj.id);
+
+                  res.status(200).end();
+                }, function(error) {
+                  // Error saving: New UsersEvent Object
+                  console.log(error);
+                  res.status(400).end();
+                });
+              });
+            });
+
+            return promise;
+          }, function(error) {
+            // Error retrieving: Users
+            console.log(error);
+            res.status(400).end();
+          });
         });
       });
     });
