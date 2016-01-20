@@ -119,18 +119,15 @@ function createEvent(req, res) {
 
           // If statement checks to see if the loyalty level is 'All'
           // TODO: Fixed hardcoded value
+          console.log('LOYALTY OBJECT ID', loyaltyLevelObj.id);
           if (loyaltyLevelObj.id !== allObj.id) {
             usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
-          }
+            return usersQuery.find().then(function(results) {
+              console.log('*** USERS COUNT ***', results.length);
 
-          var promise = Parse.Promise.as();
-          return usersQuery.find().then(function(results) {
-            console.log('*** USERS COUNT ***', results.length);
+              if (results.length === 0) res.status(200).end();
 
-            if (results.length === 0) res.status(200).end();
-
-            _.each(results, function(userObj) {
-              promise = promise.then(function() {
+              _.each(results, function(userObj) {
                 console.log('--- INSIDE EACH ---', userObj.id);
 
                 var newUsersEvents = new UsersEvents();
@@ -155,14 +152,48 @@ function createEvent(req, res) {
                   res.status(400).end();
                 });
               });
+            }, function(error) {
+              // Error retrieving: Users
+              console.log(error);
+              res.status(400).end();
             });
+          } else {
+            return usersQuery.find().then(function(results) {
+              console.log('*** USERS COUNT ***', results.length);
 
-            return promise;
-          }, function(error) {
-            // Error retrieving: Users
-            console.log(error);
-            res.status(400).end();
-          });
+              if (results.length === 0) res.status(200).end();
+
+              _.each(results, function(userObj) {
+                console.log('--- INSIDE EACH ---', userObj.id);
+
+                var newUsersEvents = new UsersEvents();
+
+                var usersEventsObj = {
+                  eventId: savedEventObj,
+                  userId: userObj,
+                  barId: currentUserBarObj(),
+                  eventStart: transformDateForParse(req.body.eventStart),
+                  eventEnd: transformDateForParse(req.body.eventEnd),
+                  userHasViewed: false,
+                  markedForDeletion: false
+                };
+
+                return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+                  console.log('--- SAVED ---', savedObj.id);
+
+                  res.status(200).end();
+                }, function(error) {
+                  // Error saving: New UsersEvent Object
+                  console.log(error);
+                  res.status(400).end();
+                });
+              });
+            }, function(error) {
+              // Error retrieving: Users
+              console.log(error);
+              res.status(400).end();
+            });
+          }
         });
       });
     });
