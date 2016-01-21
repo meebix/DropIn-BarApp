@@ -19,6 +19,7 @@
     vm.getLoyaltyLevels = getLoyaltyLevels;
     vm.goToShow = goToShow;
     vm.currentPage = 0;
+    vm.errorMessage;
     vm.init = init;
 
     // Image cropper options
@@ -54,7 +55,7 @@
       eventService.createEvent(eventData).then(function() {
         $state.go('events');
       }, function(error) {
-        // Error
+        vm.errorMessage = error.data.error;
       });
     }
 
@@ -76,6 +77,8 @@
 
       eventService.updateEvent(vm.eventId, updatedEventData).then(function() {
         $state.go('events');
+      }, function(error) {
+        vm.errorMessage = error.data.error;
       });
     }
 

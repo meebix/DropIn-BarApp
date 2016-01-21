@@ -16,6 +16,7 @@
     vm.deleteUser = deleteUser;
     vm.getBars = getBars;
     vm.currentPage = 0;
+    vm.errorMessage;
     vm.init = init;
 
     function allUsers() {
@@ -34,7 +35,7 @@
       userService.createUser(userData).then(function() {
         $state.go('users');
       }, function(error) {
-        // Error
+        vm.errorMessage = error.data.error;
       });
     }
 

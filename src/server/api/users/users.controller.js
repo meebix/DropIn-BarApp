@@ -8,6 +8,8 @@ var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
+var validator = require('../../validations/validator');
+var models = require('../../validations/models');
 
 var User = Parse.Object.extend('User');
 var Bar = Parse.Object.extend('Bar');
@@ -65,8 +67,6 @@ function createUser(req, res) {
 
   roleQuery.equalTo('objectId', 'qwekFNkzFc');
   roleQuery.first().then(function(roleObj) {
-    console.log(generatePassword());
-
     var userObj = {
       username: req.body.username,
       password: generatePassword(), // generate random password, have them reset it
@@ -81,14 +81,20 @@ function createUser(req, res) {
     return barQuery.first().then(function(barObj) {
       userObj.barId = barObj;
 
-      // Save the user
-      return newUser.save(userObj).then(function(savedUserObj) {
-        // success
-        res.status(200).json({data: savedUserObj});
-      }, function(error) {
-        // Error saving: New User Object
-        console.log(error);
-        res.status(400).end();
+      // Validations
+      validator.validate(userObj, models.userModel, function(errorMessage) {
+        if (errorMessage) {
+          res.status(400).json({error: errorMessage});
+        } else {
+          // Save the user
+          return newUser.save(userObj).then(function(savedUserObj) {
+            res.status(200).json({data: savedUserObj});
+          }, function(error) {
+            // Error saving: New User Object
+            // console.log(error);
+            res.status(400).end();
+          });
+        }
       });
     });
   });

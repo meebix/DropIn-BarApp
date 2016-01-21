@@ -9,6 +9,8 @@ var moment = require('moment');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
+var validator = require('../../validations/validator');
+var models = require('../../validations/models');
 
 var Events = Parse.Object.extend('Events');
 var Role = Parse.Object.extend('Role');
@@ -90,112 +92,119 @@ function createEvent(req, res) {
       markedForDeletion: false
     };
 
-    // Save the event
-    return newEvent.save(eventObj).then(function(savedEventObj) {
-      return savedEventObj;
-    }, function(error) {
-      // Error saving: New Event Object
-      console.log(error);
-      res.status(400).end();
-    })
-    .then(function(savedEventObj) {
-      // Get the role object for 'User'
-      roleQuery.equalTo('name', 'User');
-      return roleQuery.first().then(function(roleObj) {
-        return roleObj;
-      }, function(error) {
-        // Error retrieving: Role Object
-        console.log(error);
-        res.status(400).end();
-      })
-      .then(function(roleObj) {
-        var loyaltyQuery = new Parse.Query(LoyaltyLevels);
+    // Validations
+    validator.validate(eventObj, models.eventModel, function(errorMessage) {
+      if (errorMessage) {
+        res.status(400).json({error: errorMessage});
+      } else {
+        // Save the event
+        return newEvent.save(eventObj).then(function(savedEventObj) {
+          return savedEventObj;
+        }, function(error) {
+          // Error saving: New Event Object
+          console.log(error);
+          res.status(400).end();
+        })
+        .then(function(savedEventObj) {
+          // Get the role object for 'User'
+          roleQuery.equalTo('name', 'User');
+          return roleQuery.first().then(function(roleObj) {
+            return roleObj;
+          }, function(error) {
+            // Error retrieving: Role Object
+            console.log(error);
+            res.status(400).end();
+          })
+          .then(function(roleObj) {
+            var loyaltyQuery = new Parse.Query(LoyaltyLevels);
 
-        loyaltyQuery.equalTo('name', 'All');
-        return loyaltyQuery.first().then(function(allObj) {
-          // Find all users who have a role of 'User' and for each user
-          // save a new UsersEvents to the join table
-          usersQuery.equalTo('roleId', roleObj);
+            loyaltyQuery.equalTo('name', 'All');
+            return loyaltyQuery.first().then(function(allObj) {
+              // Find all users who have a role of 'User' and for each user
+              // save a new UsersEvents to the join table
+              usersQuery.equalTo('roleId', roleObj);
 
-          // If statement checks to see if the loyalty level is 'All'
-          // TODO: Fixed hardcoded value
-          console.log('LOYALTY OBJECT ID', loyaltyLevelObj.id);
-          if (loyaltyLevelObj.id !== allObj.id) {
-            usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
-            return usersQuery.find().then(function(results) {
-              console.log('*** USERS COUNT ***', results.length);
+              // If statement checks to see if the loyalty level is 'All'
+              // TODO: Fixed hardcoded value
+              console.log('LOYALTY OBJECT ID', loyaltyLevelObj.id);
+              if (loyaltyLevelObj.id !== allObj.id) {
+                usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
+                return usersQuery.find().then(function(results) {
+                  console.log('*** USERS COUNT ***', results.length);
 
-              if (results.length === 0) res.status(200).end();
+                  if (results.length === 0) res.status(200).end();
 
-              _.each(results, function(userObj) {
-                console.log('--- INSIDE EACH ---', userObj.id);
+                  _.each(results, function(userObj) {
+                    console.log('--- INSIDE EACH ---', userObj.id);
 
-                var newUsersEvents = new UsersEvents();
+                    var newUsersEvents = new UsersEvents();
 
-                var usersEventsObj = {
-                  eventId: savedEventObj,
-                  userId: userObj,
-                  barId: currentUserBarObj(),
-                  eventStart: transformDateForParse(req.body.eventStart),
-                  eventEnd: transformDateForParse(req.body.eventEnd),
-                  userHasViewed: false,
-                  markedForDeletion: false
-                };
+                    var usersEventsObj = {
+                      eventId: savedEventObj,
+                      userId: userObj,
+                      barId: currentUserBarObj(),
+                      eventStart: transformDateForParse(req.body.eventStart),
+                      eventEnd: transformDateForParse(req.body.eventEnd),
+                      userHasViewed: false,
+                      markedForDeletion: false
+                    };
 
-                return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-                  console.log('--- SAVED ---', savedObj.id);
+                    return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+                      console.log('--- SAVED ---', savedObj.id);
 
-                  res.status(200).end();
+                      res.status(200).end();
+                    }, function(error) {
+                      // Error saving: New UsersEvent Object
+                      console.log(error);
+                      res.status(400).end();
+                    });
+                  });
                 }, function(error) {
-                  // Error saving: New UsersEvent Object
+                  // Error retrieving: Users
                   console.log(error);
                   res.status(400).end();
                 });
-              });
-            }, function(error) {
-              // Error retrieving: Users
-              console.log(error);
-              res.status(400).end();
-            });
-          } else {
-            return usersQuery.find().then(function(results) {
-              console.log('*** USERS COUNT ***', results.length);
+              } else {
+                return usersQuery.find().then(function(results) {
+                  console.log('*** USERS COUNT ***', results.length);
 
-              if (results.length === 0) res.status(200).end();
+                  if (results.length === 0) res.status(200).end();
 
-              _.each(results, function(userObj) {
-                console.log('--- INSIDE EACH ---', userObj.id);
+                  _.each(results, function(userObj) {
+                    console.log('--- INSIDE EACH ---', userObj.id);
 
-                var newUsersEvents = new UsersEvents();
+                    var newUsersEvents = new UsersEvents();
 
-                var usersEventsObj = {
-                  eventId: savedEventObj,
-                  userId: userObj,
-                  barId: currentUserBarObj(),
-                  eventStart: transformDateForParse(req.body.eventStart),
-                  eventEnd: transformDateForParse(req.body.eventEnd),
-                  userHasViewed: false,
-                  markedForDeletion: false
-                };
+                    var usersEventsObj = {
+                      eventId: savedEventObj,
+                      userId: userObj,
+                      barId: currentUserBarObj(),
+                      eventStart: transformDateForParse(req.body.eventStart),
+                      eventEnd: transformDateForParse(req.body.eventEnd),
+                      userHasViewed: false,
+                      markedForDeletion: false
+                    };
 
-                return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-                  console.log('--- SAVED ---', savedObj.id);
+                    return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+                      console.log('--- SAVED ---', savedObj.id);
 
-                  res.status(200).end();
+                      res.status(200).end();
+                    }, function(error) {
+                      // Error saving: New UsersEvent Object
+                      console.log(error);
+                      res.status(400).end();
+                    });
+                  });
                 }, function(error) {
-                  // Error saving: New UsersEvent Object
+                  // Error retrieving: Users
                   console.log(error);
                   res.status(400).end();
                 });
-              });
-            }, function(error) {
-              // Error retrieving: Users
-              console.log(error);
-              res.status(400).end();
+              }
             });
-          }
+          });
         });
-      });
+      }
     });
   }, function(error) {
     // Error retrieving: Loyalty Object
@@ -218,35 +227,42 @@ function updateEvent(req, res) {
       eventEnd: transformDateForParse(req.body.eventEnd),
     };
 
-    return result.save(eventObj).then(function() {
-      res.status(200).json({data: result});
-    }, function(error) {
-      console.log(error);
-      res.status(400).end();
-    })
-    .then(function() {
-      var eventsQuery = new Parse.Query(Events);
-      var usersEventsQuery = new Parse.Query(UsersEvents);
-
-      eventsQuery.equalTo('objectId', req.params.id);
-      eventsQuery.first().then(function(eventObj) {
-        return eventObj;
-      })
-      .then(function(eventObj) {
-        usersEventsQuery.equalTo('eventId', eventObj);
-        usersEventsQuery.find().then(function(results) {
-          _.each(results, function(obj) {
-            obj.set('eventStart', transformDateForParse(req.body.eventStart));
-            obj.set('eventEnd', transformDateForParse(req.body.eventEnd));
-            obj.save();
-          });
-
-          res.status(200).end();
+    // Validations
+    validator.validate(eventObj, models.eventModel, function(errorMessage) {
+      if (errorMessage) {
+        res.status(400).json({error: errorMessage});
+      } else {
+        return result.save(eventObj).then(function() {
+          res.status(200).json({data: result});
         }, function(error) {
-          // Error saving to Users Events table
           console.log(error);
+          res.status(400).end();
+        })
+        .then(function() {
+          var eventsQuery = new Parse.Query(Events);
+          var usersEventsQuery = new Parse.Query(UsersEvents);
+
+          eventsQuery.equalTo('objectId', req.params.id);
+          eventsQuery.first().then(function(eventObj) {
+            return eventObj;
+          })
+          .then(function(eventObj) {
+            usersEventsQuery.equalTo('eventId', eventObj);
+            usersEventsQuery.find().then(function(results) {
+              _.each(results, function(obj) {
+                obj.set('eventStart', transformDateForParse(req.body.eventStart));
+                obj.set('eventEnd', transformDateForParse(req.body.eventEnd));
+                obj.save();
+              });
+
+              res.status(200).end();
+            }, function(error) {
+              // Error saving to Users Events table
+              console.log(error);
+            });
+          });
         });
-      });
+      }
     });
   }, function(error) {
     console.log(error);

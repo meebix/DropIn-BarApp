@@ -13,20 +13,22 @@
     vm.login = login;
     vm.resetPassword = resetPassword;
     vm.setBarNameAndTransition = setBarNameAndTransition;
+    vm.errorMessage;
+    vm.infoMessage;
 
     function login(credentials) {
       authService.login(credentials).then(function(user) {
         vm.setBarNameAndTransition();
       }, function(error) {
-        toastr.error('Invalid email address or password');
+        vm.errorMessage = true;
       });
     }
 
     function resetPassword(credentials) {
       authService.resetPassword(credentials).then(function() {
-        // success
+        vm.infoMessage = true;
       }, function() {
-        toastr.error('Please try again');
+        vm.infoMessage = true;
       });
     }
 
