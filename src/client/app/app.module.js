@@ -31,6 +31,7 @@
     // Check for authorization on every route change
     $rootScope.$on('$stateChangeStart', function (event, next) {
       var authorizedRoles = next.data.authorizedRoles;
+      $rootScope.showAlert = false;
 
       if (!accessService.isAuthorized(authorizedRoles)) {
         event.preventDefault();

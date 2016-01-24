@@ -2,6 +2,7 @@
   <div ng-include="'app/layout/header.html'"></div>
   <div ng-include="'app/layout/subnav.html'" ng-if="vm.isAnalyticPage()"></div>
   <div class="content">
+  <div class="alert {{vm.alertStyle}} text-center" role="alert" ng-show="showAlert">{{vm.alertMessage}}</div>
     <div class="container-fluid">
       <div ui-view name="main"></div>
     </div>

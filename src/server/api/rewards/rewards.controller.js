@@ -7,6 +7,8 @@ var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
+var validator = require('../../validations/validator');
+var models = require('../../validations/models');
 
 var Bar = Parse.Object.extend('Bar');
 
@@ -50,11 +52,18 @@ function updateReward(req, res) {
       reward: req.body.reward
     };
 
-    return foundBar.save(barObj).then(function(savedBarObj) {
-      res.status(200).json({data: savedBarObj});
-    }, function(error) {
-      console.log(error);
-      res.status(400).end();
+    // Validations
+    validator.validate(barObj, models.rewardModel, function(errorMessage) {
+      if (errorMessage) {
+        res.status(400).json({error: errorMessage});
+      } else {
+        return foundBar.save(barObj).then(function(savedBarObj) {
+          res.status(200).json({data: savedBarObj});
+        }, function(error) {
+          console.log(error);
+          res.status(400).end();
+        });
+      }
     });
   }, function(error) {
     console.log(error);

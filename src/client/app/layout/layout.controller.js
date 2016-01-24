@@ -5,15 +5,16 @@
     .module('app.layout')
     .controller('LayoutController', LayoutController);
 
-  LayoutController.$inject = ['$scope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
+  LayoutController.$inject = ['$scope', '$rootScope', '$location', '$state', '$cookieStore', 'authService', 'accessService', 'ROLES'];
   /* @ngInject */
-  function LayoutController($scope, $location, $state, $cookieStore, authService, accessService, ROLES) {
+  function LayoutController($scope, $rootScope, $location, $state, $cookieStore, authService, accessService, ROLES) {
     var vm = this;
     vm.isAuthPage = isAuthPage;
     vm.isActive = isActive;
     vm.isAnalyticPage = isAnalyticPage;
     vm.logout = logout;
     vm.copyrightYear = new Date();
+    vm.showAlert = false;
 
     // TODO: Why are we using $scope here instead of vm??
     // Cannot set global vm
@@ -28,6 +29,14 @@
       return accessService.isAuthorized(role);
     };
     // ---------------
+
+    // Alerts
+    $scope.$on('alertMessage', function(ev, args){
+      $rootScope.showAlert = args.showAlert;
+      vm.alertStyle = args.alertStyle;
+      vm.alertMessage = args.alertMessage;
+    });
+    // -------------------
 
     function isAuthPage(path) {
       var authPages = ['/login', '/reset-password'];

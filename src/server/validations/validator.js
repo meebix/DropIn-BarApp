@@ -16,9 +16,6 @@ function validate(model, validationProps, cb) {
     }
 
     if (key in validationProps) {
-      console.log(model[key].length);
-      console.log(validationProps[key].max);
-
       // Max Length
       if (model[key].length > validationProps[key].max) {
         errorMessage = titleize(key) + ' must be less than ' + validationProps[key].max + ' characters';

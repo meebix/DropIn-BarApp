@@ -5,9 +5,9 @@
     .module('app.events')
     .controller('EventsController', EventsController);
 
-  EventsController.$inject = ['$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
+  EventsController.$inject = ['$rootScope', '$q', 'logger', '$state', '$stateParams', 'moment', 'eventService', 'helperService'];
   /* @ngInject */
-  function EventsController($q, logger, $state, $stateParams, moment, eventService, helperService) {
+  function EventsController($rootScope, $q, logger, $state, $stateParams, moment, eventService, helperService) {
     var vm = this;
     vm.title = 'Events';
     vm.eventId = $stateParams.id;
@@ -53,7 +53,13 @@
       eventData.photo = vm.cropper.croppedImage;
 
       eventService.createEvent(eventData).then(function() {
-        $state.go('events');
+        $state.go('events').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully created new event'
+          });
+        });
       }, function(error) {
         vm.errorMessage = error.data.error;
       });
@@ -76,7 +82,13 @@
       };
 
       eventService.updateEvent(vm.eventId, updatedEventData).then(function() {
-        $state.go('events');
+        $state.go('events').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully updated event'
+          });
+        });
       }, function(error) {
         vm.errorMessage = error.data.error;
       });
@@ -84,7 +96,13 @@
 
     function deleteEvent() {
       eventService.deleteEvent(vm.eventId).then(function() {
-        $state.go('events');
+        $state.go('events').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully deleted event'
+          });
+        });
       });
     }
 

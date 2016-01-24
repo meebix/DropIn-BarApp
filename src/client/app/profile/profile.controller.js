@@ -5,9 +5,9 @@
     .module('app.profile')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$q', 'logger', '$state', '$stateParams', 'profileService'];
+  ProfileController.$inject = ['$rootScope', '$q', 'logger', '$state', '$stateParams', 'profileService'];
   /* @ngInject */
-  function ProfileController($q, logger, $state, $stateParams, profileService) {
+  function ProfileController($rootScope, $q, logger, $state, $stateParams, profileService) {
     var vm = this;
     vm.title = 'Dashboard';
     vm.barId = $stateParams.id;
@@ -17,6 +17,7 @@
     vm.updateProfile = updateProfile;
     vm.deleteProfile = deleteProfile;
     vm.goToShow = goToShow;
+    vm.errorMessage;
     vm.init = init;
 
     // Images
@@ -38,9 +39,15 @@
       profileData.photo = vm.detailPhoto;
 
       profileService.createProfile(profileData).then(function() {
-        $state.go('profiles');
+        $state.go('profiles').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully created new bar'
+          });
+        });
       }, function(error) {
-        // Error
+        vm.errorMessage = error.data.error;
       });
     }
 
@@ -82,13 +89,27 @@
       };
 
       profileService.updateProfile(vm.barId, updatedProfileData).then(function() {
-        $state.go('profiles');
+        $state.go('profiles').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully updated bar'
+          });
+        });
+      }, function(error) {
+        vm.errorMessage = error.data.error;
       });
     }
 
     function deleteProfile() {
       profileService.deleteProfile(vm.barId).then(function() {
-        $state.go('profiles');
+        $state.go('profiles').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully deleted bar'
+          });
+        });
       });
     }
 

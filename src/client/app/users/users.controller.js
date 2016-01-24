@@ -5,9 +5,9 @@
     .module('app.profile')
     .controller('UserController', UserController);
 
-  UserController.$inject = ['$q', 'logger', '$state', '$stateParams', 'userService', 'helperService'];
+  UserController.$inject = ['$rootScope', '$q', 'logger', '$state', '$stateParams', 'userService', 'helperService'];
   /* @ngInject */
-  function UserController($q, logger, $state, $stateParams, userService, helperService) {
+  function UserController($rootScope, $q, logger, $state, $stateParams, userService, helperService) {
     var vm = this;
     vm.title = 'Dashboard';
     vm.userId = $stateParams.id;
@@ -33,7 +33,13 @@
 
     function createUser(userData) {
       userService.createUser(userData).then(function() {
-        $state.go('users');
+        $state.go('users').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully created new bar user'
+          });
+        });
       }, function(error) {
         vm.errorMessage = error.data.error;
       });
@@ -41,7 +47,13 @@
 
     function deleteUser(userId) {
       userService.deleteUser(userId).then(function() {
-        $state.reload();
+        $state.reload().then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully deleted bar user'
+          });
+        });
       });
     }
 

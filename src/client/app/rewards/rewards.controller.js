@@ -5,9 +5,9 @@
     .module('app.rewards')
     .controller('RewardsController', RewardsController);
 
-  RewardsController.$inject = ['$q', 'logger', '$state', '$stateParams', 'rewardService'];
+  RewardsController.$inject = ['$rootScope', '$q', 'logger', '$state', '$stateParams', 'rewardService'];
   /* @ngInject */
-  function RewardsController($q, logger, $state, $stateParams, rewardService) {
+  function RewardsController($rootScope, $q, logger, $state, $stateParams, rewardService) {
     var vm = this;
     vm.title = 'Dashboard';
     vm.barId = $stateParams.id;
@@ -15,6 +15,7 @@
     vm.showReward = showReward;
     vm.updateReward = updateReward;
     vm.goToShow = goToShow;
+    vm.errorMessage;
     vm.init = init;
 
     function allRewards() {
@@ -33,7 +34,15 @@
 
     function updateReward(rewardData) {
       rewardService.updateReward(vm.barId, rewardData).then(function() {
-        $state.go('rewards');
+        $state.go('rewards').then(function() {
+          $rootScope.$broadcast('alertMessage', {
+            showAlert: true,
+            alertStyle: 'alert-success',
+            alertMessage: 'Successfully updated reward'
+          });
+        });
+      }, function(error) {
+        vm.errorMessage = error.data.error;
       });
     }
 
