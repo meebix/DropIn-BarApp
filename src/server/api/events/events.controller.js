@@ -9,6 +9,7 @@ var moment = require('moment');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
+var logger = require('log4js').getLogger();
 var validator = require('../../validations/validator');
 var models = require('../../validations/models');
 
@@ -68,7 +69,8 @@ function allEvents(req, res) {
 
       res.status(200).json(jsonData);
     }, function(error) {
-      res.status(400).end();
+      logger.error('Cannot get events from DB');
+      res.status(200).json({error: 'Cannot get events. Please try again later or contact support.'});
     });
   });
 }
@@ -95,7 +97,7 @@ function createEvent(req, res) {
     // Validations
     validator.validate(eventObj, models.eventModel, function(errorMessage) {
       if (errorMessage) {
-        res.status(400).json({error: errorMessage});
+        res.status(400).json({validationError: errorMessage});
       } else {
         // Save the event
         return newEvent.save(eventObj).then(function(savedEventObj) {
@@ -126,81 +128,53 @@ function createEvent(req, res) {
 
               // If statement checks to see if the loyalty level is 'All'
               // TODO: Fixed hardcoded value
-              console.log('LOYALTY OBJECT ID', loyaltyLevelObj.id);
+              console.log('XXXXXXXX -- LOGGING LOYALTY INFO -- XXXXXXXXXX');
+              console.log('req.body loyalty level id', loyaltyLevelId);
+              console.log('loyaltylevelobj from outside call', loyaltyLevelObj, loyaltyLevelObj.id);
+              console.log('all object id', allObj, allObj.id);
+              console.log('role object id', roleObj, roleObj.id);
+
               if (loyaltyLevelObj.id !== allObj.id) {
+                console.log('IF block executed because ALL was NOT called');
+                console.log(loyaltyLevelObj.id, allObj.id);
                 usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
-                return usersQuery.find().then(function(results) {
-                  console.log('*** USERS COUNT ***', results.length);
-
-                  if (results.length === 0) res.status(200).end();
-
-                  _.each(results, function(userObj) {
-                    console.log('--- INSIDE EACH ---', userObj.id);
-
-                    var newUsersEvents = new UsersEvents();
-
-                    var usersEventsObj = {
-                      eventId: savedEventObj,
-                      userId: userObj,
-                      barId: currentUserBarObj(),
-                      eventStart: transformDateForParse(req.body.eventStart),
-                      eventEnd: transformDateForParse(req.body.eventEnd),
-                      userHasViewed: false,
-                      markedForDeletion: false
-                    };
-
-                    return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-                      console.log('--- SAVED ---', savedObj.id);
-
-                      res.status(200).end();
-                    }, function(error) {
-                      // Error saving: New UsersEvent Object
-                      console.log(error);
-                      res.status(400).end();
-                    });
-                  });
-                }, function(error) {
-                  // Error retrieving: Users
-                  console.log(error);
-                  res.status(400).end();
-                });
-              } else {
-                return usersQuery.find().then(function(results) {
-                  console.log('*** USERS COUNT ***', results.length);
-
-                  if (results.length === 0) res.status(200).end();
-
-                  _.each(results, function(userObj) {
-                    console.log('--- INSIDE EACH ---', userObj.id);
-
-                    var newUsersEvents = new UsersEvents();
-
-                    var usersEventsObj = {
-                      eventId: savedEventObj,
-                      userId: userObj,
-                      barId: currentUserBarObj(),
-                      eventStart: transformDateForParse(req.body.eventStart),
-                      eventEnd: transformDateForParse(req.body.eventEnd),
-                      userHasViewed: false,
-                      markedForDeletion: false
-                    };
-
-                    return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-                      console.log('--- SAVED ---', savedObj.id);
-
-                      res.status(200).end();
-                    }, function(error) {
-                      // Error saving: New UsersEvent Object
-                      console.log(error);
-                      res.status(400).end();
-                    });
-                  });
-                }, function(error) {
-                  // Error retrieving: Users
-                  console.log(error);
-                  res.status(400).end();
-                });
               }
+
+              return usersQuery.find().then(function(results) {
+                console.log('*** USERS COUNT ***', results.length);
+
+                if (results.length === 0) res.status(200).end();
+
+                _.each(results, function(userObj) {
+                  console.log('--- INSIDE EACH ---', userObj.id);
+
+                  var newUsersEvents = new UsersEvents();
+
+                  var usersEventsObj = {
+                    eventId: savedEventObj,
+                    userId: userObj,
+                    barId: currentUserBarObj(),
+                    eventStart: transformDateForParse(req.body.eventStart),
+                    eventEnd: transformDateForParse(req.body.eventEnd),
+                    userHasViewed: false,
+                    markedForDeletion: false
+                  };
+
+                  return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+                    console.log('--- SAVED ---', savedObj.id);
+
+                    res.status(200).end();
+                  }, function(error) {
+                    // Error saving: New UsersEvent Object
+                    console.log(error);
+                    res.status(400).end();
+                  });
+                });
+              }, function(error) {
+                // Error retrieving: Users
+                console.log(error);
+                res.status(400).end();
+              });
             });
           });
         });
@@ -230,7 +204,7 @@ function updateEvent(req, res) {
     // Validations
     validator.validate(eventObj, models.eventModel, function(errorMessage) {
       if (errorMessage) {
-        res.status(400).json({error: errorMessage});
+        res.status(400).json({validationError: errorMessage});
       } else {
         return result.save(eventObj).then(function() {
           res.status(200).json({data: result});
