@@ -55,7 +55,7 @@ function updateReward(req, res) {
     // Validations
     validator.validate(barObj, models.rewardModel, function(errorMessage) {
       if (errorMessage) {
-        res.status(400).json({error: errorMessage});
+        res.status(400).json({validationError: errorMessage});
       } else {
         return foundBar.save(barObj).then(function(savedBarObj) {
           res.status(200).json({data: savedBarObj});

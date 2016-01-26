@@ -8,6 +8,7 @@ var _ = require('underscore');
 var currentUserObj = require('../auth/auth.controller').currentUserObj;
 var currentUserBarObj = require('../auth/auth.controller').currentUserBarObj;
 var four0four = require('../../utils/404')();
+var logger = require('log4js').getLogger();
 var validator = require('../../validations/validator');
 var models = require('../../validations/models');
 
@@ -31,6 +32,8 @@ function allUsers(req, res) {
   var displayLimit = 15;
   var count;
 
+  logger.info('USERS CTRL: calling all users');
+
   roleQuery.equalTo('name', 'Bar');
   roleQuery.first().then(function(roleObj) {
     usersQuery.equalTo('roleId', roleObj);
@@ -51,7 +54,7 @@ function allUsers(req, res) {
 
         res.status(200).json(jsonData);
       }, function(error) {
-        res.status(400).end();
+        res.status(400).json({error: ''});
       });
     });
   }, function(error) {
@@ -84,7 +87,7 @@ function createUser(req, res) {
       // Validations
       validator.validate(userObj, models.userModel, function(errorMessage) {
         if (errorMessage) {
-          res.status(400).json({error: errorMessage});
+          res.status(400).json({validationError: errorMessage});
         } else {
           // Save the user
           return newUser.save(userObj).then(function(savedUserObj) {

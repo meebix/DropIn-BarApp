@@ -68,7 +68,7 @@ function createProfile(req, res) {
   // Validations
   validator.validate(barObj, models.profileModel, function(errorMessage) {
     if (errorMessage) {
-      res.status(400).json({error: errorMessage});
+      res.status(400).json({validationError: errorMessage});
     } else {
       // Save the bar
       newBar.save(barObj).then(function(savedBarObj) {
@@ -135,7 +135,7 @@ function updateProfile(req, res) {
     // Validations
     validator.validate(barObj, models.profileModel, function(errorMessage) {
       if (errorMessage) {
-        res.status(400).json({error: errorMessage});
+        res.status(400).json({validationError: errorMessage});
       } else {
         return foundBar.save(barObj).then(function(savedBarObj) {
           return savedBarObj;

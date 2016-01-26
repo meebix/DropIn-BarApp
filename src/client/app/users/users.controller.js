@@ -41,7 +41,7 @@
           });
         });
       }, function(error) {
-        vm.errorMessage = error.data.error;
+        vm.errorMessage = error.data.validationError;
       });
     }
 
