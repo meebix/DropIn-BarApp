@@ -18,8 +18,6 @@ var Role = Parse.Object.extend('Role');
 var LoyaltyLevels = Parse.Object.extend('Loyalty_Levels');
 var UsersEvents = Parse.Object.extend('Users_Events');
 var EventStats = Parse.Object.extend('Stats_Events');
-var roleQuery = new Parse.Query(Role);
-var usersQuery = new Parse.Query(Parse.User);
 
 // Export
 module.exports = {
@@ -108,6 +106,8 @@ function createEvent(req, res) {
           res.status(400).end();
         })
         .then(function(savedEventObj) {
+          var roleQuery = new Parse.Query(Role);
+
           // Get the role object for 'User'
           roleQuery.equalTo('name', 'User');
           return roleQuery.first().then(function(roleObj) {
@@ -122,6 +122,8 @@ function createEvent(req, res) {
 
             loyaltyQuery.equalTo('name', 'All');
             return loyaltyQuery.first().then(function(allObj) {
+              var usersQuery = new Parse.Query(Parse.User);
+
               // Find all users who have a role of 'User' and for each user
               // save a new UsersEvents to the join table
               usersQuery.equalTo('roleId', roleObj);
@@ -292,83 +294,83 @@ function deleteEvent(req, res) {
 // =====================
 
 // Send event to ALL users
-function sendToAll(savedEventObj, req, res) {
-  return usersQuery.find().then(function(results) {
-    console.log('*** USERS COUNT ***', results.length);
+// function sendToAll(savedEventObj, req, res) {
+//   return usersQuery.find().then(function(results) {
+//     console.log('*** USERS COUNT ***', results.length);
 
-    if (results.length === 0) res.status(200).end();
+//     if (results.length === 0) res.status(200).end();
 
-    _.each(results, function(userObj) {
-      console.log('--- INSIDE EACH ---', userObj.id);
+//     _.each(results, function(userObj) {
+//       console.log('--- INSIDE EACH ---', userObj.id);
 
-      var newUsersEvents = new UsersEvents();
+//       var newUsersEvents = new UsersEvents();
 
-      var usersEventsObj = {
-        eventId: savedEventObj,
-        userId: userObj,
-        barId: currentUserBarObj(),
-        eventStart: transformDateForParse(req.body.eventStart),
-        eventEnd: transformDateForParse(req.body.eventEnd),
-        userHasViewed: false,
-        markedForDeletion: false
-      };
+//       var usersEventsObj = {
+//         eventId: savedEventObj,
+//         userId: userObj,
+//         barId: currentUserBarObj(),
+//         eventStart: transformDateForParse(req.body.eventStart),
+//         eventEnd: transformDateForParse(req.body.eventEnd),
+//         userHasViewed: false,
+//         markedForDeletion: false
+//       };
 
-      return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-        console.log('--- SAVED ---', savedObj.id);
+//       return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+//         console.log('--- SAVED ---', savedObj.id);
 
-        res.status(200).end();
-      }, function(error) {
-        // Error saving: New UsersEvent Object
-        console.log(error);
-        res.status(400).end();
-      });
-    });
-  }, function(error) {
-    // Error retrieving: Users
-    console.log(error);
-    res.status(400).end();
-  });
-}
+//         res.status(200).end();
+//       }, function(error) {
+//         // Error saving: New UsersEvent Object
+//         console.log(error);
+//         res.status(400).end();
+//       });
+//     });
+//   }, function(error) {
+//     // Error retrieving: Users
+//     console.log(error);
+//     res.status(400).end();
+//   });
+// }
 
-// Send event to SPECIFIED users
-function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
-  usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
-  return usersQuery.find().then(function(results) {
-    console.log('*** USERS COUNT ***', results.length);
+// // Send event to SPECIFIED users
+// function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
+//   usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
+//   return usersQuery.find().then(function(results) {
+//     console.log('*** USERS COUNT ***', results.length);
 
-    if (results.length === 0) res.status(200).end();
+//     if (results.length === 0) res.status(200).end();
 
-    _.each(results, function(userObj) {
-      console.log('--- INSIDE EACH ---', userObj.id);
+//     _.each(results, function(userObj) {
+//       console.log('--- INSIDE EACH ---', userObj.id);
 
-      var newUsersEvents = new UsersEvents();
+//       var newUsersEvents = new UsersEvents();
 
-      var usersEventsObj = {
-        eventId: savedEventObj,
-        userId: userObj,
-        barId: currentUserBarObj(),
-        eventStart: transformDateForParse(req.body.eventStart),
-        eventEnd: transformDateForParse(req.body.eventEnd),
-        userHasViewed: false,
-        markedForDeletion: false
-      };
+//       var usersEventsObj = {
+//         eventId: savedEventObj,
+//         userId: userObj,
+//         barId: currentUserBarObj(),
+//         eventStart: transformDateForParse(req.body.eventStart),
+//         eventEnd: transformDateForParse(req.body.eventEnd),
+//         userHasViewed: false,
+//         markedForDeletion: false
+//       };
 
-      return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-        console.log('--- SAVED ---', savedObj.id);
+//       return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
+//         console.log('--- SAVED ---', savedObj.id);
 
-        res.status(200).end();
-      }, function(error) {
-        // Error saving: New UsersEvent Object
-        console.log(error);
-        res.status(400).end();
-      });
-    });
-  }, function(error) {
-    // Error retrieving: Users
-    console.log(error);
-    res.status(400).end();
-  });
-}
+//         res.status(200).end();
+//       }, function(error) {
+//         // Error saving: New UsersEvent Object
+//         console.log(error);
+//         res.status(400).end();
+//       });
+//     });
+//   }, function(error) {
+//     // Error retrieving: Users
+//     console.log(error);
+//     res.status(400).end();
+//   });
+// }
 
 // This just creates a date object for Parse to read
 // Parse seems to be converting date to UTC before storing it automatically
