@@ -58,12 +58,13 @@
         <label for="profilePhone">Phone Number</label>
         <input type="text" class="form-control" placeholder="(201) 444-4444" ng-model="vm.profileData.phone" ng-focus="vm.showHelperPhone = true" ng-blur="vm.showHelperPhone = false">
       </div>
+
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label></label>
         <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperPhone">
-          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Must be formatted as (123) 456-7899</div>
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Must be formatted as <strong>(123) 456-7899</strong></div>
         </div>
       </div>
     </div>
@@ -108,7 +109,7 @@
     </div>
     <div class="col-md-6">
       <p>150 x 150</p>
-      <img ng-src="{{vm.thumbnailPhoto}}" width="150" height="150">
+      <img ng-src="{{vm.profileData.thumbnail.url}}" width="150" height="150">
     </div>
   </div>
   <div class="row margin-top-20">
@@ -125,7 +126,7 @@
     </div>
     <div class="col-md-6">
       <p>275 x 175</p>
-      <img ng-src="{{vm.detailPhoto}}" width="275" height="175">
+      <img ng-src="{{vm.profileData.photo.url}}" width="275" height="175">
     </div>
   </div>
   <hr>

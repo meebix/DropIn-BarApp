@@ -33,10 +33,6 @@
     }
 
     function createProfile(profileData) {
-      // profileData.beaconMajor = Number(profileData.beaconMajor);
-      // profileData.beaconMinor = Number(profileData.beaconMinor);
-      // profileData.latitude = Number(profileData.latitude);
-      // profileData.longitude = Number(profileData.longitude);
       profileData.thumbnail = vm.thumbnailPhoto;
       profileData.photo = vm.detailPhoto;
 

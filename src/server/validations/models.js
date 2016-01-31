@@ -25,8 +25,8 @@ var profileModel = {
   phone: { min: 14, max: 14 }, // 14 due to expected formatting
   email: { min: 5, max: 100, email: true },
   description: { min: 20, max: 800 },
-  beaconMajor: { min: 5, max: 5, numbersOnly: true, name: 'Beacon major' },
-  beaconMinor: { min: 5, max: 5, numbersOnly: true },
+  beaconMajor: { min: 1, max: 5, numbersOnly: true, name: 'Beacon major' },
+  beaconMinor: { min: 1, max: 5, numbersOnly: true },
   latitude: { min: 1, max: 20, allowFloat: true },
   longitude: { min: 1, max: 20, allowFloat: true },
   mondayPromotion: { min: 5, max: 500 },
