@@ -24,7 +24,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="profileAddress">Address</label>
-        <input type="text" class="form-control" placeholder="1200 Washington Ave" ng-model="vm.profileData.address" ng-focus="vm.showHelperAddress = true" ng-blur="vm.showHelperAddress = false">
+        <input type="text" class="form-control" placeholder="1200 Washington Ave" ng-model="vm.profileData.address">
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="profileCity">City</label>
-        <input type="text" class="form-control" placeholder="Hoboken" ng-model="vm.profileData.city" ng-focus="vm.showHelperCity = true" ng-blur="vm.showHelperCity = false">
+        <input type="text" class="form-control" placeholder="Hoboken" ng-model="vm.profileData.city">
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="profileState">State</label>
-        <input type="text" class="form-control" placeholder="NJ" ng-model="vm.profileData.state" ng-focus="vm.showHelperState = true" ng-blur="vm.showHelperState = false">
+        <input type="text" class="form-control" placeholder="NJ" ng-model="vm.profileData.state">
       </div>
     </div>
   </div>
@@ -48,7 +48,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="profileZip">Zip Code</label>
-        <input type="text" class="form-control" placeholder="07030" ng-model="vm.profileData.zip" ng-focus="vm.showHelperZip = true" ng-blur="vm.showHelperZip = false">
+        <input type="text" class="form-control" placeholder="07030" ng-model="vm.profileData.zip">
       </div>
     </div>
   </div>
@@ -57,6 +57,14 @@
       <div class="form-group">
         <label for="profilePhone">Phone Number</label>
         <input type="text" class="form-control" placeholder="(201) 444-4444" ng-model="vm.profileData.phone" ng-focus="vm.showHelperPhone = true" ng-blur="vm.showHelperPhone = false">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label></label>
+        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperPhone">
+          <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Must be formatted as (123) 456-7899</div>
+        </div>
       </div>
     </div>
   </div>
@@ -126,7 +134,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="beaconMajor">Beacon Major</label>
-            <input type="number" class="form-control" ng-model="vm.profileData.beaconMajor" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
+            <input type="text" class="form-control" ng-model="vm.profileData.beaconMajor" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
       </div>
     </div>
     <div class="col-md-6">
@@ -142,7 +150,7 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="beaconMinor">Beacon Minor</label>
-            <input type="number" class="form-control" ng-model="vm.profileData.beaconMinor" ng-focus="vm.showHelperBeaconMinor = true" ng-blur="vm.showHelperBeaconMinor = false">
+            <input type="text" class="form-control" ng-model="vm.profileData.beaconMinor" ng-focus="vm.showHelperBeaconMinor = true" ng-blur="vm.showHelperBeaconMinor = false">
       </div>
     </div>
     <div class="col-md-6">

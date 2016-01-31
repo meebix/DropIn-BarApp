@@ -33,8 +33,10 @@
     }
 
     function createProfile(profileData) {
-      profileData.latitude = Number(profileData.latitude);
-      profileData.longitude = Number(profileData.longitude);
+      // profileData.beaconMajor = Number(profileData.beaconMajor);
+      // profileData.beaconMinor = Number(profileData.beaconMinor);
+      // profileData.latitude = Number(profileData.latitude);
+      // profileData.longitude = Number(profileData.longitude);
       profileData.thumbnail = vm.thumbnailPhoto;
       profileData.photo = vm.detailPhoto;
 
@@ -76,8 +78,8 @@
         photo: vm.detailPhoto,
         beaconMajor: profileData.beaconMajor,
         beaconMinor: profileData.beaconMinor,
-        latitude: Number(profileData.latitude),
-        longitude: Number(profileData.longitude),
+        latitude: profileData.latitude,
+        longitude: profileData.longitude,
         mondayPromotion: profileData.mondayPromotion,
         tuesdayPromotion: profileData.tuesdayPromotion,
         wednesdayPromotion: profileData.wednesdayPromotion,
