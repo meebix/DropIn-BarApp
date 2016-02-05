@@ -189,10 +189,22 @@ function deleteProfile(req, res) {
 
   barQuery.equalTo('objectId', req.params.id);
   barQuery.first().then(function(barObj) {
-    barObj.set('isActive', false);
-    barObj.save();
+    var paramsQuery = new Parse.Query(AppParams);
 
-    res.status(200).json({data: barObj});
+    paramsQuery.equalTo('paramName', 'totalBarsOnboarded');
+    paramsQuery.first().then(function(obj) {
+      var currentCount = obj.get('number1');
+      var subtractOne = currentCount - 1;
+
+      obj.set('number1', subtractOne);
+      obj.save();
+    })
+    .then(function() {
+      barObj.set('isActive', false);
+      barObj.save();
+
+      res.status(200).json({data: barObj});
+    });
   }, function(error) {
     console.log(error);
     res.status(400).end();
