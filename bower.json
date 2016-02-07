@@ -34,7 +34,7 @@
     "toastr": "^2.1.1"
   },
   "resolutions": {
-    "angular": "~1.3.x"
+    "angular": "=1.3.x"
   },
   "overrides": {
     "jquery-ui": {
