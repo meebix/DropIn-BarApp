@@ -1,17 +1,21 @@
 <span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
+<h4>Who is on Drop In?</h4>
+<hr>
+
 <!-- Total Users -->
 <div class="col-md-6">
   <div class="data-panel">
-    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-      <li>
-        <a popover-placement="right" uib-popover="A breakdown by gender of all users registered on the Drop In app" role="button">
-          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
-        </a>
-      </li>
-      <li class="text-center text-uppercase"><strong>Gender</strong></li>
-      <li></li>
-    </ul>
+    <div class="info-overlay" ng-show="showInfoA">
+      <p>A breakdown by gender of all users registered on the Drop In app</p>
+    </div>
+    <div class="row chart-title">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4">
+        <div class="text-center text-uppercase"><strong>Gender</strong></div>
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
     <div>
       <canvas id="pie" class="chart chart-pie"
         chart-data="vm.dataGender" chart-labels="vm.labelsGender" chart-colours="vm.coloursGender"
@@ -19,12 +23,12 @@
       </canvas>
     </div>
     <div class="row text-center">
-      <div class="col-md-6">
-        <div class="number-stat" style="color: #419191">{{vm.totalMales}}</div>
+      <div class="col-xs-6 col-md-6">
+        <div class="number-stat" style="color: #0B60F1">{{vm.totalMales}}</div>
         <div class="number-stat-label">Males</div>
       </div>
-      <div class="col-md-6">
-        <div class="number-stat" style="color: #F26D6D">{{vm.totalFemales}}</div>
+      <div class="col-xs-6 col-md-6">
+        <div class="number-stat" style="color: #F44F72">{{vm.totalFemales}}</div>
         <div class="number-stat-label">Females</div>
       </div>
     </div>
@@ -34,15 +38,20 @@
 <!-- Loyalty Levels -->
 <div class="col-md-6">
   <div class="data-panel">
-    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-      <li>
-        <a popover-placement="right" uib-popover="A breakdown by loyalty levels of all users registered on the Drop In app" role="button">
-          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
-        </a>
-      </li>
-      <li class="text-center text-uppercase"><strong>Loyalty Levels</strong></li>
-      <li></li>
-    </ul>
+    <div class="info-overlay" ng-show="showInfoB">
+      <p>Guests = 0-2 credits</p>
+      <p>Regulars = 3-11 credits</p>
+      <p>VIPs = 12+ credits</p>
+    </div>
+    <div class="row chart-title">
+      <div class="col-xs-4">
+        <a href=""><i class="fa fa-info-circle fa-lg" style="color: #ccc" ng-click="showInfoB = !showInfoB"></i></a>
+      </div>
+      <div class="col-xs-4">
+        <div class="text-center text-uppercase"><strong>Loyalty Levels</strong></div>
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
     <div>
       <canvas id="bar" class="chart chart-bar"
         chart-data="vm.dataLoyaltyLevels" chart-labels="vm.labelsLoyaltyLevels" chart-colours="vm.coloursLoyaltyLevels"
@@ -50,15 +59,15 @@
       </canvas>
     </div>
     <div class="row text-center">
-      <div class="col-md-4">
+      <div class="col-xs-4 col-md-4">
         <div class="number-stat" style="color: #4C92FF">{{vm.totalGuests}}</div>
         <div class="number-stat-label">Guests</div>
       </div>
-      <div class="col-md-4">
+      <div class="col-xs-4 col-md-4">
         <div class="number-stat" style="color: #16A085">{{vm.totalRegulars}}</div>
         <div class="number-stat-label">Regulars</div>
       </div>
-      <div class="col-md-4">
+      <div class="col-xs-4 col-md-4">
         <div class="number-stat" style="color: #CCAC00">{{vm.totalVips}}</div>
         <div class="number-stat-label">VIPs</div>
       </div>
@@ -69,15 +78,16 @@
 <!-- Age -->
 <div class="col-md-6">
   <div class="data-panel">
-    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-      <li>
-        <a popover-placement="right" uib-popover="A breakdown by age of all users registered on the Drop In app" role="button">
-          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
-        </a>
-      </li>
-      <li class="text-center text-uppercase"><strong>Age</strong></li>
-      <li></li>
-    </ul>
+    <div class="info-overlay" ng-show="showInfoC">
+      <p>A breakdown by age of all users registered on the Drop In app</p>
+    </div>
+    <div class="row chart-title">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4">
+        <div class="text-center text-uppercase"><strong>Age</strong></div>
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
     <div>
       <canvas id="doughnut" class="chart chart-doughnut"
         chart-data="vm.dataAge" chart-labels="vm.labelsAge" chart-colours="vm.coloursAge"
@@ -85,78 +95,22 @@
       </canvas>
     </div>
     <div class="row text-center">
-      <div class="col-md-3">
-        <div class="number-stat" style="color: #9775AA">{{vm.age2124}}</div>
+      <div class="col-xs-3 col-md-3">
+        <div class="number-stat" style="color: #FFAA98">{{vm.age2124}}</div>
         <div class="number-stat-label">21-24</div>
       </div>
-      <div class="col-md-3">
-        <div class="number-stat" style="color: #754B8E">{{vm.age2529}}</div>
+      <div class="col-xs-3 col-md-3">
+        <div class="number-stat" style="color: #DE7862">{{vm.age2529}}</div>
         <div class="number-stat-label">25-29</div>
       </div>
-      <div class="col-md-3">
-        <div class="number-stat" style="color: #572A72">{{vm.age3034}}</div>
+      <div class="col-xs-3 col-md-3">
+        <div class="number-stat" style="color: #BB513A">{{vm.age3034}}</div>
         <div class="number-stat-label">30-34</div>
       </div>
-      <div class="col-md-3">
-        <div class="number-stat" style="color: #3C1255">{{vm.age35Plus}}</div>
+      <div class="col-xs-3 col-md-3">
+        <div class="number-stat" style="color: #97301A">{{vm.age35Plus}}</div>
         <div class="number-stat-label">35+</div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Drop In Gender Totals</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="pie" class="chart chart-pie"
-        chart-data="vm.dataGender" chart-labels="vm.labelsGender" chart-colours="vm.coloursGender"
-        chart-legend="true" chart-options="vm.chartOptionsGender">
-      </canvas>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Drop In Loyalty Level Totals</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="doughnut" class="chart chart-doughnut"
-        chart-data="vm.dataLoyaltyLevel" chart-labels="vm.labelsLoyaltyLevel" chart-colours="vm.coloursLoyaltyLevel"
-        chart-legend="true" chart-options="vm.chartOptionsLoyaltyLevel">
-      </canvas>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Drop In Age Totals</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="pie" class="chart chart-pie"
-        chart-data="vm.dataAge" chart-labels="vm.labelsAge" chart-colours="vm.coloursAge"
-        chart-legend="true" chart-options="vm.chartOptionsAge">
-      </canvas>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-12">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{vm.barName}} Active Users</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="bar" class="chart chart-bar"
-        chart-data="vm.dataActiveUsers" chart-labels="vm.labelsActiveUsers" chart-colours="vm.coloursActiveUsers"
-        chart-legend="true" chart-series="vm.seriesActiveUsers" chart-options="vm.chartOptionsActiveUsers">
-      </canvas>
-    </div>
-  </div>
-</div> -->

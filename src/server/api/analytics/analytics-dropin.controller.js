@@ -39,9 +39,9 @@ function multipleStatsData(req, res) {
     var rewardsValues = [];
 
     _.each(results, function(result) {
-      trafficValues.push(result.attributes.totalTrafficByCredit);
-      rewardsValues.push(result.attributes.totalRewardsRedeemed);
-      calcDates.push(moment.utc(result.attributes.calcDate).format('MM-DD'));
+      trafficValues.unshift(result.attributes.totalTrafficByCredit);
+      rewardsValues.unshift(result.attributes.totalRewardsRedeemed);
+      calcDates.unshift(moment.utc(result.attributes.calcDate).format('MM-DD'));
     });
 
     var stats = [trafficValues, rewardsValues, calcDates];

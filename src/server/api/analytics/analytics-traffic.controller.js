@@ -30,8 +30,8 @@ function statsData(req, res) {
     var barName = [results[0].attributes.barId.attributes.name];
 
     _.each(results, function(result) {
-      values.push(result.attributes.visitsByCredit);
-      calcDates.push(moment.utc(result.attributes.calcDate).format('MM-DD'));
+      values.unshift(result.attributes.visitsByCredit);
+      calcDates.unshift(moment.utc(result.attributes.calcDate).format('MM-DD'));
     });
 
     var stats = [values, calcDates, barName];

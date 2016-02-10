@@ -52,7 +52,7 @@
     // Gender breakdown chart data
     function chartGender() {
       vm.labelsGender = ['Males', 'Females'];
-      vm.coloursGender = ['#419191', '#F26D6D'];
+      vm.coloursGender = ['#0B60F1', '#F44F72'];
       vm.chartOptionsGender = {
         // tooltipTemplate: '<%= value %>',
         // onAnimationComplete: function() {
@@ -85,7 +85,7 @@
     function chartAge() {
       vm.labelsAge = ['21-24', '25-29', '30-34', '35 plus'];
       vm.seriesAge = ['21-24', '25-29', '30-34', '35 plus'];
-      vm.coloursAge = ['#9775AA', '#754B8E', '#572A72', '#3C1255'];
+      vm.coloursAge = ['#FFAA98', '#DE7862', '#BB513A', '#97301A'];
       vm.chartOptionsAge = {
         segmentStrokeColor: '#EAEAEA',
         segmentStrokeWidth: 7,
