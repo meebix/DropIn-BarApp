@@ -25,12 +25,58 @@
   z-index: 1;
   padding: 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-top-right-radius: 4px;
+  border-top-right-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.info-overlay:after, .info-overlay:before {
+  bottom: 100%;
+  left: 10px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.info-overlay:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #ffffff;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.info-overlay:before {
+  border-color: rgba(204, 204, 204, 0);
+  border-bottom-color: #ccc;
+  border-width: 11px;
+  margin-left: -11px;
 }
 
 .info-overlay p {
   font-size: 14px;
   font-weight: 300;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a.more-info-link {
+  position: relative;
+  top: 5px;
+  color: @link-color-alt;
+  font-size: 12px;
 }
 
 // Block-style labels
@@ -63,5 +109,4 @@
 .number-stat-label {
   font-size: 14px;
   font-weight: 300;
-  // color: #cccccc;
 }

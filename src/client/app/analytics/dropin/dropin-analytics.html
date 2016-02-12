@@ -1,14 +1,31 @@
 <span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
-<h4>Who is on Drop In?</h4>
+<h4>
+  Who is on Drop In?
+  <a href="" class="more-info-link pull-right" data-toggle="modal" data-target=".bs-example-modal-sm">More Info</a>
+</h4>
 <hr>
+
+<!-- More Info Modal -->
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog modal-sm vertical-align-center">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div>
+            This page shows a snapshot of all users signed up on the Drop In app.
+            Drop In users can earn credits and redeem rewards at your bar, and are your audience for
+            creating &amp; sending out events.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Total Users -->
 <div class="col-md-6">
   <div class="data-panel">
-    <div class="info-overlay" ng-show="showInfoA">
-      <p>A breakdown by gender of all users registered on the Drop In app</p>
-    </div>
     <div class="row chart-title">
       <div class="col-xs-4"></div>
       <div class="col-xs-4">
@@ -78,9 +95,6 @@
 <!-- Age -->
 <div class="col-md-6">
   <div class="data-panel">
-    <div class="info-overlay" ng-show="showInfoC">
-      <p>A breakdown by age of all users registered on the Drop In app</p>
-    </div>
     <div class="row chart-title">
       <div class="col-xs-4"></div>
       <div class="col-xs-4">
