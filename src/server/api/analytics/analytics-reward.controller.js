@@ -28,13 +28,14 @@ function statsData(req, res) {
     var values = [];
     var calcDates = [];
     var barName = [results[0].attributes.barId.attributes.name];
+    var barId = [results[0].attributes.barId.attributes.name];
 
     _.each(results, function(result) {
       values.unshift(result.attributes.rewardsRedeemed);
-      calcDates.unshift(moment.utc(result.attributes.calcDate).format('MM-DD'));
+      calcDates.unshift(moment.utc(result.attributes.calcDate).format('MMM-DD'));
     });
 
-    var stats = [values, calcDates, barName];
+    var stats = [values, calcDates, barName, barId];
 
     res.status(200).json({data: stats});
   }, function(error) {

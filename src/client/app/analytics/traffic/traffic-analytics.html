@@ -1,17 +1,49 @@
 <span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
+<div class="row">
+  <div class="col-xs-9 col-sm-11">
+    <h4>How many users are visiting your bars?</h4>
+  </div>
+  <div class="col-xs-3 col-sm-1 padding-left-xs-0 text-right">
+    <a href="" class="more-info-link" data-toggle="modal" data-target=".bs-modal-sm">More Info</a>
+  </div>
+</div>
+<hr class="thin-top">
+
+<!-- More Info Modal -->
+<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog modal-sm vertical-align-center">
+      <div class="modal-content">
+        <div class="modal-body">
+          Drop In reward redemptions represent the number of users who have redeemed a
+          Drop In Reward at all participating bar (including yours) during the last seven days.
+          Your bar’s reward redemptions represent users that have redeemed a Drop In Reward at
+          your bar only during the last seven days.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Traffic -->
 <div class="col-md-6">
   <div class="data-panel">
-    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-      <li>
-        <a popover-placement="right" uib-popover="Users who have earned a credit by visiting a bar for at least 30 minutes broken down by day" role="button">
-          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
-        </a>
-      </li>
-      <li class="text-center text-uppercase"><strong>Traffic</strong></li>
-      <li></li>
-    </ul>
+    <div class="info-overlay" ng-show="showInfoA">
+      <p>
+        1 credit is earned by a user once they are connected to the Drop In iBeacons in your bar
+        for at least 30 minutes (users can only earn 1 credit / day at your bar)
+      </p>
+    </div>
+    <div class="row margin-bottom-15">
+      <div class="col-xs-4">
+        <a href=""><i class="fa fa-info-circle fa-lg" style="color: #ccc" ng-click="showInfoA = !showInfoA"></i></a>
+      </div>
+      <div class="col-xs-4">
+        <div class="text-center text-uppercase"><strong>Traffic</strong></div>
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
     <div>
       <canvas id="line" class="chart chart-line" chart-data="vm.dataTraffic" chart-colours="vm.coloursTraffic"
         chart-labels="vm.labelsTraffic" chart-legend="false" chart-series="vm.seriesTraffic"
@@ -19,33 +51,18 @@
       </canvas>
     </div>
     <div class="row text-center">
-      <div class="col-md-6">
+      <div class="col-xs-6 col-md-6">
         <div class="number-stat" style="color: #0084C1">
           <div style="background-color: #0084C1; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
         </div>
         <div class="number-stat-label">Drop In</div>
       </div>
-      <div class="col-md-6">
-        <div class="number-stat" style="color: #F05523">
-          <div style="background-color: #F05523; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
+      <div class="col-xs-6 col-md-6">
+        <div class="number-stat" style="color: #00A447">
+          <div style="background-color: #00A447; width: 20px; height: 20px; margin: 10px auto 5px auto;"></div>
         </div>
         <div class="number-stat-label">{{vm.barName}}</div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="col-md-12">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{vm.barName[0]}} Traffic</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="bar" class="chart chart-bar"
-        chart-data="vm.dataTraffic" chart-labels="vm.labelsTraffic" chart-colours="vm.coloursTraffic"
-        chart-legend="true" chart-series="vm.seriesTraffic" chart-options="vm.chartOptionsTraffic">
-      </canvas>
-    </div>
-  </div>
-</div>
- -->

@@ -38,7 +38,7 @@
     function chartTraffic() {
       vm.labelsTraffic = [vm.calcDates[0], vm.calcDates[1], vm.calcDates[2], vm.calcDates[3], vm.calcDates[4], vm.calcDates[5], vm.calcDates[6]];
       vm.seriesTraffic = ['Drop In', vm.barName];
-      vm.coloursTraffic = ['#0084C1', '#F05523'];
+      vm.coloursTraffic = ['#0084C1', '#00A447'];
       vm.chartOptionsTraffic = {
         multiTooltipTemplate: '<%= value %>',
         showTooltips: true,

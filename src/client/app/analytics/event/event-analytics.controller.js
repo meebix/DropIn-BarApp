@@ -15,6 +15,7 @@
     vm.statsData = statsData;
     vm.chartEvent = chartEvent;
     vm.currentPage = 0;
+    vm.selectEvent = true;
     vm.init = init;
 
     function statsData(eventId) {
@@ -36,7 +37,7 @@
     function chartEvent() {
       vm.labelsEvent = [''];
       vm.seriesEvent = ['Users Sent To', 'Credits Earned'];
-      vm.coloursEvent = ['#3E606F', '#7AA08B'];
+      vm.coloursEvent = ['#0084C1', '#00A447'];
       vm.chartOptionsEvent = {
         showTooltips: false,
         // legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
@@ -63,6 +64,9 @@
         vm.eventData = results.data;
         vm.chartReady = true;
       });
+
+      // Hide selecting an event section
+      vm.selectEvent = false;
 
       // Populate chart
       statsData(eventId);

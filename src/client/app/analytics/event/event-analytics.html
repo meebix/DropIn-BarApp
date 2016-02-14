@@ -1,16 +1,75 @@
-<!-- Events -->
-<div class="row" ng-show="vm.chartReady">
-  <div class="col-md-6">
+<span us-spinner spinner-theme="events" ng-hide="dataLoaded"></span>
+
+<!-- Event Graph and Data -->
+<div ng-show="!vm.selectEvent">
+  <div class="row">
+    <div class="col-xs-8 col-sm-10">
+      <h4>How effective are my events?</h4>
+    </div>
+    <div class="col-xs-4 col-sm-2 padding-left-xs-0 text-right">
+      <a href="" class="more-info-link" ng-click="vm.selectEvent = true">Change Event</a>
+    </div>
+  </div>
+  <hr class="thin-top">
+
+  <!-- More Info Modal -->
+  <div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="vertical-alignment-helper">
+      <div class="modal-dialog modal-sm vertical-align-center">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4 class="margin-top-10 margin-bottom-20">{{vm.eventData.name | titlecase}}</h4>
+            <h5 class="text-muted">Description</h5>
+            <hr class="thin">
+            <div class="row margin-bottom-15">
+              <div class="col-md-9">
+                <p>{{vm.eventData.description}}</p>
+              </div>
+            </div>
+            <h5 class="text-muted">Dates</h5>
+            <hr class="thin">
+            <div class="row margin-bottom-15">
+              <div class="col-md-5">
+                <p class="margin-bottom-0"><strong>Start</strong></p>
+                <p>{{vm.eventData.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
+              </div>
+              <div class="col-md-5">
+                <p class="margin-bottom-0"><strong>End</strong></p>
+                <p>{{vm.eventData.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
+              </div>
+            </div>
+            <h5 class="text-muted">Sent To</h5>
+            <hr class="thin">
+            <div class="row">
+              <div class="col-md-9">
+                <p>{{vm.eventData.loyaltyLevelId.name}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events -->
+  <div class="col-md-6" ng-show="vm.chartReady">
     <div class="data-panel">
-      <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-        <li>
-          <a popover-placement="right" uib-popover="Users who have earned a credit by visiting your bar during the time of the event" role="button">
-            <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
-          </a>
-        </li>
-        <li class="text-center text-uppercase"><strong>Event</strong></li>
-        <li></li>
-      </ul>
+      <div class="info-overlay" ng-show="showInfoA">
+        <p>
+          Put something here
+        </p>
+      </div>
+      <div class="row margin-bottom-15">
+        <div class="col-xs-4">
+          <a href=""><i class="fa fa-info-circle fa-lg" style="color: #ccc" ng-click="showInfoA = !showInfoA"></i></a>
+        </div>
+        <div class="col-xs-4">
+          <div class="text-center text-uppercase"><strong>Event</strong></div>
+        </div>
+        <div class="col-xs-4">
+          <a href="" class="chart-info-link pull-right" data-toggle="modal" data-target=".bs-modal-sm">Event Info</a>
+        </div>
+      </div>
       <div>
         <canvas id="bar" class="chart chart-bar"
           chart-data="vm.dataEvent" chart-labels="vm.labelsEvent" chart-colours="vm.coloursEvent"
@@ -18,70 +77,45 @@
         </canvas>
       </div>
       <div class="row text-center">
-        <div class="col-md-6">
-          <div class="number-stat" style="color: #3E606F">{{vm.usersSentTo}}</div>
+        <div class="col-xs-6 col-md-6">
+          <div class="number-stat" style="color: #0084C1">{{vm.usersSentTo}}</div>
           <div class="number-stat-label">Users Sent To</div>
         </div>
-        <div class="col-md-6">
-          <div class="number-stat" style="color: #7AA08B">{{vm.creditsEarned}}</div>
+        <div class="col-xs-6 col-md-6">
+          <div class="number-stat" style="color: #00A447">{{vm.creditsEarned}}</div>
           <div class="number-stat-label">Credits Earned</div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="col-md-6">
-    <h2 class="margin-top-10 margin-bottom-20">{{vm.eventData.name | titlecase}}</h2>
-    <h4 class="text-muted">Description</h4>
-    <hr class="thin">
-    <div class="row margin-bottom-15">
-      <div class="col-md-9">
-        <p>{{vm.eventData.description}}</p>
-      </div>
-    </div>
-    <h4 class="text-muted">Dates</h4>
-    <hr class="thin">
-    <div class="row margin-bottom-15">
-      <div class="col-md-5">
-        <p class="margin-bottom-0"><strong>Start</strong></p>
-        <p>{{vm.eventData.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
-      </div>
-      <div class="col-md-5">
-        <p class="margin-bottom-0"><strong>End</strong></p>
-        <p>{{vm.eventData.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</p>
-      </div>
-    </div>
-    <h4 class="text-muted">Sent To</h4>
-    <hr class="thin">
-    <div class="row margin-bottom-15">
-      <div class="col-md-9">
-        <p>{{vm.eventData.loyaltyLevelId.name}}</p>
-      </div>
-    </div>
-  </div>
 </div>
 
-<h3 class="margin-top-0">Select an Event</h3>
-<span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
-<div class="table-responsive margin-top-20">
-  <table class="table pointer table-hover">
+<!-- Selection of event -->
+<div ng-show="vm.selectEvent">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <h4>Select an event</h4>
+    </div>
+  </div>
+  <hr class="thin-top">
+  <table class="table pointer table-hover margin-top-20">
     <thead>
       <tr>
         <th>Name</th>
         <th>Start</th>
-        <th>End</th>
-        <th>Sent To</th>
+        <th class="hidden-xs">End</th>
+        <th class="hidden-xs">Sent To</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="event in vm.allEvents | orderBy: '-eventEnd'" ng-click="vm.populateEvent(event.objectId)">
         <td>{{event.name | titlecase}}</td>
         <td>{{event.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
-        <td>{{event.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
-        <td>{{event.loyaltyLevelId.name}}</td>
+        <td class="hidden-xs">{{event.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
+        <td class="hidden-xs">{{event.loyaltyLevelId.name}}</td>
       </tr>
     </tbody>
   </table>
+  <button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-show="vm.showPreviousPage()">Previous</button>
+  <button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>
 </div>
-<button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-show="vm.showPreviousPage()">Previous</button>
-<button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>

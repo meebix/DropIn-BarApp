@@ -12,6 +12,15 @@ a.alt-link {
   }
 }
 
+a.alt-link-blue {
+  color: @link-color-alt-blue;
+
+  &:hover {
+    color: @link-hover-color-alt-blue;
+    text-decoration: underline;
+  }
+}
+
 // Remove blue outline on focus
 a.btn.btn-link {
   &:extend(a.alt-link);

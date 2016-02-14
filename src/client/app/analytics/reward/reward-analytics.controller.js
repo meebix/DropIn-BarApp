@@ -5,13 +5,14 @@
     .module('app.analytics.reward')
     .controller('RewardAnalyticsController', RewardAnalyticsController);
 
-  RewardAnalyticsController.$inject = ['$q', '$filter', 'logger', 'analyticService'];
+  RewardAnalyticsController.$inject = ['$q', '$filter', 'logger', 'analyticService', 'helperService'];
   /* @ngInject */
-  function RewardAnalyticsController($q, $filter, logger, analyticService) {
+  function RewardAnalyticsController($q, $filter, logger, analyticService, helperService) {
     var vm = this;
     vm.title = 'Reward Analytics';
     vm.statsData = statsData;
     vm.chartRewards = chartRewards;
+    vm.getBarReward = getBarReward;
     vm.init = init;
 
     function statsData() {
@@ -49,8 +50,15 @@
       vm.dataRewards = [vm.dropinRewardsRedeemed, vm.barRewardsRedeemed];
     }
 
+    function getBarReward() {
+      helperService.getCurrentUsersBar().then(function(results) {
+        vm.barReward = results.data.reward;
+      });
+    }
+
     function init() {
       vm.statsData();
+      vm.getBarReward();
     }
 
     vm.init();

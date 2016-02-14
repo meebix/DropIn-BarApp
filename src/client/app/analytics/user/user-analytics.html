@@ -1,89 +1,63 @@
 <span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
+<div class="row">
+  <div class="col-xs-9 col-sm-11">
+    <h4>How many users are actively visiting Drop In bars?</h4>
+  </div>
+  <div class="col-xs-3 col-sm-1 padding-left-xs-0 text-right">
+    <a href="" class="more-info-link" data-toggle="modal" data-target=".bs-modal-sm">More Info</a>
+  </div>
+</div>
+<hr class="thin-top">
+
+<!-- More Info Modal -->
+<div class="modal fade bs-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="vertical-alignment-helper">
+    <div class="modal-dialog modal-sm vertical-align-center">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div>
+            An active user is an individual who has earned at least 1 credit within the last 14 days.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Active Users -->
 <div class="col-md-6">
   <div class="data-panel">
-    <ul class="list-inline list-unstyled nav-justified margin-bottom-15">
-      <li>
-        <a popover-placement="right" uib-popover="Users who have earned a credit by visiting a bar for at least 30 minutes within the last 30 days" role="button">
-          <i class="fa fa-info-circle fa-lg" style="color: #ccc"></i>
-        </a>
-      </li>
-      <li class="text-center text-uppercase"><strong>Active Users</strong></li>
-      <li></li>
-    </ul>
+    <div class="info-overlay" ng-show="showInfoA">
+      <p>
+        1 credit is earned by a user once they are connected to the Drop In iBeacons in
+        your bar for at least 30 minutes (users can only earn 1 credit / day at your bar)
+      </p>
+    </div>
+    <div class="row chart-title">
+      <div class="col-xs-4">
+        <a href=""><i class="fa fa-info-circle fa-lg" style="color: #ccc" ng-click="showInfoA = !showInfoA"></i></a>
+      </div>
+      <div class="col-xs-4">
+        <div class="text-center text-uppercase"><strong>Active Users</strong></div>
+      </div>
+      <div class="col-xs-4"></div>
+    </div>
     <div>
       <canvas id="bar" class="chart chart-bar"
         chart-data="vm.dataActiveUsers" chart-labels="vm.labelsActiveUsers" chart-colours="vm.coloursActiveUsers"
         chart-legend="false" chart-options="vm.chartOptionsActiveUsers">
       </canvas>
-      <div class="text-center text-muted" style="font-size: 12px; margin-top: -18px;">Over the past 30 days</div>
     </div>
     <div class="row text-center">
-      <div class="col-md-6">
+      <div class="col-xs-6 col-md-6">
         <div class="number-stat" style="color: #0084C1">{{vm.totalActiveUsersByCredit}}</div>
         <div class="number-stat-label">Drop In</div>
       </div>
-      <div class="col-md-6">
-        <div class="number-stat" style="color: #F05523">{{vm.activeUsersByCredit}}</div>
+      <div class="col-xs-6 col-md-6">
+        <div class="number-stat" style="color: #00A447">{{vm.activeUsersByCredit}}</div>
         <div class="number-stat-label">{{vm.barName}}</div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Drop In Gender Totals</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="pie" class="chart chart-pie"
-        chart-data="vm.dataGender" chart-labels="vm.labelsGender" chart-colours="vm.coloursGender"
-        chart-legend="true" chart-options="vm.chartOptionsGender">
-      </canvas>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Drop In Loyalty Level Totals</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="doughnut" class="chart chart-doughnut"
-        chart-data="vm.dataLoyaltyLevel" chart-labels="vm.labelsLoyaltyLevel" chart-colours="vm.coloursLoyaltyLevel"
-        chart-legend="true" chart-options="vm.chartOptionsLoyaltyLevel">
-      </canvas>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Drop In Age Totals</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="pie" class="chart chart-pie"
-        chart-data="vm.dataAge" chart-labels="vm.labelsAge" chart-colours="vm.coloursAge"
-        chart-legend="true" chart-options="vm.chartOptionsAge">
-      </canvas>
-    </div>
-  </div>
-</div>
-
-<div class="col-md-12">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">{{vm.barName}} Active Users</h3>
-    </div>
-    <div class="panel-body">
-      <canvas id="bar" class="chart chart-bar"
-        chart-data="vm.dataActiveUsers" chart-labels="vm.labelsActiveUsers" chart-colours="vm.coloursActiveUsers"
-        chart-legend="true" chart-series="vm.seriesActiveUsers" chart-options="vm.chartOptionsActiveUsers">
-      </canvas>
-    </div>
-  </div>
-</div> -->

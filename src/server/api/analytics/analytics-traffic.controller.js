@@ -31,7 +31,7 @@ function statsData(req, res) {
 
     _.each(results, function(result) {
       values.unshift(result.attributes.visitsByCredit);
-      calcDates.unshift(moment.utc(result.attributes.calcDate).format('MM-DD'));
+      calcDates.unshift(moment.utc(result.attributes.calcDate).format('MMM-DD'));
     });
 
     var stats = [values, calcDates, barName];
