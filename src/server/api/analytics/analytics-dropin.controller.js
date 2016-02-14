@@ -29,7 +29,7 @@ function singleStatsData(req, res) {
 
 function multipleStatsData(req, res) {
   var dropinStats = new Parse.Query(DropInStats);
-  var oneWeekAgoDate = new Date(moment(new Date()).subtract(7, 'days')._d);
+  var oneWeekAgoDate = new Date(moment(new Date()).subtract(8, 'days')._d);
 
   dropinStats.descending('calcDate');
   dropinStats.greaterThanOrEqualTo('calcDate', oneWeekAgoDate);
