@@ -1,26 +1,33 @@
 <h1>Events</h1>
 <hr>
 <a ui-sref="events-new" class="btn btn-primary">Create Event</a>
-<span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
-<div class="table-responsive margin-top-20">
-  <table class="table pointer table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Sent To</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="event in vm.allEvents | orderBy: '-eventEnd'" ng-click="vm.goToShow(event.objectId)">
-        <td>{{event.name | titlecase}}</td>
-        <td>{{event.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
-        <td>{{event.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
-        <td>{{event.loyaltyLevelId.name}}</td>
-      </tr>
-    </tbody>
-  </table>
+
+<div ng-show="eventsCreated">
+  <span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
+  <div class="table-responsive margin-top-20">
+    <table class="table pointer table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Sent To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="event in vm.allEvents | orderBy: '-eventEnd'" ng-click="vm.goToShow(event.objectId)">
+          <td>{{event.name | titlecase}}</td>
+          <td>{{event.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
+          <td>{{event.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
+          <td>{{event.loyaltyLevelId.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-show="vm.showPreviousPage()">Previous</button>
+  <button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>
 </div>
-<button type="button" class="btn btn-default" ng-click="vm.previousPage()" ng-show="vm.showPreviousPage()">Previous</button>
-<button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>
+
+<div class="margin-top-40" ng-show="!eventsCreated">
+  <p>You have not created any events yet</p>
+</div>

@@ -36,11 +36,16 @@
     // REST calls
     function allEvents() {
       eventService.allEvents({ limitByDate: true, page: vm.currentPage }).then(function(results) {
-        vm.allEvents = results.data;
+        console.log(results.data);
+        vm.eventsCreated = results.data.length !== 0;
 
-        vm.displayLimit = results.displayLimit;
-        vm.count = results.count;
-        vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
+        if (vm.eventsCreated) {
+          vm.allEvents = results.data;
+
+          vm.displayLimit = results.displayLimit;
+          vm.count = results.count;
+          vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
+        }
       }, function(error) {
         // Error
       });

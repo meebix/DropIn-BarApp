@@ -20,13 +20,17 @@
 
     function statsData(eventId) {
       analyticService.eventStats(eventId).then(function(results) {
-        vm.eventStats = results.data;
+        vm.eventsCreated = results.data.length !== 0;
 
-        // Stats
-        vm.usersSentTo = vm.eventStats.usersSentTo;
-        vm.creditsEarned = vm.eventStats.creditsEarned;
-        vm.calcDates = vm.eventStats.calcDate.iso;
-        vm.eventName = vm.eventStats.eventId.name;
+        if (vm.eventsCreated) {
+          vm.eventStats = results.data;
+
+          // Stats
+          vm.usersSentTo = vm.eventStats.usersSentTo;
+          vm.creditsEarned = vm.eventStats.creditsEarned;
+          vm.calcDates = vm.eventStats.calcDate.iso;
+          vm.eventName = vm.eventStats.eventId.name;
+        }
       })
       .then(function() {
         vm.chartEvent();

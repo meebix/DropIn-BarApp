@@ -36,6 +36,7 @@
             <input type="file" name="photo" class="photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
             <div class="btn btn-default">Browse</div>
           </label>
+          <div><small>You must own the rights to the uploaded image</small></div>
         </div>
         <div class="margin-top-10" ng-hide="vm.cropper.sourceImage !== null">
           <img ng-src="{{vm.eventData.photo.url}}" alt="Description" width="375" height="275"  />

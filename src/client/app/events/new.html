@@ -35,9 +35,10 @@
             <input type="file" name="photo" class="photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
             <div class="btn btn-default">Browse</div>
           </label>
+          <div><small>You must own the rights to the uploaded image</small></div>
         </div>
         <div class="margin-top-10" ng-show="vm.cropper.sourceImage !== null">
-          <canvas width="4s75" height="375" id="event-canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="80" min-height="80" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+          <canvas width="475" height="375" id="event-canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="80" min-height="80" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
         </div>
       </div>
     </div>

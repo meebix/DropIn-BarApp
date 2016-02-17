@@ -49,12 +49,13 @@ function allEvents(req, res) {
 
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);
-  eventsQuery.lessThan('eventEnd', lessThanDate);
-  eventsQuery.greaterThan('eventEnd', greaterThanDate);
+  eventsQuery.lessThan('eventStart', lessThanDate);
+  eventsQuery.greaterThan('eventStart', greaterThanDate);
   eventsQuery.include('loyaltyLevelId');
   eventsQuery.limit(displayLimit);
   eventsQuery.skip(page * displayLimit);
   eventsQuery.count().then(function(result) {
+    console.log(result);
     count = result;
   })
   .then(function() {
