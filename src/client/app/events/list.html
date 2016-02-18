@@ -2,7 +2,7 @@
 <hr>
 <a ui-sref="events-new" class="btn btn-primary">Create Event</a>
 
-<div ng-show="eventsCreated">
+<div ng-show="vm.eventsCreated">
   <span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
   <div class="table-responsive margin-top-20">
     <table class="table pointer table-hover">
@@ -28,6 +28,6 @@
   <button type="button" class="btn btn-default pull-right" ng-click="vm.nextPage()" ng-show="vm.showNextPage()">Next</button>
 </div>
 
-<div class="margin-top-40" ng-show="!eventsCreated">
+<div class="margin-top-40" ng-show="!vm.eventsCreated">
   <p>You have not created any events yet</p>
 </div>

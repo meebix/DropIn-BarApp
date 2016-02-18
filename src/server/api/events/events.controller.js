@@ -128,15 +128,6 @@ function createEvent(req, res) {
               // Find all users who have a role of 'User' and for each user
               // save a new UsersEvents to the join table
               usersQuery.equalTo('roleId', roleObj);
-
-              // If statement checks to see if the loyalty level is 'All'
-              // TODO: Fixed hardcoded value
-              console.log('XXXXXXXX -- LOGGING LOYALTY INFO -- XXXXXXXXXX');
-              console.log('req.body loyalty level id', loyaltyLevelId);
-              console.log('loyaltylevelobj from outside call', loyaltyLevelObj, loyaltyLevelObj.id);
-              console.log('all object id', allObj, allObj.id);
-              console.log('role object id', roleObj, roleObj.id);
-
               if (loyaltyLevelObj.id !== allObj.id) {
                 console.log('IF block executed because ALL was NOT called');
                 console.log(loyaltyLevelObj.id, allObj.id);
@@ -293,85 +284,6 @@ function deleteEvent(req, res) {
 
 // Utility Functions
 // =====================
-
-// Send event to ALL users
-// function sendToAll(savedEventObj, req, res) {
-//   return usersQuery.find().then(function(results) {
-//     console.log('*** USERS COUNT ***', results.length);
-
-//     if (results.length === 0) res.status(200).end();
-
-//     _.each(results, function(userObj) {
-//       console.log('--- INSIDE EACH ---', userObj.id);
-
-//       var newUsersEvents = new UsersEvents();
-
-//       var usersEventsObj = {
-//         eventId: savedEventObj,
-//         userId: userObj,
-//         barId: currentUserBarObj(),
-//         eventStart: transformDateForParse(req.body.eventStart),
-//         eventEnd: transformDateForParse(req.body.eventEnd),
-//         userHasViewed: false,
-//         markedForDeletion: false
-//       };
-
-//       return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-//         console.log('--- SAVED ---', savedObj.id);
-
-//         res.status(200).end();
-//       }, function(error) {
-//         // Error saving: New UsersEvent Object
-//         console.log(error);
-//         res.status(400).end();
-//       });
-//     });
-//   }, function(error) {
-//     // Error retrieving: Users
-//     console.log(error);
-//     res.status(400).end();
-//   });
-// }
-
-// // Send event to SPECIFIED users
-// function sendToSpecified(savedEventObj, loyaltyLevelObj, req, res) {
-//   usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
-//   return usersQuery.find().then(function(results) {
-//     console.log('*** USERS COUNT ***', results.length);
-
-//     if (results.length === 0) res.status(200).end();
-
-//     _.each(results, function(userObj) {
-//       console.log('--- INSIDE EACH ---', userObj.id);
-
-//       var newUsersEvents = new UsersEvents();
-
-//       var usersEventsObj = {
-//         eventId: savedEventObj,
-//         userId: userObj,
-//         barId: currentUserBarObj(),
-//         eventStart: transformDateForParse(req.body.eventStart),
-//         eventEnd: transformDateForParse(req.body.eventEnd),
-//         userHasViewed: false,
-//         markedForDeletion: false
-//       };
-
-//       return newUsersEvents.save(usersEventsObj).then(function(savedObj) {
-//         console.log('--- SAVED ---', savedObj.id);
-
-//         res.status(200).end();
-//       }, function(error) {
-//         // Error saving: New UsersEvent Object
-//         console.log(error);
-//         res.status(400).end();
-//       });
-//     });
-//   }, function(error) {
-//     // Error retrieving: Users
-//     console.log(error);
-//     res.status(400).end();
-//   });
-// }
 
 // This just creates a date object for Parse to read
 // Parse seems to be converting date to UTC before storing it automatically

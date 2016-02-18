@@ -20,6 +20,7 @@
     vm.goToShow = goToShow;
     vm.currentPage = 0;
     vm.errorMessage;
+    vm.eventsCreated = true;
     vm.init = init;
 
     // Image cropper options
@@ -36,7 +37,6 @@
     // REST calls
     function allEvents() {
       eventService.allEvents({ limitByDate: true, page: vm.currentPage }).then(function(results) {
-        console.log(results.data);
         vm.eventsCreated = results.data.length !== 0;
 
         if (vm.eventsCreated) {
