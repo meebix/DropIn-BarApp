@@ -47,10 +47,14 @@
       <div class="col-xs-4"></div>
     </div>
     <div>
-      <canvas id="line-rewards" class="chart chart-line" chart-data="vm.dataRewards" chart-colours="vm.coloursRewards"
-        chart-labels="vm.labelsRewards" chart-legend="false" chart-series="vm.seriesRewards"
-        chart-options="vm.chartOptionsRewards">
-      </canvas>
+      <div class="col-xs-12 col-sm-12 padding-left-25">
+        <div class="text-center rotate-90 y-axis y-position-rewards"># Of Rewards Redeemed</div>
+        <canvas id="line-rewards" class="chart chart-line" chart-data="vm.dataRewards" chart-colours="vm.coloursRewards"
+          chart-labels="vm.labelsRewards" chart-legend="false" chart-series="vm.seriesRewards"
+          chart-options="vm.chartOptionsRewards">
+        </canvas>
+        <div class="text-center" style="font-size: 11px; color: #a2a2a2;">Day</div>
+      </div>
     </div>
     <div class="row text-center">
       <div class="col-xs-6 col-md-6">

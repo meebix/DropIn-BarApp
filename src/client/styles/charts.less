@@ -1,3 +1,5 @@
+@import (reference) "./bootstrap/variables.less";
+
 // Charts
 //
 
@@ -115,4 +117,88 @@ a.chart-info-link {
 .number-stat-label {
   font-size: 14px;
   font-weight: 300;
+}
+
+.y-axis {
+  font-size: 11px;
+  color: #a2a2a2;
+}
+
+.y-position-traffic {
+  position: relative;
+  top: 112px;
+  right: 68px;
+  width: 102px;
+}
+
+.y-position-rewards {
+  position: relative;
+  top: 112px;
+  right: 80px;
+  width: 128px;
+}
+
+// Media Queries
+@media (max-width: 376px) {
+  .y-position-traffic {
+    position: relative;
+    top: 55px;
+    right: 68px;
+    width: 102px;
+  }
+
+  .y-position-rewards {
+    position: relative;
+    top: 58px;
+    right: 80px;
+    width: 128px;
+  }
+}
+
+@media (min-width: 376px) and (max-width: 414px) {
+  .y-position-traffic {
+    position: relative;
+    top: 58px;
+    right: 62px;
+    width: 102px;
+  }
+
+  .y-position-rewards {
+    position: relative;
+    top: 60px;
+    right: 80px;
+    width: 128px;
+  }
+}
+
+@media (min-width: 414px) and (max-width: 480px) {
+  .y-position-traffic {
+    position: relative;
+    top: 67px;
+    right: 45px;
+    width: 102px;
+  }
+
+  .y-position-rewards {
+    position: relative;
+    top: 57px;
+    right: 62px;
+    width: 128px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 530px) {
+  .y-position-traffic {
+    position: relative;
+    top: 92px;
+    right: 67px;
+    width: 102px;
+  }
+
+  .y-position-rewards {
+    position: relative;
+    top: 75px;
+    right: 80px;
+    width: 128px;
+  }
 }
