@@ -26,7 +26,12 @@
           },
           title: 'Events',
           data: {
-            authorizedRoles: [ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       },
@@ -43,7 +48,12 @@
           },
           title: 'Events',
           data: {
-            authorizedRoles: [ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       },
@@ -60,7 +70,12 @@
           },
           title: 'Events',
           data: {
-            authorizedRoles: [ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       },
@@ -77,7 +92,12 @@
           },
           title: 'Events',
           data: {
-            authorizedRoles: [ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       }

@@ -26,7 +26,10 @@
           },
           title: 'Users',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       },
@@ -43,7 +46,10 @@
           },
           title: 'User',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       }

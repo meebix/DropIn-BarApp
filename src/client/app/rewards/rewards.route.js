@@ -26,7 +26,10 @@
           },
           title: 'Rewards',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       },
@@ -43,7 +46,10 @@
           },
           title: 'Rewards',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       }

@@ -26,7 +26,12 @@
           },
           title: 'Event Analytics',
           data: {
-            authorizedRoles: [ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       }

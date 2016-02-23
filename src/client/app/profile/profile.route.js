@@ -26,7 +26,10 @@
           },
           title: 'Profiles',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       },
@@ -43,7 +46,10 @@
           },
           title: 'profile',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       },
@@ -60,7 +66,10 @@
           },
           title: 'profile',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       },
@@ -77,7 +86,10 @@
           },
           title: 'Profile',
           data: {
-            authorizedRoles: [ROLES.admin]
+            authorizedRoles: [
+              ROLES.admin,
+              ROLES.uatAdmin
+            ]
           }
         }
       }

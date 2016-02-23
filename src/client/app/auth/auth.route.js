@@ -26,7 +26,13 @@
           },
           title: 'Login',
           data: {
-            authorizedRoles: [ROLES.all, ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.all,
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       },
@@ -43,7 +49,13 @@
           },
           title: 'Reset Password',
           data: {
-            authorizedRoles: [ROLES.all, ROLES.admin, ROLES.bar]
+            authorizedRoles: [
+              ROLES.all,
+              ROLES.admin,
+              ROLES.bar,
+              ROLES.uatAdmin,
+              ROLES.uatBar
+            ]
           }
         }
       }
