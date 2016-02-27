@@ -17,10 +17,10 @@
   ])
   .run(appRun);
 
-  appRun.$inject = ['$state', '$rootScope', '$cookieStore', 'toastr', 'authService', 'accessService'];
+  appRun.$inject = ['$state', '$rootScope', '$location', '$cookieStore', 'toastr', 'authService', 'accessService'];
   /* @ngInject */
 
-  function appRun($state, $rootScope, $cookieStore, toastr, authService, accessService) {
+  function appRun($state, $rootScope, $location, $cookieStore, toastr, authService, accessService) {
     // Check for authentication and authorization when app loads
     authService.isAuthenticated().then(function(result) {
       // result contains json authorized: false if not authenticated, blank otherwise

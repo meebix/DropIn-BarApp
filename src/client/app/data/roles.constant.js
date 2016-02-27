@@ -6,7 +6,7 @@
     .constant('ROLES', {
 
       // Role name: Parse ObjectId
-      all: '*',
+      all: '0000000000',
       admin: 'aKUOYT4z34',
       bar: 'qwekFNkzFc',
       uatAdmin: 'BqD3tsp359',

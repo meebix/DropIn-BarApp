@@ -71,6 +71,7 @@
     function logout() {
       authService.logout().then(function() {
         $cookieStore.remove('bar-name');
+        $rootScope.userRole = '';
         $state.go('login');
       }, function() {
         // error broadcast

@@ -24,8 +24,8 @@
         user = $cookieStore.get('user');
         role = user.roleId.objectId;
       } else {
-        // If no cookie was set yet, use * for all role
-        role = '*';
+        // If no cookie was set yet, use a random value for all role
+        role = '0000000000';
       }
 
       return role;

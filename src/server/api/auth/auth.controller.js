@@ -23,10 +23,10 @@ function login(req, res, next) {
   Parse.User.enableUnsafeCurrentUser();
 
   Parse.User.logIn(req.body.username, req.body.password).then(function(user) {
-    // Set session token
+    // Set session tokens
     req.session.token = user.getSessionToken();
 
-    // Set cookie
+    // Set cookies
     res.cookie('user', JSON.stringify(user));
 
     res.status(200).json({user: user});
