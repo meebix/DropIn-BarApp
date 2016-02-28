@@ -34,18 +34,9 @@ function allEvents(req, res) {
   var page = req.query.page;
   var displayLimit = 15;
   var count;
-  var greaterThanDate;
-  var lessThanDate;
 
-  // TODO: Move event anlytics query to own file and remove this dateLimitation nonsense
-  if (req.query.limitByDate === 'true') {
-    greaterThanDate = new Date();
-    lessThanDate = moment(new Date()).add(100, 'years')._d;
-  } else {
-    // Set date in past so all events pull from DB
-    greaterThanDate = new Date('01', '01', '1970');
-    lessThanDate = new Date();
-  }
+  var lessThanDate = moment(new Date()).add(100, 'years')._d;
+  var greaterThanDate = new Date();
 
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);

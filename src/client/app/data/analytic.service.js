@@ -14,7 +14,8 @@
       eventStats: eventStats,
       rewardStats: rewardStats,
       trafficStats: trafficStats,
-      userStats: userStats
+      userStats: userStats,
+      allEvents: allEvents
     };
 
     return service;
@@ -117,6 +118,24 @@
       }).then(function(response) {
         $rootScope.dataLoaded = true;
         $rootScope.fadeBackground = false;
+        return response.data;
+      });
+    }
+
+    function allEvents(options) {
+      $rootScope.dataLoaded = false;
+
+      return $http({
+        method: 'GET',
+        url: '/api/v1/analytics/events',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        params: {
+          page: options.page
+        }
+      }).then(function(response) {
+        $rootScope.dataLoaded = true;
         return response.data;
       });
     }

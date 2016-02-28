@@ -36,7 +36,7 @@
 
     // REST calls
     function allEvents() {
-      eventService.allEvents({ limitByDate: true, page: vm.currentPage }).then(function(results) {
+      eventService.allEvents({ page: vm.currentPage }).then(function(results) {
         vm.eventsCreated = results.data.length !== 0;
 
         if (vm.eventsCreated) {

@@ -14,6 +14,7 @@ var analyticsUserController = require('./analytics-user.controller');
 router.get('/single-dropin', analyticsDropInController.singleStatsData);
 router.get('/multiple-dropin', analyticsDropInController.multipleStatsData);
 router.get('/events/:id', analyticsEventsController.statsData);
+router.get('/events', analyticsEventsController.allEventsData);
 router.get('/rewards', analyticsRewardsController.statsData);
 router.get('/traffic', analyticsTrafficController.statsData);
 router.get('/users', analyticsUserController.statsData);

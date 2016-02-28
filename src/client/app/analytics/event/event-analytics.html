@@ -2,7 +2,7 @@
 <div ng-show="!vm.selectEvent">
   <div class="row">
     <div class="col-xs-8 col-sm-10">
-      <h4>How effective are my events?</h4>
+      <h4>How effective was my event?</h4>
     </div>
     <div class="col-xs-4 col-sm-2 padding-left-xs-0 text-right">
       <a href="" class="more-info-link" ng-click="vm.selectEvent = true">Change Event</a>
@@ -54,8 +54,12 @@
     <div class="data-panel">
       <div class="info-overlay" ng-show="showInfoA">
         <p>
-          Credits are only counted here if they were earned by users in the intended audience
-          (i.e. loyalty level) and were earned during the event's specific date &amp; time
+          The conversion (or effectiveness) of your event is shown below by counting the number
+          of credits earned by all Drop In users that received an invite to the event (based on loyalty level).
+          Only those users who earned a credit within the event's date and time window are counted.
+        </p>
+        <p>
+          Remember: Users earn a credit after visiting your bar for 30 minutes.
         </p>
       </div>
       <div class="row margin-bottom-15">
@@ -129,5 +133,5 @@
 </div>
 
 <div ng-show="!vm.eventsCreated">
-  <p>You currently do not have any events to manage</p>
+  <p>You currently do not have any events with stats.</p>
 </div>

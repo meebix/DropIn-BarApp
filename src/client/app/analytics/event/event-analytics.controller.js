@@ -52,7 +52,7 @@
     }
 
     function allEvents() {
-      eventService.allEvents({ limitByDate: false, page: vm.currentPage }).then(function(results) {
+      analyticService.allEvents({ page: vm.currentPage }).then(function(results) {
         vm.eventsCreated = results.data.length !== 0;
 
         if (vm.eventsCreated) {

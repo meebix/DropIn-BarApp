@@ -28,7 +28,6 @@
           'Content-Type': 'application/json'
         },
         params: {
-          limitByDate: options.limitByDate,
           page: options.page
         }
       }).then(function(response) {
