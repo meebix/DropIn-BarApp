@@ -16,6 +16,7 @@
     vm.chartEvent = chartEvent;
     vm.currentPage = 0;
     vm.selectEvent = true;
+    vm.eventsCreated = true;
     vm.init = init;
 
     function statsData(eventId) {
@@ -52,12 +53,16 @@
 
     function allEvents() {
       eventService.allEvents({ limitByDate: false, page: vm.currentPage }).then(function(results) {
-        vm.allEvents = results.data;
+        vm.eventsCreated = results.data.length !== 0;
 
-        // Pagination
-        vm.displayLimit = results.displayLimit;
-        vm.count = results.count;
-        vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
+        if (vm.eventsCreated) {
+          vm.allEvents = results.data;
+
+          // Pagination
+          vm.displayLimit = results.displayLimit;
+          vm.count = results.count;
+          vm.maxPage = Math.ceil(results.count / results.displayLimit) - 1;
+        }
       }, function(error) {
         // Error
       });

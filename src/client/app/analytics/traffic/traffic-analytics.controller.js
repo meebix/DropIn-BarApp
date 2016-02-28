@@ -19,15 +19,15 @@
         vm.trafficStats = results.data;
 
         // Stats
-        vm.barTrafficValues = vm.trafficStats[0].slice(0, vm.trafficStats[0].length-1);
-        vm.calcDates = vm.trafficStats[1].slice(0, vm.trafficStats[1].length-1);
+        vm.barTrafficValues = vm.trafficStats[0];
+        vm.calcDates = vm.trafficStats[1];
         vm.barName = vm.trafficStats[2][0];
       }).then(function() {
         return analyticService.multipleDropinStats().then(function(results) {
           vm.multipleDropinStats = results.data;
 
           // Stats
-          vm.dropinTrafficValues = vm.multipleDropinStats[0].slice(0, vm.multipleDropinStats[0].length-1);
+          vm.dropinTrafficValues = vm.multipleDropinStats[0];
         });
       }).then(function() {
         vm.chartTraffic();

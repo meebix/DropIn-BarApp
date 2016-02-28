@@ -20,15 +20,15 @@
         vm.rewardStats = results.data;
 
         // Stats
-        vm.barRewardsRedeemed = vm.rewardStats[0].slice(0, vm.rewardStats[0].length-1);
-        vm.calcDates = vm.rewardStats[1].slice(0, vm.rewardStats[1].length-1);
+        vm.barRewardsRedeemed = vm.rewardStats[0];
+        vm.calcDates = vm.rewardStats[1];
         vm.barName = vm.rewardStats[2][0];
       }).then(function() {
         return analyticService.multipleDropinStats().then(function(results) {
           vm.multipleDropinStats = results.data;
 
           // Stats
-          vm.dropinRewardsRedeemed = vm.multipleDropinStats[1].slice(0, vm.multipleDropinStats[1].length-1);
+          vm.dropinRewardsRedeemed = vm.multipleDropinStats[1];
         });
       }).then(function() {
         vm.chartRewards();

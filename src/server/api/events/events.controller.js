@@ -44,7 +44,7 @@ function allEvents(req, res) {
   } else {
     // Set date in past so all events pull from DB
     greaterThanDate = new Date('01', '01', '1970');
-    lessThanDate = moment(new Date()).subtract(1, 'day')._d;
+    lessThanDate = new Date();
   }
 
   eventsQuery.equalTo('barId', currentUserBarObj());
@@ -55,7 +55,6 @@ function allEvents(req, res) {
   eventsQuery.limit(displayLimit);
   eventsQuery.skip(page * displayLimit);
   eventsQuery.count().then(function(result) {
-    console.log(result);
     count = result;
   })
   .then(function() {

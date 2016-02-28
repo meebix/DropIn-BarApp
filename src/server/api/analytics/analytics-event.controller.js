@@ -10,8 +10,6 @@ var four0four = require('../../utils/404')();
 var Events = Parse.Object.extend('Events');
 var EventStats = Parse.Object.extend('Stats_Events');
 
-// req.params.id
-
 // Export
 module.exports = {
   statsData: statsData
