@@ -1,8 +1,8 @@
 <h1>Bar Rewards</h1>
 <hr>
 <span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
-<div class="table-responsive margin-top-20">
-  <table class="table pointer table-hover">
+<div class="table margin-top-20">
+  <table class="table pointer table-hover" style="table-layout: fixed;">
     <thead>
       <tr>
         <th>Reward</th>
@@ -12,8 +12,8 @@
     <tbody>
     <p><span us-spinner ng-hide="dataLoaded"></span></p>
     <tr ng-repeat="reward in vm.allRewards | orderBy: 'name'" ng-click="vm.goToShow(reward.objectId)">
-        <td>{{reward.reward | titlecase}}</td>
-        <td>{{reward.name}}</td>
+        <td style="min-width: 97px;">{{reward.reward | titlecase}}</td>
+        <td style="min-width: 97px;">{{reward.name}}</td>
       </tr>
     </tbody>
   </table>

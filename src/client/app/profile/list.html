@@ -2,20 +2,20 @@
 <hr>
 <a ui-sref="profile-new" class="btn btn-primary">Create Bar</a>
 <span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
-<div class="table-responsive margin-top-20">
+<div class="table margin-top-20">
   <table class="table pointer table-hover">
     <thead>
       <tr>
         <th>Name</th>
         <th>Location</th>
-        <th>Active</th>
+        <th class="hidden-xs">Active</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="profile in vm.allProfiles | orderBy: 'name'" ng-click="vm.goToShow(profile.objectId)">
-        <td>{{profile.name}}</td>
-        <td>{{profile.city | titlecase}}, {{profile.state | uppercase}}</td>
-        <td ng-init="profile.isActive ? profile.isActive = 'True' : profile.isActive = 'False'">{{profile.isActive}}</td>
+        <td style="min-width: 97px;">{{profile.name}}</td>
+        <td style="min-width: 97px;">{{profile.city | titlecase}}, {{profile.state | uppercase}}</td>
+        <td class="hidden-xs" ng-init="profile.isActive ? profile.isActive = 'True' : profile.isActive = 'False'">{{profile.isActive}}</td>
       </tr>
     </tbody>
   </table>

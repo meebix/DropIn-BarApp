@@ -9,10 +9,10 @@
         <input type="text" class="form-control" placeholder="john@bar.com" ng-model="vm.userData.username" ng-focus="vm.showHelperUsername = true" ng-blur="vm.showHelperUsername = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperUsername">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperUsername">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This should be the <strong>email</strong> of the user</div>
         </div>
       </div>
@@ -35,10 +35,10 @@
         </select>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperBar">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperBar">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Select the bar where the user works</div>
         </div>
       </div>

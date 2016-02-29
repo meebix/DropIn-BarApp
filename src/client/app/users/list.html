@@ -2,21 +2,21 @@
 <hr>
 <a ui-sref="user-new" class="btn btn-primary">Create Bar User</a>
 <span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
-<div class="table-responsive margin-top-20">
-  <table class="table table-hover">
+<div class="table margin-top-20">
+  <table class="table table-hover" style="overflow-y: hidden;">
     <thead>
       <tr>
         <th>Username</th>
-        <th>Email</th>
-        <th>Bar</th>
+        <th class="hidden-xs">Email</th>
+        <th class="hidden-xs">Bar</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="user in vm.allUsers | orderBy: 'username'">
-        <td>{{user.username | lowercase}}</td>
-        <td>{{user.email | lowercase}}</td>
-        <td>{{user.barId.name}}</td>
+        <td style="min-width: 97px;">{{user.username | lowercase}}</td>
+        <td class="hidden-xs">{{user.email | lowercase}}</td>
+        <td class="hidden-xs">{{user.barId.name}}</td>
         <td><a href="" class="alt-link" ng-click="vm.deleteUser(user.objectId)">Delete</a></td>
       </tr>
     </tbody>

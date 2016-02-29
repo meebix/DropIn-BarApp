@@ -4,22 +4,28 @@
 
 <div ng-show="vm.eventsCreated">
   <span us-spinner spinner-theme="table" ng-hide="dataLoaded"></span>
-  <div class="table-responsive margin-top-20">
+  <div class="table margin-top-20">
     <table class="table pointer table-hover">
       <thead>
         <tr>
           <th>Name</th>
           <th>Start</th>
-          <th>End</th>
-          <th>Sent To</th>
+          <th class="hidden-xs">End</th>
+          <th class="hidden-xs">Sent To</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="event in vm.allEvents | orderBy: 'eventStart'" ng-click="vm.goToShow(event.objectId)">
           <td>{{event.name | titlecase}}</td>
-          <td>{{event.eventStart.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
-          <td>{{event.eventEnd.iso | date: 'EEE, MMM d, hh:mm a'}}</td>
-          <td>{{event.loyaltyLevelId.name}}</td>
+          <td style="min-width: 97px;">
+            <div>{{event.eventStart.iso | date: 'EEE, MMM d'}}</div>
+            <div>{{event.eventStart.iso | date: 'hh:mm a'}}</div>
+          </td>
+          <td class="hidden-xs" style="min-width: 97px;">
+            <div>{{event.eventEnd.iso | date: 'EEE, MMM d'}}</div>
+            <div>{{event.eventEnd.iso | date: 'hh:mm a'}}</div>
+          </td>
+          <td class="hidden-xs">{{event.loyaltyLevelId.name}}</td>
         </tr>
       </tbody>
     </table>

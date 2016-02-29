@@ -11,10 +11,10 @@
         <input type="text" class="form-control" placeholder="The Last Call" ng-model="vm.profileData.name" ng-focus="vm.showHelperName = true" ng-blur="vm.showHelperName = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperName">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperName">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Please enter the <strong>official legal name</strong> of the bar</div>
         </div>
       </div>
@@ -58,12 +58,11 @@
         <label for="profilePhone">Phone Number</label>
         <input type="text" class="form-control" placeholder="(201) 444-4444" ng-model="vm.profileData.phone" ng-focus="vm.showHelperPhone = true" ng-blur="vm.showHelperPhone = false">
       </div>
-
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperPhone">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperPhone">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Must be formatted as <strong>(123) 456-7899</strong></div>
         </div>
       </div>
@@ -76,10 +75,10 @@
         <input type="text" class="form-control" placeholder="info@bar.com" ng-model="vm.profileData.email" ng-focus="vm.showHelperEmail = true" ng-blur="vm.showHelperEmail = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperEmail">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperEmail">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Please enter the main <strong>information email address</strong> for the bar</div>
         </div>
       </div>
@@ -135,13 +134,13 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="beaconMajor">Beacon Major</label>
-            <input type="text" class="form-control" ng-model="vm.profileData.beaconMajor" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
+          <input type="text" class="form-control" ng-model="vm.profileData.beaconMajor" ng-focus="vm.showHelperBeaconMajor = true" ng-blur="vm.showHelperBeaconMajor = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperBeaconMajor">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperBeaconMajor">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>major</strong> setting when connecting to a beacon</div>
         </div>
       </div>
@@ -154,10 +153,10 @@
             <input type="text" class="form-control" ng-model="vm.profileData.beaconMinor" ng-focus="vm.showHelperBeaconMinor = true" ng-blur="vm.showHelperBeaconMinor = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperBeaconMinor">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperBeaconMinor">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>minor</strong> setting when connecting to a beacon</div>
         </div>
       </div>
@@ -169,13 +168,13 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="mapLatitude">Map Latitude</label>
-            <input type="text" class="form-control" ng-model="vm.profileData.latitude" ng-focus="vm.showHelperLatitude = true" ng-blur="vm.showHelperLatitude = false">
+          <input type="text" class="form-control" ng-model="vm.profileData.latitude" ng-focus="vm.showHelperLatitude = true" ng-blur="vm.showHelperLatitude = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperLatitude">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperLatitude">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>latitude</strong> cordinate of the bar on a map</div>
         </div>
       </div>
@@ -185,13 +184,13 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="mapLongitude">Map Longitude</label>
-            <input type="text" class="form-control" ng-model="vm.profileData.longitude" ng-focus="vm.showHelperLongitude = true" ng-blur="vm.showHelperLongitude = false">
+          <input type="text" class="form-control" ng-model="vm.profileData.longitude" ng-focus="vm.showHelperLongitude = true" ng-blur="vm.showHelperLongitude = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperLongitude">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperLongitude">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This value denotes the <strong>longitude</strong> cordinate of the bar on a map</div>
         </div>
       </div>
@@ -264,10 +263,10 @@
         <input type="text" class="form-control" ng-model="vm.profileData.reward" placeholder="$2 Margaritas" ng-focus="vm.showHelperReward = true" ng-blur="vm.showHelperReward = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperReward">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperReward">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Enter the <strong>reward</strong> the bar will be providing to Drop In users</div>
         </div>
       </div>
@@ -283,10 +282,10 @@
         </select>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" ng-show="vm.showHelperStatus">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperStatus">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> False = bar is not yet actively shown to users on the mobile app</div>
         </div>
       </div>

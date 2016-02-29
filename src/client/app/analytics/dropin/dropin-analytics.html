@@ -1,11 +1,11 @@
 <span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
-<div><small>{{vm.calcDate}}</small></div>
+<div><small>{{vm.calcDate | date : 'MM/dd/yyyy' : 'UTC'}}</small></div>
 <div class="row">
-  <div class="col-xs-9 col-sm-11">
+  <div class="col-xs-9 col-sm-10 col-md-11">
     <h4>Who is on Drop In?</h4>
   </div>
-  <div class="col-xs-3 col-sm-1 padding-left-xs-0 text-right">
+  <div class="col-xs-3 col-sm-2 col-md-1 padding-left-xs-0 text-right">
     <a href="" class="more-info-link" data-toggle="modal" data-target=".bs-modal-sm">More Info</a>
   </div>
 </div>

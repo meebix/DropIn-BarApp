@@ -19,7 +19,7 @@
     function statsData() {
       analyticService.singleDropinStats().then(function(results) {
         vm.singleDropinStats = results.data;
-        vm.calcDate = $filter('date')(vm.singleDropinStats.calcDate.iso, 'MM/dd/yyyy');
+        vm.calcDate = vm.singleDropinStats.calcDate.iso
 
         // Stats
         vm.totalMales = vm.singleDropinStats.totalMales;

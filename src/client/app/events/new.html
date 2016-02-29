@@ -3,23 +3,23 @@
 <hr>
 <form name="createEventForm" ng-submit="vm.createEvent(vm.eventData)" enctype="multipart/form-data">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="form-group">
         <label for="eventName">Name</label>
         <input type="text" class="form-control" placeholder="$0.50 Wings Night" ng-model="vm.eventData.name" ng-focus="vm.showHelperName = true" ng-blur="vm.showHelperName = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6" ng-show="vm.showHelperName">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperName">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> This will be the name of your event on the Drop In app</div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="form-group">
         <label for="eventDescription">Description</label>
         <textarea class="form-control" placeholder="Tell our users why they should go to your event" rows="3" ng-model="vm.eventData.description"></textarea>
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="form-group">
         <label for="eventPhoto">Event Photo</label>
         <div>
@@ -35,17 +35,17 @@
             <input type="file" name="photo" class="photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
             <div class="btn btn-default">Browse</div>
           </label>
-          <div><small>You must own the rights to the uploaded image</small></div>
+          <div style="color: #bbb;"><small>You must own the rights to the uploaded image</small></div>
         </div>
         <div class="margin-top-10" ng-show="vm.cropper.sourceImage !== null">
-          <canvas width="475" height="375" id="event-canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="80" min-height="80" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+          <canvas id="event-canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="80" min-height="80" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="preview-image text-center" ng-show="vm.cropper.sourceImage !== null">
+    <div class="col-sm-8 col-md-6">
+      <div class="preview-image" ng-show="vm.cropper.sourceImage !== null">
         <div><strong>Photo Preview</strong></div>
-        <div class="margin-top-10" ng-show="vm.cropper.croppedImage !== null"><img ng-src="{{vm.cropper.croppedImage}}" /></div>
+        <div class="margin-top-10 margin-bottom-xs-15" ng-show="vm.cropper.croppedImage !== null"><img class="img-responsive center-preview-image" ng-src="{{vm.cropper.croppedImage}}" /></div>
       </div>
     </div>
   </div>
@@ -56,6 +56,7 @@
         min-date="vm.minDate" hour-step="vm.hourStep"
         minute-step="vm.minuteStep" show-meridian="vm.showMeridian"
         date-format="MM-dd-yyyy" date-options="vm.dateOptions"
+        mousewheel="false"
         name="datetimepicker"
         show-spinners="true">
       </datetimepicker>
@@ -68,13 +69,14 @@
         min-date="vm.minDate" hour-step="vm.hourStep"
         minute-step="vm.minuteStep" show-meridian="vm.showMeridian"
         date-format="MM-dd-yyyy" date-options="vm.dateOptions"
+        mousewheel="false"
         name="datetimepicker"
         show-spinners="true">
       </datetimepicker>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="form-group">
         <label for="eventSendTo">Send To</label>
         <select class="form-control" ng-options="loyaltyLevel.objectId as loyaltyLevel.name for loyaltyLevel in vm.loyaltyLevels" ng-model="vm.eventData.loyaltyLevelId" ng-focus="vm.showHelperSendTo = true" ng-blur="vm.showHelperSendTo = false">
@@ -82,17 +84,17 @@
         </select>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6" ng-show="vm.showHelperSendTo">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperSendTo">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> These will be the users that receive the event on the mobile app</div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="alert alert-danger" role="alert" ng-show="vm.errorMessage"><i class="fa fa-exclamation-triangle margin-right-10"></i> {{vm.errorMessage}}</div>
       <button type="submit" class="btn btn-primary btn-block margin-top-20">Create</button>
     </div>

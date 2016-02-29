@@ -4,23 +4,23 @@
 <hr>
 <form name="createEventForm" ng-submit="vm.updateReward(vm.rewardData)">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="form-group">
         <label for="rewardName">Name</label>
         <input type="text" class="form-control" ng-model="vm.rewardData.reward" ng-focus="vm.showHelperReward = true" ng-blur="vm.showHelperReward = false">
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6" ng-show="vm.showHelperReward">
       <div class="form-group">
-        <label></label>
-        <div class="helper margin-top-5 fadein fadeout" ng-show="vm.showHelperReward">
+        <label class="hidden-xs hidden-sm"></label>
+        <div class="helper margin-top-5 fadein fadeout">
           <div class="input-helper"><i class="fa fa-info-circle fa-lg brand-blue margin-right-5"></i> Enter the <strong>reward</strong> the bar will be providing to Drop In users</div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-8 col-md-6">
       <div class="alert alert-danger" role="alert" ng-show="vm.errorMessage"><i class="fa fa-exclamation-triangle margin-right-10"></i> {{vm.errorMessage}}</div>
       <button type="submit" class="btn btn-primary btn-block margin-top-20">Update</button>
     </div>

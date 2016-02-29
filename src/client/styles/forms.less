@@ -20,11 +20,38 @@ input.photo {
 
 .preview-image {
   margin-top: 54px;
+  text-align: center;
+}
+
+.center-preview-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 // Media queries
-// @media screen and (min-width: @screen-md-min) {
-//   .form-control {
-//     width: 50%;
-//   }
-// }
+@media screen and (max-width: @screen-sm-min) {
+  .preview-image {
+    margin-top: 0;
+    text-align: left;
+  }
+
+  .center-preview-image {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: @screen-md-min) {
+  .preview-image {
+    margin-top: 0;
+    text-align: left;
+  }
+
+  .center-preview-image {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
