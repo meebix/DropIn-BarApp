@@ -10,7 +10,11 @@ function validate(model, validationProps, cb) {
 
   for (var key in model) {
     // Required
-    if (!model[key] && typeof model[key] !== 'boolean' && !isNaN(model[key])) {
+    var isNumber = validationProps[key].isNumber;
+    var isUndefined = model[key] === undefined;
+    var isEmpty = model[key] === '';
+
+    if ((isUndefined || isEmpty || (isNumber && isNaN(model[key]))) && typeof model[key] !== 'boolean') {
       errorMessage = 'All fields are required';
       break;
     }

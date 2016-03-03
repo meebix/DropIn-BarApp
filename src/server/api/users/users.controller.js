@@ -68,13 +68,14 @@ function createUser(req, res) {
   var roleQuery = new Parse.Query(Role);
   var barQuery = new Parse.Query(Bar);
 
-  roleQuery.equalTo('objectId', 'qwekFNkzFc');
+  roleQuery.equalTo('name', 'Bar');
   roleQuery.first().then(function(roleObj) {
     var userObj = {
       username: req.body.username,
       password: generatePassword(), // generate random password, have them reset it
       email: req.body.email,
-      roleId: roleObj
+      roleId: roleObj,
+      excludeUser: true
     };
 
     return userObj;
