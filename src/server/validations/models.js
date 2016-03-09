@@ -14,7 +14,10 @@ var eventModel = {
   description: { min: 20, max: 800 },
   photo: {},
   eventStart: {},
-  eventEnd: {}
+  eventEnd: {},
+  loyaltyLevelId: {},
+  barId: {},
+  markedForDeletion: {}
 };
 
 // Reward model

@@ -32,12 +32,12 @@ function validate(model, validationProps, cb) {
         break;
       }
 
-      // No special characters
-      var specialCharRegEx = new RegExp(/[<>\/]/);
-      if (specialCharRegEx.test(model[key])) {
-        errorMessage = titleize(key) + ' must not contain special characters';
-        break;
-      }
+      // // No special characters
+      // var specialCharRegEx = new RegExp(/[<>\/]/);
+      // if (specialCharRegEx.test(model[key])) {
+      //   errorMessage = titleize(key) + ' must not contain special characters';
+      //   break;
+      // }
 
       // Email
       if (validationProps[key].email) {

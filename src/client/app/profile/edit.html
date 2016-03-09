@@ -100,7 +100,7 @@
         <label for="thumbnailPhoto">Thumbnail Photo</label>
         <div>
           <label>
-            <input type="file" name="thumbnail" class="photo" multiple="false" image="vm.thumbnailPhoto" accept="image/*" img-cropper-fileread>
+            <input type="file" name="thumbnail" class="photo" multiple="false" change-input-file="vm.getThumbnailPhoto" accept="image/*">
             <div class="btn btn-default">Browse</div>
           </label>
         </div>
@@ -108,7 +108,7 @@
     </div>
     <div class="col-md-6">
       <p>150 x 150</p>
-      <img ng-src="{{vm.profileData.thumbnail.url}}" width="150" height="150">
+      <img ng-src="{{vm.thumbnailPhoto || vm.profileData.thumbnail.url}}" width="150" height="150">
     </div>
   </div>
   <div class="row margin-top-20">
@@ -117,7 +117,7 @@
         <label for="detailPhoto">Detail Photo</label>
         <div>
           <label>
-            <input type="file" name="photo" class="photo" multiple="false" image="vm.detailPhoto" accept="image/*" img-cropper-fileread>
+            <input type="file" name="detail" class="photo" multiple="false" change-input-file="vm.getDetailPhoto" accept="image/*">
             <div class="btn btn-default">Browse</div>
           </label>
         </div>
@@ -125,7 +125,7 @@
     </div>
     <div class="col-md-6">
       <p>275 x 175</p>
-      <img ng-src="{{vm.profileData.photo.url}}" width="275" height="175">
+      <img ng-src="{{vm.detailPhoto || vm.profileData.photo.url}}" width="275" height="175">
     </div>
   </div>
   <hr>

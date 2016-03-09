@@ -5,6 +5,6 @@
     'app.core',
     'ui.bootstrap',
     'ui.bootstrap.datetimepicker',
-    'angular-img-cropper'
+    'ngCropper'
     ]);
 })();

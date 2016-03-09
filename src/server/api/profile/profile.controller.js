@@ -116,8 +116,6 @@ function updateProfile(req, res) {
       phone: req.body.phone,
       email: req.body.email,
       description: req.body.description,
-      thumbnail: prepareImageForParse(req.body.thumbnail),
-      photo: prepareImageForParse(req.body.photo),
       beaconMajor: Number(req.body.beaconMajor),
       beaconMinor: Number(req.body.beaconMinor),
       latitude: Number(req.body.latitude),
@@ -131,6 +129,15 @@ function updateProfile(req, res) {
       sundayPromotion: req.body.sundayPromotion,
       isActive: req.body.isActive
     };
+
+    // Images (Optional)
+    if (req.body.thumbnail !== null) {
+      barObj.thumbnail = prepareImageForParse(req.body.thumbnail);
+    }
+
+    if (req.body.photo !== null) {
+      barObj.photo = prepareImageForParse(req.body.photo);
+    }
 
     // Validations
     validator.validate(barObj, models.profileModel, function(errorMessage) {
@@ -217,7 +224,7 @@ function deleteProfile(req, res) {
 // Prepare image for Parse
 function prepareImageForParse(image) {
   if (image === null) {
-    return;
+    return null;
   }
 
   var base64Image = image.replace(/^data:image\/png;base64,/, '');

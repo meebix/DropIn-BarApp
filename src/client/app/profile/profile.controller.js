@@ -5,9 +5,9 @@
     .module('app.profile')
     .controller('ProfileController', ProfileController);
 
-  ProfileController.$inject = ['$rootScope', '$q', 'logger', '$state', '$stateParams', 'profileService'];
+  ProfileController.$inject = ['$rootScope', '$q', 'logger', '$state', '$stateParams', 'profileService', 'Cropper'];
   /* @ngInject */
-  function ProfileController($rootScope, $q, logger, $state, $stateParams, profileService) {
+  function ProfileController($rootScope, $q, logger, $state, $stateParams, profileService, Cropper) {
     var vm = this;
     vm.title = 'Dashboard';
     vm.barId = $stateParams.id;
@@ -20,9 +20,26 @@
     vm.errorMessage;
     vm.init = init;
 
-    // Images
+    // Image
+    var file;
     vm.thumbnailPhoto = null;
     vm.detailPhoto = null;
+
+    vm.getThumbnailPhoto = function(event){
+      var blob = event.target.files[0];
+
+      Cropper.encode((file = blob)).then(function(dataUrl) {
+        vm.thumbnailPhoto = dataUrl;
+      });
+    };
+
+    vm.getDetailPhoto = function(event){
+      var blob = event.target.files[0];
+
+      Cropper.encode((file = blob)).then(function(dataUrl) {
+        vm.detailPhoto = dataUrl;
+      });
+    };
 
     function allProfiles() {
       profileService.allProfiles().then(function(results) {

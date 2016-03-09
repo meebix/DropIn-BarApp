@@ -32,20 +32,25 @@
         <label for="eventPhoto">Event Photo</label>
         <div>
           <label>
-            <input type="file" name="photo" class="photo" multiple="false" image="vm.cropper.sourceImage" accept="image/*" img-cropper-fileread>
+            <input type="file" name="photo" class="photo" multiple="false" change-input-file="uploadFile" accept="image/*">
             <div class="btn btn-default">Browse</div>
           </label>
           <div style="color: #bbb;"><small>You must own the rights to the uploaded image</small></div>
         </div>
-        <div class="margin-top-10" ng-show="vm.cropper.sourceImage !== null">
-          <canvas id="event-canvas" image-cropper image="vm.cropper.sourceImage" cropped-image="vm.cropper.croppedImage" crop-width="375" crop-height="275" min-width="80" min-height="80" keep-aspect="true" crop-area-bounds="vm.bounds"></canvas>
+        <div ng-show="showImage">
+          <div class="margin-top-10">
+            <!-- Image -->
+            <img class="cropper-image" data-ng-src="{{dataUrl}}"
+                 ng-cropper
+                 ng-cropper-show="showEvent"
+                 ng-cropper-hide="hideEvent"
+                 ng-cropper-options="options">
+          </div>
+          <button class="btn btn-success btn-square btn-block" type="button" ng-click="preview()">Done</button>
         </div>
-      </div>
-    </div>
-    <div class="col-sm-8 col-md-6">
-      <div class="preview-image" ng-show="vm.cropper.sourceImage !== null">
-        <div><strong>Photo Preview</strong></div>
-        <div class="margin-top-10 margin-bottom-xs-15" ng-show="vm.cropper.croppedImage !== null"><img class="img-responsive center-preview-image" ng-src="{{vm.cropper.croppedImage}}" /></div>
+        <div class="margin-top-10" ng-show="showCropped">
+          <img ng-src="{{preview.dataUrl}}" class="preview-image">
+        </div>
       </div>
     </div>
   </div>
