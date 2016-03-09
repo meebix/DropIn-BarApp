@@ -1,6 +1,6 @@
 <span us-spinner spinner-theme="page" ng-hide="dataLoaded"></span>
 
-<div><small>{{vm.calcDate | date : 'MM/dd/yyyy' : 'UTC'}}</small></div>
+<div><small>Data as of {{vm.calcDate | date : 'MM/dd/yyyy' : 'UTC'}}</small></div>
 <div class="row">
   <div class="col-xs-9 col-sm-10 col-md-11">
     <h4>Who is on Drop In?</h4>
@@ -134,3 +134,8 @@
   </div>
 </div>
 
+<div class="col-sm-12 text-center text-legal">
+  <small>
+    Drop In processes the daily activities of users overnight so they are available the next day.
+  </small>
+</div>
