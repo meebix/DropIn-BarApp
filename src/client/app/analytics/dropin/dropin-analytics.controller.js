@@ -24,6 +24,7 @@
         // Stats
         vm.totalMales = vm.singleDropinStats.totalMales;
         vm.totalFemales = vm.singleDropinStats.totalFemales;
+        vm.totalGenderUnknown = vm.singleDropinStats.totalGenderUnknown;
         vm.totalGuests = vm.singleDropinStats.totalGuests;
         vm.totalRegulars = vm.singleDropinStats.totalRegulars;
         vm.totalVips = vm.singleDropinStats.totalVips;
