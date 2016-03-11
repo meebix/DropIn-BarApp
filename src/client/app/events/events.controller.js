@@ -66,7 +66,7 @@
 
     $scope.options = {
       autoCropArea: 0.85,
-      aspectRatio: 2 / 1,
+      aspectRatio: 1 / 1,
       crop: function(dataNew) {
         data = dataNew;
       }
