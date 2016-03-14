@@ -10,8 +10,8 @@ var userModel = {
 
 // Event model
 var eventModel = {
-  name: { min: 5, max: 25 },
-  description: { min: 20, max: 800 },
+  name: { min: 5, max: 50 },
+  description: { min: 20, max: 1000 },
   photo: {},
   eventStart: {},
   eventEnd: {},
@@ -22,7 +22,7 @@ var eventModel = {
 
 // Reward model
 var rewardModel = {
-  reward: { min: 5, max: 50 }
+  reward: { min: 5, max: 40 }
 };
 
 // Profile model
@@ -34,7 +34,7 @@ var profileModel = {
   zip: { min: 5, max: 5, numbersOnly: true },
   phone: { min: 14, max: 14 }, // 14 due to expected formatting
   email: { min: 5, max: 100, email: true },
-  description: { min: 20, max: 800 },
+  description: { min: 20, max: 1000 },
   thumbnail: {},
   photo: {},
   beaconMajor: { min: 1, max: 5, isNumber: true, numbersOnly: true, name: 'Beacon major' },
