@@ -104,9 +104,12 @@ function createProfile(req, res) {
 
 function updateProfile(req, res) {
   var barQuery = new Parse.Query(Bar);
+  var currentIsActiveValue;
 
   barQuery.equalTo('objectId', req.params.id);
   barQuery.first().then(function(foundBar) {
+    currentIsActiveValue = foundBar.attributes.isActive;
+
     var barObj = {
       name: req.body.name,
       address: req.body.address,
@@ -159,9 +162,9 @@ function updateProfile(req, res) {
             var addOne = currentCount + 1;
             var subtractOne = currentCount - 1;
 
-            if (req.body.isActive === true) {
+            if (currentIsActiveValue !== true && req.body.isActive === true) {
               obj.set('number1', addOne);
-            } else {
+            } else if (req.body.isActive === false) {
               obj.set('number1', subtractOne);
             }
 
