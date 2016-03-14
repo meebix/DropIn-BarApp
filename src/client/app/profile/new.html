@@ -99,7 +99,7 @@
         <label for="thumbnailPhoto">Thumbnail Photo</label>
         <div>
           <label>
-            <input type="file" name="thumbnail" class="photo" multiple="false" image="vm.thumbnailPhoto" accept="image/*" img-cropper-fileread>
+            <input type="file" name="thumbnail" class="photo" multiple="false" change-input-file="vm.getThumbnailPhoto" accept="image/*">
             <div class="btn btn-default">Browse</div>
           </label>
         </div>
@@ -116,7 +116,7 @@
         <label for="detailPhoto">Detail Photo</label>
         <div>
           <label>
-            <input type="file" name="photo" class="photo" multiple="false" image="vm.detailPhoto" accept="image/*" img-cropper-fileread>
+            <input type="file" name="photo" class="photo" multiple="false" change-input-file="vm.getDetailPhoto" accept="image/*">
             <div class="btn btn-default">Browse</div>
           </label>
         </div>
