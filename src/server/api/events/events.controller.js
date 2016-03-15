@@ -180,10 +180,14 @@ function updateEvent(req, res) {
     var eventObj = {
       name: req.body.name,
       description: req.body.description,
-      photo: prepareImageForParse(req.body.photo),
       eventStart: transformDateForParse(req.body.eventStart),
       eventEnd: transformDateForParse(req.body.eventEnd),
     };
+
+    // Image
+    if (req.body.photo !== null) {
+      eventObj.photo = prepareImageForParse(req.body.photo);
+    }
 
     // Validations
     validator.validate(eventObj, models.eventModel, function(errorMessage) {
@@ -285,10 +289,6 @@ function transformDateForParse(date) {
 
 // Prepare image for Parse
 function prepareImageForParse(image) {
-  if (image === null) {
-    return;
-  }
-
   var base64Image = image.replace(/^data:image\/png;base64,/, '');
   var checkSum = crypto.randomBytes(15).toString('hex');
 

@@ -126,7 +126,7 @@
       var updatedEventData = {
         name: eventData.name,
         description: eventData.description,
-        photo: $scope.preview.dataUrl,
+        photo: $scope.preview.dataUrl || null,
         eventStart: moment(eventData.eventStart.iso).format(),
         eventEnd: moment(eventData.eventEnd.iso).format()
       };
