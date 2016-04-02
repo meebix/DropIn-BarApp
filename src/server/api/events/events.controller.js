@@ -37,7 +37,7 @@ function allEvents(req, res) {
 
   var lessThanDate = moment(new Date()).add(100, 'years')._d;
   var greaterThanDate = new Date();
-
+  console.log(currentUserBarObj());
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);
   eventsQuery.lessThan('eventStart', lessThanDate);
@@ -118,12 +118,14 @@ function createEvent(req, res) {
               // Find all users who have a role of 'User' and for each user
               // save a new UsersEvents to the join table
               usersQuery.equalTo('roleId', roleObj);
+
               if (loyaltyLevelObj.id !== allObj.id) {
                 console.log('IF block executed because ALL was NOT called');
                 console.log(loyaltyLevelObj.id, allObj.id);
                 usersQuery.equalTo('loyaltyLevelId', loyaltyLevelObj);
               }
 
+              usersQuery.limit(1000);
               return usersQuery.find().then(function(results) {
                 console.log('*** USERS COUNT ***', results.length);
 
