@@ -37,7 +37,6 @@ function allEvents(req, res) {
 
   var lessThanDate = moment(new Date()).add(100, 'years')._d;
   var greaterThanDate = new Date();
-  console.log(currentUserBarObj());
   eventsQuery.equalTo('barId', currentUserBarObj());
   eventsQuery.notEqualTo('markedForDeletion', true);
   eventsQuery.lessThan('eventStart', lessThanDate);
@@ -212,6 +211,7 @@ function updateEvent(req, res) {
           })
           .then(function(eventObj) {
             usersEventsQuery.equalTo('eventId', eventObj);
+            usersEventsQuery.limit(1000);
             usersEventsQuery.find().then(function(results) {
               _.each(results, function(obj) {
                 obj.set('eventStart', transformDateForParse(req.body.eventStart));
@@ -265,6 +265,7 @@ function deleteEvent(req, res) {
     var usersEventsQuery = new Parse.Query(UsersEvents);
 
     usersEventsQuery.equalTo('eventId', eventObj);
+    usersEventsQuery.limit(1000);
     usersEventsQuery.find().then(function(results) {
       _.each(results, function(obj) {
         obj.set('markedForDeletion', true);
