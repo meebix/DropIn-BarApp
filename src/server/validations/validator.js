@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var moment = require('moment');
 
 module.exports = {
   validate: validate
@@ -79,6 +80,14 @@ function validate(model, validationProps, cb) {
         }
       }
     }
+  }
+
+  // Event start vs. Event end times
+  var eventStart = moment(model.eventStart);
+  var eventEnd = moment(model.eventEnd);
+
+  if (eventEnd.isBefore(eventStart)) {
+    errorMessage = 'The event start time must be before the event end time';
   }
 
   return cb(errorMessage);
