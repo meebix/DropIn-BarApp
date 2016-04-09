@@ -91,7 +91,7 @@
           function(event, toState, toParams, fromState, fromParams) {
             stateCounts.changes++;
             handlingStateChangeError = false;
-            var title = config.docTitle + ' ' + (toState.title || '');
+            var title = (toState.title || '') + ' | ' + config.docTitle;
             $rootScope.title = title; // data bind to <title>
           }
         );
