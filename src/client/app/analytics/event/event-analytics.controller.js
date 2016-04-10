@@ -28,7 +28,7 @@
 
           // Stats
           vm.usersSentTo = vm.eventStats.usersSentTo;
-          vm.creditsEarned = vm.eventStats.creditsEarned;
+          vm.visitConversions = vm.eventStats.visitConversions;
           vm.calcDates = vm.eventStats.calcDate.iso;
           vm.eventName = vm.eventStats.eventId.name;
         }
@@ -41,14 +41,14 @@
     // Event chart data
     function chartEvent() {
       vm.labelsEvent = [''];
-      vm.seriesEvent = ['Users Sent To', 'Credits Earned'];
+      vm.seriesEvent = ['Users Sent To', 'Conversions'];
       vm.coloursEvent = ['#0084C1', '#00A447'];
       vm.chartOptionsEvent = {
         showTooltips: false,
         // legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><div class="chart-value" style="color: <%=datasets[i].strokeColor%>;"><%=datasets[i].bars[0].value%></div><%if(datasets[i].label){%><div class="chart-label"><%=datasets[i].label%></div><%}%></li><%}%></ul>'
       };
 
-      vm.dataEvent = [[vm.usersSentTo], [vm.creditsEarned]];
+      vm.dataEvent = [[vm.usersSentTo], [vm.visitConversions]];
     }
 
     function allEvents() {

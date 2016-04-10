@@ -54,10 +54,10 @@
     <div class="data-panel">
       <div class="info-overlay" ng-show="showInfoA">
         <p>
-          The number of conversions (or effectiveness) of your event is shown below by counting the
-          number of credits earned by all Drop In users that received an invitation to the event
-          (based on user loyalty level). Only those users who earned a credit within the event's date
-          and time window are counted.
+          The number of conversions (or effectiveness) of your event is shown below by counting
+          the number of credits earned or rewards redeemed by Drop In users who received an invitation
+          to the event. Individuals are only counted once if they both earn a credit and redeem a reward
+          within the event's date and time window.
         </p>
         <p>
           Remember: Users earn a credit after visiting your bar for at least 30 minutes.
@@ -86,8 +86,8 @@
           <div class="number-stat-label">Users Invited</div>
         </div>
         <div class="col-xs-6 col-md-6">
-          <div class="number-stat" style="color: #00A447">{{vm.creditsEarned}}</div>
-          <div class="number-stat-label">Conversions (Credits Earned)</div>
+          <div class="number-stat" style="color: #00A447">{{vm.visitConversions}}</div>
+          <div class="number-stat-label">Conversions <br> (Credit Earned or Reward Redeemed)</div>
         </div>
       </div>
     </div>
