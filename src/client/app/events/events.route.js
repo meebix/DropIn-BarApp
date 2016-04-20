@@ -46,7 +46,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Events',
+          title: 'Create Event',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -68,7 +68,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Events',
+          title: 'Event',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -90,7 +90,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Events',
+          title: 'Edit Event',
           data: {
             authorizedRoles: [
               ROLES.admin,

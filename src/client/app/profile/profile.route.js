@@ -24,7 +24,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Profiles',
+          title: 'Bar Profiles',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -44,7 +44,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'profile',
+          title: 'Create Bar Profile',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -64,7 +64,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'profile',
+          title: 'Bar Profile',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -84,7 +84,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Profile',
+          title: 'Edit Bar Profile',
           data: {
             authorizedRoles: [
               ROLES.admin,

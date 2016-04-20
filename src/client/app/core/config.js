@@ -17,7 +17,7 @@
 
   var config = {
     appErrorPrefix: '[app Error] ',
-    appTitle: 'app'
+    appTitle: 'Drop In'
   };
 
   core.value('config', config);
@@ -31,7 +31,7 @@
       $logProvider.debugEnabled(true);
     }
     exceptionHandlerProvider.configure(config.appErrorPrefix);
-    routerHelperProvider.configure({docTitle: config.appTitle + ': '});
+    routerHelperProvider.configure({docTitle: config.appTitle});
   }
 
   core.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
