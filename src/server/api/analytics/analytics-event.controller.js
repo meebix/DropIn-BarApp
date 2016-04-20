@@ -47,6 +47,7 @@ function allEventsData(req, res) {
   eventsQuery.include('loyaltyLevelId');
   eventsQuery.limit(displayLimit);
   eventsQuery.skip(page * displayLimit);
+  eventsQuery.descending('eventStart');
   eventsQuery.count().then(function(result) {
     count = result;
   })
@@ -54,7 +55,7 @@ function allEventsData(req, res) {
     return eventsQuery.find().then(function(events) {
       var filteredEvents = _.filter(events, function(result) {
         var startDate = moment(result.attributes.eventStart);
-        var yesterday = moment().subtract(1, 'days').hours(10).minute(15).second(0).millisecond(0);
+        var yesterday = moment().hours(10).minute(15).second(0).millisecond(0);
 
         if (startDate.isBefore(yesterday)) {
           return result;
