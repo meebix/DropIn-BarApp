@@ -24,7 +24,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Rewards',
+          title: 'Bar Rewards',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -44,7 +44,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Rewards',
+          title: 'Edit Bar Reward',
           data: {
             authorizedRoles: [
               ROLES.admin,

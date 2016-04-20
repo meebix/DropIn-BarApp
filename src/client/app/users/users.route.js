@@ -24,7 +24,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'Users',
+          title: 'Bar Users',
           data: {
             authorizedRoles: [
               ROLES.admin,
@@ -44,7 +44,7 @@
               controllerAs: 'vm'
             }
           },
-          title: 'User',
+          title: 'Create Bar User',
           data: {
             authorizedRoles: [
               ROLES.admin,
